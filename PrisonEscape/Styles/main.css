@@ -1,0 +1,209 @@
+/* Dark Blue : #000033  */
+/* Lighter Blue : #33335C  */
+/* Light Green BackGround : #66FF66  */
+
+body
+{
+	margin:0;
+	overflow: hidden;
+    background-color: silver;
+    background-image: linear-gradient(335deg, #b00 23px, transparent 23px),
+    linear-gradient(155deg, #d00 23px, transparent 23px),
+    linear-gradient(335deg, #b00 23px, transparent 23px),
+    linear-gradient(155deg, #d00 23px, transparent 23px);
+    background-size: 58px 58px;	
+    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+
+#gameWrap
+{
+    margin-left: auto;
+    margin-right: auto;
+	margin-top:1em;
+    width: 60%;
+}
+
+#game
+{
+	font-family:bearpawregular;
+	color:#000033;
+	position: absolute;
+	width: 60%;
+	height: 90%;
+	
+    background:
+    radial-gradient(black 15%, transparent 16%) 0 0,
+    radial-gradient(black 15%, transparent 16%) 8px 8px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+    radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+    background-color:#282828;
+    background-size:16px 16px;
+	
+	border: 1em solid black;
+	border-radius: 3em;
+	box-shadow:		4px 4px 6px white,
+					-4px -4px 6px white,
+					0px 0px 0px black;
+}
+
+#game .screen
+{
+	position: absolute;
+	width:100%;
+	height:100%;
+	display: none;
+	z-index:10;
+}
+
+#game .screen.active
+{
+	display:block;
+}
+
+#splash-screen
+{
+	font-family:bearpawregular;
+	color:#000033;
+	text-align: center;
+	padding-top:2em;
+}
+
+#splash-screen .continue
+{
+	cursor: pointer;
+	padding-top:5em;
+	color:red;
+	font-size:5em;
+	text-shadow: 	2px 2px 3px black,
+					-2px -2px 3px black,
+					0px 0px 0px black;
+}
+
+#splash-screen .logo
+{
+	font-family:capture_itregular;
+	color:#000033;
+	font-size:6em;
+	margin:0;
+	text-align: center;
+	text-shadow: 	2px 2px 3px rgb(255,255,0),
+					-2px -2px 3px rgb(255,255,0),
+					6px 10px 10px black;
+}
+
+
+
+/*MAIN MENU STYLES*/
+#main-menu
+{
+	padding-top:2em;
+}
+
+#main-menu .logo
+{
+	font-family:capture_itregular;
+	color:#000033;
+	font-size:6em;
+	margin:0;
+	text-align: center;
+	text-shadow: 	2px 2px 3px rgb(255,255,0),
+					-2px -2px 3px rgb(255,255,0),
+					6px 10px 10px black;
+}
+
+
+
+ul.menu li
+{
+	
+	text-align:center;
+	padding:0;
+	margin-top:1em;
+	margin-right:2em;
+	list-style:none;
+}
+ul.menu li button
+{
+
+	font-family:bearpawregular;
+	font-size:4em;
+	color: red;
+	width:6em;
+	height:1.5em;
+	background:black;
+	border: 0.05em solid rgb(255,255,0);
+	border-radius: 0.5em;
+	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
+	-moz-box-shadow:  0.2em 0.2em 0.3em black;
+	box-shadow:  0.2em 0.2em 0.3em black;
+	
+}
+
+ul.menu li button:hover
+{
+	background: #565642;
+	
+}
+
+ul.menu li button:active
+{
+	color:rgb(255,255,0);
+	background: rgb(30,40,0)
+}
+
+
+
+
+
+/*SMART PHONES*/
+@media only screen and (max-width: 480px) 
+{
+	#main-menu .logo
+	{
+		font-size:5em;
+	}
+	#gameWrap
+	{
+		margin:.5em;
+		width: 100%;
+	}
+	#game
+	{
+		width: 89%;
+		height: 93%;
+	}
+		ul.menu li button
+	{
+		font-size:3em;
+		width:4em;
+		height:1.5em;
+	}
+}
+
+/*IPAD SIZES/TABLETS*/
+@media only screen and (min-width: 481px) and (max-width: 979px)
+{
+    #splash-screen .logo
+    {
+        font-size:5em;
+    }
+	#main-menu .logo
+	{
+		font-size:5em;
+	}
+	#gameWrap
+	{
+		margin:1em;
+		width: 100%;
+	}
+	#game
+	{
+		width: 90%;
+		height: 90%;
+	}
+	ul.menu li button
+	{
+		width:5em;
+		height:1.5em;
+	}
+}

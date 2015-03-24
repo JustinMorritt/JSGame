@@ -1,0 +1,84 @@
+GAME OVERVIEW ================================================================================================================================================================================
+
+
+	TEAM PERSONNEL
+
+	Justin Morritt
+	Levi Squires 
+	Tim Greason 
+	
+
+	TEAM STRUCTURE
+	[Identify the key roles of members of your marketing team and the normal patterns of communication between roles. You can create a diagram or table to illustrate communication relationships.]
+
+	
+	TEAM GOALS
+
+	•	[List your team's quality goals.]
+
+	TEAM ROLES AND RESPONSIBILITIES
+	[Identify the responsibilities assigned to each of the team roles.]
+
+
+
+PLOT AND SETTING INFORMATION ================================================================================================================================================================================
+
+	POTENTIAL EXCEPTIONS AND PROBLEMS
+	•	[List all potential problems that might arise during the project, and list their causes, symptoms, consequences, and possible solutions.]
+
+	APPROPRIATE CORRECTIVE MEASURES
+	[For each issue, identify the optimal way to resolve the issue and then identify the steps that your team needs to take in order to implement the resolution.]
+
+	TRACKING RISKS AND ISSUES
+	[In the following table, track the risks and issues that you identified.]
+	Date recorded	Risk description	Probability	Impact	Mitigation plan
+
+	
+	
+
+CORE GAME PLAY ================================================================================================================================================================================
+
+	CHANGE MANAGEMENT PROCESS STEPS
+	[Describe the process that your team will follow to document and approve changes to the project. If your team uses a change control document, identify how and when team members should fill it out.]
+
+	CHANGE MANAGEMENT PROCESS FLOW
+
+	[Create a flow diagram of your change process.]
+ 
+ 
+ 
+ 
+ENVIROMENTAL ELEMENTS ================================================================================================================================================================================
+
+	ENVIRONMENTS
+
+
+	CHARACTERS
+
+
+	WEAPONS
+
+
+	CRAFTING
+
+	
+	
+
+INTERFACE USAGE ================================================================================================================================================================================
+
+	MOUSE
+
+	KEYBOARD
+
+	MOBILE TOUCH SCREEN
+	
+	
+	
+
+MENUS AND GENERAL GAME USAGE ================================================================================================================================================================================
+
+	MAIN MENU
+	
+	IN GAME MENU
+	
+	OPTIONS MENU

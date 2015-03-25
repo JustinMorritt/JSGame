@@ -47,21 +47,34 @@ CORE GAME PLAY =================================================================
  
  
  
+	How to play:
+		Randomly generated jail sentence
+		Player starts with X points
+		You as the main character, want to escape from jail
+		You lose points as days pass, but can gain points for being a good prison for X amount of time.
+		Try to escape with the most amount of points possible.
+ 
  
 ENVIROMENTAL ELEMENTS ================================================================================================================================================================================
 
 	ENVIRONMENTS
-
+		Prison and a bit of surrounding around
 
 	CHARACTERS
+		Main Character
+		Guards
+		Other prisoners
 
 
 	WEAPONS
-
+		Makeshift Shiv
+		Loaded Sock
 
 	CRAFTING
-
-	
+		Crafting is only possible when in your own cell.
+		Makeshift key
+		Shiv
+		thick shirt (shirt with a book to protect from attacks)
 	
 
 INTERFACE USAGE ================================================================================================================================================================================

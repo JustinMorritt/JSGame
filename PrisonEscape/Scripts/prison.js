@@ -1,5 +1,14 @@
 var prison = (function () 
 {
+
+    var settings =
+    {
+        inmates: 20,
+        gaurds: 10,
+        baseScore: 100,
+        numJewelTypes: 7
+    };
+
 	var scriptQueue = [], numResourcesLoaded = 0, numResources = 0, executeRunning = false;
 	
 	function executeScriptQueue()
@@ -101,6 +110,7 @@ var prison = (function ()
 	return{
 	load: load,
 	setup: setup,
+	settings: settings,
 	showScreen: showScreen,
 	screens: {}
 	

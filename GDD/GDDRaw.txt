@@ -1,21 +1,38 @@
 GAME OVERVIEW ================================================================================================================================================================================
 
 
-	TEAM PERSONNEL
+	TEAM PERSONNEL:
 
 	Justin Morritt
 	Levi Squires 
 	Tim Greason 
 	
-
-	TEAM STRUCTURE
-	[Identify the key roles of members of your marketing team and the normal patterns of communication between roles. You can create a diagram or table to illustrate communication relationships.]
-
 	
 	TEAM GOALS
 
-	•	[List your team's quality goals.]
+	•	Gather Plenty of 2D assets, Structure sprite images as well as sprite coordinate systems.
+	•	Gather Sound Effects, Game Music, Embed this within JavaScript at appropriate locations.
+	•	Set up a Base HTML structure for hosting the Game/Canvas in.
+	•	Set up a Script Loading/ DOM structure for dealing with scripts as well as HTML elements through the JavaScript.
+	•	Build a Simple yet Elegant User Interface , This user interface will host all game statistics that are congruent with the real-time environment.
+	• 	The Heads up Display or "UI" will be an overlaying Structure using HTML/CSS. This will dynamically update as the events in the Canvas unfold.
+	•	Set up a Canvas Environment that is Linked with the custom DOM module. The Canvas will host all the characters/map and game activity.
+	•	Create a Map and Link it into the Collision Module , This will make walls solid and lay out the foundation of where we want our characters
+		to be able to walk. Around this time begin to link in small sprite animations to the main map (sliding doors, sprinklers, animations...etc.)
+	•	Generate Spawn coding , this will spawn in items in random locations in the map, as well as inmates will spawn in different cells every time.
+	•	Work on the collision, as well as implement a fighting and respect mechanic between inmates. This mechanic also carries over to the guards.
+	•	Create an inventory for our player , as well as implement the health bars and Respect Bars above characters heads.
+	•	Implement a crafting system, as well as a timing system that will be linked into the "UI" this will make the game tick.
+	•	At this point the player should be able to move around the map. The NPC's Artificial intelligence will be programmed. 
+	•	The NPC's  "AI" will vary from inmate to guard, inmates will walk around freely and attend the lunch room at noon, they will also return to their cells at night.
+	• 	Guards "AI" will be programmed to have them patrolling hallways and in areas where items may spawn. This creates a situation where the player must
+		stealthily gather items for crafting. The Guards, if looking in a players general direction will catch them if they are acquiring materials. They will 
+		Strip search you and send you to your cell and you will spend the rest of the day in there. The next day will appear and a player may have lost some precious progress.
+	• 	Secret Areas will be implemented , these may only be accessed after certain items are crafted or certain events are completed.
+	•	Scores will be implemented, these will be tallied up after a player dies or escapes ! The combinations of point modifiers will be extensive.
+		Point Modifiers taken into consideration: Days Survived, Fights Won, Items Crafted, Mini Objectives Complete, Total Respect Gain From inmates.
 
+	
 	TEAM ROLES AND RESPONSIBILITIES
 	[Identify the responsibilities assigned to each of the team roles.]
 
@@ -48,11 +65,18 @@ CORE GAME PLAY =================================================================
  
  
 	How to play:
+		
 		Randomly generated jail sentence
 		You as the main character, want to escape from jail as fast as possible (Getting out on good behaviour is also an option)
 		
 	How to lose:
-		Death
+		A player will lose the game in many different fashions all stemming down to death. Whether you get in a fight with another inmate due to lack of respect or
+		get caught by a guard and beaten down. If a player cant survive the fight they will die and lose the entire game. This game is a somewhat rogue game where
+		a player tries to go as long as they can to beat the game. Each new game is completely random so the possibilities are endless of how ones time in prison is spent.
+		One thing is for sure, a player will try to stealthily complete objectives to get out of prison quicker. Armour and weapons can be a great asset to staying alive,
+		but don't get caught with them. Players caught with weapons and armour while completing an objective will have their sentence extended, thus making it a harder "Run"
+		to complete. 
+		
  
  
 ENVIROMENTAL ELEMENTS ================================================================================================================================================================================
@@ -95,11 +119,17 @@ ENVIROMENTAL ELEMENTS ==========================================================
 
 INTERFACE USAGE ================================================================================================================================================================================
 
-	MOUSE
+	MOUSE- 	A player may play our game entirely using just a mouse. The only button necessary would be to click . This is just an option for extreme casual players.
+			A person may just click on the ground where they want their character to walk and the character will walk there . This entire mechanic can be used to 
+			navigate the entire map as well as to trigger events. A player may click on objects in the world to perform actions needed to complete specific tasks. 
+			The entire fight aspect will be utilized by clicking on the person you are in a fight with or clicking on the ground away from the fight to avoid an incoming hit.
 
-	KEYBOARD
+	KEYBOARD- Depending on how a player wants to play they could use the keyboard to interact with the world. The Arrow keys as well as the WSAD keys will be set for walking
+		the space bar will be used for interaction with the world. Space will (punch,stab,open doors, pick-up items, etc.)
 
-	MOBILE TOUCH SCREEN
+	MOBILE TOUCH SCREEN- The controls for the mobile version of this game will be very similar to the mouse controls. A player will click on the screen of their phone/tablet,
+		the character will follow where they click on the ground. The character will also complete actions with a simple click of the finger on the screen. This leaves the game 
+		still simple enough for the player to focus on goals, timing, and all the important factors in escaping prison. 
 	
 	
 	

@@ -82,10 +82,12 @@ CORE GAME PLAY =================================================================
 ENVIROMENTAL ELEMENTS ================================================================================================================================================================================
 
 	ENVIRONMENTS
-		Prison and a bit of surrounding around
-			Schedule (5-8 min per day)
-				Lunch
-				Lockdown(Night)
+		Prison: cells, cafeteria, yard, library, gym, supply room, hallways between areas.
+			Schedule (5-8 minutes per day)
+				Early morning(access to cell block)
+				Lunch(access to cafeteria only)
+				Free time(access to yard, library, gym and cell block)
+				Night(sent back to cell and day cycle resets)
 			
 
 	CHARACTERS
@@ -136,8 +138,19 @@ INTERFACE USAGE ================================================================
 
 MENUS AND GENERAL GAME USAGE ================================================================================================================================================================================
 
-	MAIN MENU
+	Main Menu
+		Start Game
+		Continue Game(wish-list)
+		High Scores
+		About Game
+		Exit Game
 	
-	IN GAME MENU
+	In Game Menu
+		Resume Game
+		Settings
+		Exit
 	
-	OPTIONS MENU
+	Settings Menu
+		Sound Options
+		Difficulty(wish-list)
+		

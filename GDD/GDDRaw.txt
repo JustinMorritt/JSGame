@@ -25,6 +25,7 @@ GAME OVERVIEW ==================================================================
 	•	Implement a crafting system, as well as a timing system that will be linked into the "UI" this will make the game tick.
 	•	At this point the player should be able to move around the map. The NPC's Artificial intelligence will be programmed. 
 	•	The NPC's  "AI" will vary from inmate to guard, inmates will walk around freely and attend the lunch room at noon, they will also return to their cells at night.
+	•	Link all Path finding Algorithms to web workers, this will increase performance dramatically with the expensive CPU processing needed.
 	• 	Guards "AI" will be programmed to have them patrolling hallways and in areas where items may spawn. This creates a situation where the player must
 		stealthily gather items for crafting. The Guards, if looking in a players general direction will catch them if they are acquiring materials. They will 
 		Strip search you and send you to your cell and you will spend the rest of the day in there. The next day will appear and a player may have lost some precious progress.
@@ -32,6 +33,8 @@ GAME OVERVIEW ==================================================================
 	•	Scores will be implemented, these will be tallied up after a player dies or escapes ! The combinations of point modifiers will be extensive.
 		Point Modifiers taken into consideration: Days Survived, Fights Won, Items Crafted, Mini Objectives Complete, Total Respect Gain From inmates.
 
+	TEAM WISHLIST
+	• Create Save/Continue Files for players that cant finish a whole run and want access at a later time.
 	
 	TEAM ROLES AND RESPONSIBILITIES
 	[Identify the responsibilities assigned to each of the team roles.]

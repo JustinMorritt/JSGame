@@ -1,6 +1,5 @@
 GAME OVERVIEW ================================================================================================================================================================================
 
-
 	TEAM PERSONNEL:
 
 	Justin Morritt
@@ -35,11 +34,11 @@ GAME OVERVIEW ==================================================================
 
 	TEAM WISHLIST
 	• Create Save/Continue Files for players that cant finish a whole run and want access at a later time.
+	• Mouse friend that follows you , increasing base health because of an overall Morale boost and  better outlook towards life.
+	•
+	•
+	•
 	
-	TEAM ROLES AND RESPONSIBILITIES
-	[Identify the responsibilities assigned to each of the team roles.]
-
-
 
 PLOT AND SETTING INFORMATION ================================================================================================================================================================================
 
@@ -68,9 +67,13 @@ CORE GAME PLAY =================================================================
  
  
 	How to play:
+		A player will be waking up to a new world of Order. Life has thrown them a curve ball and they ended up in prison . The player will receive their randomly 
+		generated jail sentence and a breakdown of the crimes they have commit. The crimes a player has commit will shape the world around them. These crimes will affect 
+		how long it will take for you to be released on good behaviour, as well as affect the respect rating of other inmates towards you.	Randomly generated jail sentence will
+		most likely be different every time a player goes for a run of Prison Escape.  You as the main character, want to escape from jail as fast as possible 
+		(Getting out on good behaviour is also an option).
+	
 		
-		Randomly generated jail sentence
-		You as the main character, want to escape from jail as fast as possible (Getting out on good behaviour is also an option)
 		
 	How to lose:
 		A player will lose the game in many different fashions all stemming down to death. Whether you get in a fight with another inmate due to lack of respect or
@@ -106,20 +109,26 @@ ENVIROMENTAL ELEMENTS ==========================================================
 		Makeshift Shiv
 		Loaded Sock
 
-	CRAFTING
-		Crafting is only possible when in your own cell.
-		examples of craftable items
-			Makeshift key
-			Shiv
-			thick shirt (shirt with a book to protect from attacks)
+	CRAFTING (Crafting is only possible when in your own cell.)
+	
+	Examples of craftable items:
+			Makeshift key - these will be made from combining hairpins with spoons or forks . 
+			Shiv - Different Shivs will be Created from different combinations of Crafting , the "Toothbrush Shiv", "Razer Blade Shiv" for a few examples. 
+			thick shirt (shirt with a book to protect from attacks) - extra shirts will be given to players after completing mini objectives , usually an inmate
+			that respects you will give you an extra shirt as a form of protection. This will lower the damage taken from stabs. 
+			Loaded Sock - When a player finds a dirty sock and combines it with a rock they will have the most primitive weapon, the "Loaded Sock"
 			
 	Materials
-		Broken glass
-		Rock
-		Spoon
-		Knife
-		Fork
-		File
+		Dirty Sock - This will be found at random, will be very obvious , its one of the first weapons a player can create to protect themselves.
+		Hairpin - These will be needed to craft makeshift keys , they will be very tiny to see but the reward is great when a player can access secret areas. 
+		Toothbrush - these will be given to a player at the beginning of the game. The player when combining a toothbrush with a razer blade will make a "shiv".
+		Razer Blade - found from a dirty razer , used in combination with forks and spoons to make a "shiv"
+		Broken glass - this will be collected after a player finds a light bulb that he can stealthily break. 
+		Rock - Rocks will be spawned in random locations, you still need to be careful when picking them up. 
+		Spoon - Spoon's will be stolen from the cafeteria, these will be very hard to steal. 
+		Knife - Knives will be extremely hard to steal from the cafeteria, a person must be very stealthy.
+		Fork - Forks will be stolen from the cafeteria also , these can be crafted into a variety of items . (same as spoon)
+		File - Files will be found in random secret rooms , these are rare and will lower your sentence when found. 
 	
 
 INTERFACE USAGE ================================================================================================================================================================================
@@ -142,9 +151,9 @@ INTERFACE USAGE ================================================================
 MENUS AND GENERAL GAME USAGE ================================================================================================================================================================================
 
 	Main Menu
-		Start Game
+		Start Game - this will prompt the user with a name input. The player will enter their name and the journey will begin.
 		Continue Game(wish-list)
-		High Scores
+		High Scores 
 		About Game
 		Exit Game
 	
@@ -154,6 +163,7 @@ MENUS AND GENERAL GAME USAGE ===================================================
 		Exit
 	
 	Settings Menu
-		Sound Options
-		Difficulty(wish-list)
+		Sound Options - turn sound effects on or off , turn music on or off. 
+		Difficulty(wish-list) - this may be implemented after all of our goals are completed. Easy, Medium, Hard will be our options.
+								these options will increase or decrease your base health in the game . Will also make items spawn more rarely.
 		

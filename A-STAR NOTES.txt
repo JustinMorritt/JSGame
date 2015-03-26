@@ -1,0 +1,22 @@
+NAv-Mesh - most efficient
+
+BrethFurst Search ( used to find closesest powerup , fewest steps possible)
+while( CurrNode != EndNode)
+	{
+		add children to fringe ( as long as they arnt enclosed)
+		choose element in front of fringe to be current node
+		add current node to closed list;
+	}
+	
+Dijkstra Algorithm 	
+{ 
+	uses path weights..
+}
+
+A-Star 
+{
+	diaganal ( euclidean space, requires root calculation)
+	uses mahattan distance as an extra weight
+	g cost-Distance From source
+	h cost-Distance To Final
+}

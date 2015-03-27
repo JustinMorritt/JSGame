@@ -35,7 +35,7 @@ GAME OVERVIEW ==================================================================
 	TEAM WISHLIST
 	• Create Save/Continue Files for players that cant finish a whole run and want access at a later time.
 	• Mouse friend that follows you , increasing base health because of an overall Morale boost and  better outlook towards life.
-	•
+	• Different difficulty levels
 	•
 	•
 	
@@ -67,9 +67,9 @@ CORE GAME PLAY =================================================================
  
  
 	How to play:
-		A player will be waking up to a new world of Order. Life has thrown them a curve ball and they ended up in prison . The player will receive their randomly 
-		generated jail sentence and a breakdown of the crimes they have commit. The crimes a player has commit will shape the world around them. These crimes will affect 
-		how long it will take for you to be released on good behaviour, as well as affect the respect rating of other inmates towards you.	Randomly generated jail sentence will
+		The player will be waking up to a new world of order. Life has thrown them a curve ball and they ended up in prison. The player will receive their randomly 
+		generated jail sentence and a breakdown of the crimes they have committed. The crimes a player has commit will shape the world around them. These crimes will affect 
+		how long it will take for you to be released on good behaviour, as well as affect the respect rating of other inmates towards you. Randomly generated jail sentences will
 		most likely be different every time a player goes for a run of Prison Escape.  You as the main character, want to escape from jail as fast as possible 
 		(Getting out on good behaviour is also an option).
 	

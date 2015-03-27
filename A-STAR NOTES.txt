@@ -17,6 +17,74 @@ A-Star
 {
 	diaganal ( euclidean space, requires root calculation)
 	uses mahattan distance as an extra weight
-	g cost-Distance From source
-	h cost-Distance To Final
+	g cost-Distance From source starting node
+	h - heuristic , distance from a node to target node use ManHattan 
+	
+	look at surroundings and calculate F cost = G + H ---> looks at lowest G cost  , makes that node the next node on the closed list 
+	
+	calculate a h value for the node, then calculate a move cost  (10 for vertical and 14 for hypoteneuse  Sqrt(10^2+10^2))
+	
+	
+	
+	
+	OPEN // List   -To be evealuated
+	CLOSED // LIST - Already been evaluated 
+	
+	add Start to OPEN list 
+	
+	loop 
+	current = node in the open with the lowest F cost 
+	remove current from OPENand current to CLOSED
+	if current is the target node// path has been found 
+	 return ...
+	 
+	for each neighbor of the current node 
+		if neighbor is not TRAVERSABLE (walkable) or is in closed skip to the next neighbour
+		
+		if new path to neighbour is shorter OR neighbour is not in OPENset f_COST of neighbour to current
+		if neighbour is not in OPEN ..
+			add neighbour to OPEN
+	
+	
+	
+}
+
+
+COLLISION BOX's
+{
+	var NPCs = [	{"id":"inmate1","x": 100, "y": -20, "w": 40, "h": 20 , "goHome: false", "hp" : 100 , "CellX": 100, "CellY": 50, "Respect":100},
+					{"id":"inmate2","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate3","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate4","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate5","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate6","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate7","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate8","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate9","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate10","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate11","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate12","x": 100, "y": -20, "w": 40, "h": 20},
+					{"id":"inmate13","x": 100, "y": -20, "w": 40, "h": 20},
+				]
+}
+function renderNPCs   for(var i =0; i < NPCs.length; i++)
+						ctx.CreateNPC(NPCs[i].x, NPCs[i].y, NPCs[i].h, NPCs[i].w)
+
+						
+function animate()
+{
+
+}						
+var animateInterval = setInterval(animate, 30);	
+
+NPCs.splice(i,1)				
+
+
+Hit Detection Notes (COllision)
+SIMPLE BOX COLLISION
+{
+		M1.x + M1.w >= M2.x 	&&
+		M1.x <= M2.x + M2.w 	&& 
+		M1.y >= M2.y 			&&
+		M1.y <= M2.y + M2.h
 }

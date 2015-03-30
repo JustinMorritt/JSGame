@@ -6,7 +6,8 @@ var prison = (function ()
         inmates: 20,
         gaurds: 10,
         baseScore: 100,
-        numJewelTypes: 7
+        numOffences: 39,
+        sentence: ""
     };
 
 	var scriptQueue = [], numResourcesLoaded = 0, numResources = 0, executeRunning = false;

@@ -3,24 +3,25 @@
     //jewel.board.initialize(function(){}) to test
     //jewel.board.print()
     var settings,
-        jewels,
         inmates,
         gaurds,
-        baseScore,
-        numJewelTypes;
-
-    function run() {
-        initialize(console.log("init"));
-        print();
-    }
+        sentence,
+        sentenceTime,
+        numOffences,
+        baseScore
+        ;
 
     function initialize(callback) {
         settings = prison.settings;
-        numJewelTypes = settings.numJewelTypes;
+        sentenceTime = 0;
+        sentence = settings.sentence;
+        offences = [];
+        offenceTime = [];
+        numOffences = settings.numOffences;
         baseScore = settings.baseScore;
         inmates = settings.inmates;
         gaurds = settings.gaurds;
-        fillBoard();
+        randomSentence();
 
         if (callback) {
             callback();
@@ -28,13 +29,73 @@
 
     }
 
-    function randomJewel() {
-        var randJewel = Math.floor(Math.random() * numJewelTypes) + 1;
-        console.log("Created a random Jewel: " + randJewel);
-        return randJewel;
+    function randomSentence() {
+     
+        function randOffence() {
+            return Math.floor(Math.random() * numOffences);
+        }
+        var numCrimesCommit = Math.floor(Math.random() * 4) + 1 ; //  <<---  CHANGE 4 TO A DIFFICULTY MODIFIER
+        var offenceTime = [30, 25, 25, 25, 25,
+                            25, 10, 10, 7, 25,
+                            25, 14, 25, 15, 5,
+                            5, 7, 10, 3, 1,
+                            2, 14, 14, 7, 14,
+                            2, 2, 7, 7, 5,
+                            5, 5, 15, 15, 5,
+                            14, 10, 14, 10, 25];
+        var offences = ["Genocide, crimes against humanity, war crimes and related offences other then one involving murder ",
+            "Causing explosion likely to endanger life or property",
+            "Soliciting to commit murder",
+            "Destroying, damaging or endangering the safety of an aircraft",
+            "Racially-aggravated arson (endangering life)",
+            "Kidnapping",
+            "Possession of firearm with intent to cause fear of violence ",
+            "Possessing or distributing prohibited weapon or ammunition ",
+            "Carrying firearm or imitation firearm in public place",
+            "Murder",
+            "Attempt to cause explosion, making or keeping explosive etc.",
+            "Causing death by careless driving while under the influence of drink or drugs",
+            "Wounding or grievous bodily harm with intent to cause grievous bodily harm etc.",
+            "Fraudulent evasion of controls on Class A and B drugs",
+            "Possession of firearm without certificate",
+            "Abandonment of children under two",
+            "Failure to disclose information about terrorism",
+            "Attempted sexual intercourse with girl under 13",
+            "Indecent assault on a woman",
+            "Causing prostitution of women",
+            "Keeping a brothel",
+            "Sexual intercourse with patients",
+            "Burglary with intent to inflict GBH on a person or do unlawful damage to a building or anything in it (dwelling) ",
+            "Burglary with intent to commit rape (dwelling)",
+            "Fraudulent evasion of the prohibition on importing indecent or obcene articles ",
+            "Aggravated vehicle taking",
+            "Voyeurism",
+            "Intercourse with an animal",
+            "Controlling prostitution for gain",
+            "Man living on earnings of prostitution",
+            "Dealing in firearms",
+            "Assault occasioning actual bodily harm",
+            "Offences against international protection of nuclear material",
+            "Hostage taking",
+            "Violent disorder",
+            "Riot",
+            "Blackmail",
+            "Aiding and abetting suicide",
+            "Administering poison etc. so as to endanger life",
+            "Torture"
+        ];
+
+        for (var i = 1; i <= numCrimesCommit ; i++) {
+            var offNum = randOffence();
+            sentenceTime += offenceTime[offNum];
+            sentence += offences[offNum] + " = " + offenceTime[offNum] + " Years \n";
+        }
+
+        console.log("You Have Committed : \n" + sentence);
+        console.log("Total Offence Time : " + sentenceTime + " Years.");
     }
 
-
+    /*
     function fillBoard() {
         var type;
         jewels = [];
@@ -55,204 +116,10 @@
             fillBoard();
         }
     }
-
-    function getJewel(x, y) {
-        if (x < 0 || x > inmates - 1 || y < 0 || y > gaurds - 1) {
-            console.log("Error: Jewel out of bounds!")
-            return -1;
-        }
-        else {
-            return jewels[x][y];
-        }
-    }
+    */
 
 
-    //RETURN THE NUMBER JEWELS IN LONGEST CHAIN
-    //THAT INCLUDES (X,Y)
-    function checkChain(x, y) {
-        var type = getJewel(x, y),
-            left = 0, right = 0, down = 0, up = 0;
-        //look RIGHT
-        while (type === getJewel(x + right + 1, y)) {
-            right++;
-        }
-        //LOOK LEFT
-        while (type === getJewel(x - left + 1, y)) {
-            left++;
-        }
-        //LOOK UP
-        while (type === getJewel(x, y + up + 1)) {
-            up++;
-        }
-        //LOOK DOWN
-        while (type === getJewel(x, y - down - 1)) {
-            down++;
-        }
-        return Math.max(left + 1 + right, up + 1 + down);
-    }
 
-
-    //RETURNS TRUE IF (X1,Y1) CAN BE SWAPPED WITH (X2,y2) TO FORM A NEW MATCH
-    //TEST WITH  jewel.board.canSwap(4,3,4,2);
-    function canSwap(x1, y1, x2, y2) {
-        var type1 = getJewel(x1, y1),
-            type2 = getJewel(x2, y2),
-            chain;
-
-        if (!isAdjacent(x1, y1, x2, y2)) {
-            console.log("Cannot Swap There!");
-            return false;
-        }
-
-        //TEMPORARILY SWAP JEWELS
-        jewels[x1][y1] = type2;
-        jewels[x2][y2] = type1;
-
-        chain = (checkChain(x2, y2) > 2 || checkChain(x1, y1) > 2);
-
-        //Swap back
-
-        jewels[x1][y1] = type1;
-        jewels[x2][y2] = type2;
-
-        return chain;
-    }
-
-    //  RETURNS TRUE IX X1,Y1 IS ADJACENT TO X2,Y2
-    function isAdjacent(x1, y1, x2, y2) {
-        var dx = Math.abs(x1 - x2),
-            dy = Math.abs(y1 - y2);
-        return (dx + dy === 1);
-    }
-
-    function getChains() {
-        var x, y, chains = [0];
-        for (x = 0; x < inmates; x++) {
-            chains[x] = [];
-            for (y = 0; y < gaurds; y++) {
-                chains[x][y] = checkChain(x, y);
-            }
-        }
-        return chains;
-    }
-
-    function getBoard() {
-        var copy = [],
-            x;
-
-        for (x = 0; x < inmates; x++) {
-            copy[x] = jewels[x].slice(0);
-        }
-        return copy;
-    }
-
-    //REMOVING / SCORING
-    function check(events) {
-
-        var chains = getChains(),
-            hadChains = false,
-            score = 0,
-            removed = [],
-            moved = [],
-            gaps = [];
-
-        for (var x = 0; x < inmates; x++) {
-            gaps[x] = 0;
-            for (var y = gaurds - 1; y >= 0; y--) {
-                if (chains[x][y] > 2) {
-                    hadChains = true;
-                    gaps[x]++;
-                    removed.push({
-                        x: x,
-                        y: y,
-                        type: getJewel(x, y)
-                    });
-
-
-                    //ADD POINTS TO SCORE
-                    score += baseScore * Math.pow(2, (chains[x][y] - 3));
-
-                }
-                else if (gaps[x] > 0) {
-                    moved.push({
-                        toX: x,
-                        toY: y + gaps[x],
-                        fromX: x,
-                        fromY: y,
-                        type: getJewel(x, y)
-                    });
-                    jewels[x][y + gaps[x]] = getJewel(x, y);
-                }
-            }
-        }
-        for (var x = 0; x < inmates; x++) {
-            for (var y = 0; y < gaps[x]; y++) {
-                jewels[x][y] = randomJewel();
-                moved.push({
-                    toX: x,
-                    toY: y,
-                    fromX: x,
-                    fromY: y - gaps[x],
-                    type: jewels[x][y]
-                });
-            }
-        }
-        events = events || [];
-        if (hadChains) {
-            events.push(
-                { type: "remove", data: removed },
-                { type: "score", data: score },
-                {
-                    type: "move", data: moved
-                });
-
-            if (!hasMoves()) {
-                fillBoard();
-                events.push({
-                    type: "refill",
-                    data: getBoard()
-                });
-            }
-            return check(events);
-        }
-        else {
-            return events;
-        }
-
-    }
-
-    function hasMoves() {
-        for (var x = 0; x < inmates; x++) {
-            for (var y = 0; y < gaurds; y++) {
-                if (canJewelMove(x, y)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    //returns true if (x,y) is a valid position and can be swapped with a neighbor
-    function canJewelMove(x, y) {
-        return ((x > 0 && canSwap(x, y, x - 1, y)) ||
-                (x < inmates - 1 && canSwap(x, y, x + 1, y)) ||
-                (y > 0 && canSwap(x, y, x, y - 1)) ||
-                (y < gaurds - 1 && canSwap(x, y, x, y + 1)));
-    }
-
-    function swap(x1, y1, x2, y2, callback) {
-        var tmp, events;
-        if (canSwap(x1, y1, x2, y2)) {
-            tmp = getJewel(x1, y1);
-            jewels[x1][y1] = getJewel(x2, y2);
-            jewels[x2][y2] = tmp;
-
-            //check board for list of events
-            callback(events);
-        } else {
-            callback(false);
-        }
-    }
 
     function print() {
         var str = "\n";
@@ -269,11 +136,6 @@
 
     return {
         //EXPOSED FUNCTIONS IN HERE
-        run: run,
         initialize: initialize,
-        print: print,
-        getBoard: getBoard,
-        swap: swap,
-        canSwap: canSwap
     };
 })();

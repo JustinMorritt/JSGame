@@ -1,0 +1,20 @@
+NPC Names:								Gang Nicknames:
+	Frank									Brains
+	Adam									Butterfingers
+	Gorge									Dasher
+	Bob										Digger
+	Carlos									Fat Boy
+	Hugo									Icepick
+	Randy									Mad Dog
+	Lee										Monster
+	Elvis									O.G.
+	Igor									Old Creepy
+	Noah									Plumber
+	Fapio									Pretty Boy
+	Kai										Princess
+	Sergei									Smiley
+	Yuri									Snake
+	Billy									Taco
+	Zoltan									Two Holes
+											Wild Man
+											Wolf

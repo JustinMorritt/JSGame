@@ -3,8 +3,8 @@ var prison = (function ()
 
     var settings =
     {
-        inmates: 20,
-        gaurds: 10,
+        inmates: 19,
+        guards: 10,
         baseScore: 100,
         numOffences: 39,
         sentence: ""

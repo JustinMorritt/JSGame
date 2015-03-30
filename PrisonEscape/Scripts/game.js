@@ -1,40 +1,92 @@
-﻿prison.game = (function () {
+﻿prison.game = (function ()
+{
     //GAME FUNCTIONS GO HERE
     //jewel.board.initialize(function(){}) to test
     //jewel.board.print()
     var settings,
         inmates,
-        gaurds,
+        guards,
         sentence,
         sentenceTime,
         numOffences,
         baseScore
         ;
 
-    function initialize(callback) {
+    function initialize(callback)
+    {
         settings = prison.settings;
-        sentenceTime = 0;
         sentence = settings.sentence;
-        offences = [];
-        offenceTime = [];
         numOffences = settings.numOffences;
         baseScore = settings.baseScore;
         inmates = settings.inmates;
-        gaurds = settings.gaurds;
-        randomSentence();
+        guards = settings.gaurds;
 
-        if (callback) {
+        sentenceTime = 0;
+        offences = [];
+        guardNames = [];
+        inmateNames = [];
+        offenceTime = [];
+
+        //FUNCTIONS
+        randomSentence();
+        randomNameIM();
+        randomNameGRD();
+        displayNPCs();
+
+
+        if (callback)
+        {
             callback();
         }
 
     }
 
-    function randomSentence() {
-     
-        function randOffence() {
+
+    //TO DO
+    function randomNameIM()
+    {
+        for(var i = 1 ; i < inmates ; ++i)
+        {
+            //guardNames[name]
+            //inmateNames[name] 
+            //40 names
+        }
+    }
+    function randomNameGRD()
+    {
+        for (var i = 1 ; i < guards ; ++i)
+        {
+          
+            //20 names
+        }
+    }
+
+    function displayNPCs()
+    {
+        for (var i = 1 ; i < inmates ; ++i)
+        {
+            inmateNames[i];
+        }
+        for (var i = 1 ; i < guards ; ++i)
+        {
+            guardNames[i];
+        }
+
+    }
+
+
+    function randomSentence()
+    {
+        function randOffence()
+        {
             return Math.floor(Math.random() * numOffences);
         }
-        var numCrimesCommit = Math.floor(Math.random() * 4) + 1 ; //  <<---  CHANGE 4 TO A DIFFICULTY MODIFIER
+
+        function randOffenceCommitNum()
+        {
+            return Math.floor(Math.random() * 4) + 1;
+        }
+
         var offenceTime = [30, 25, 25, 25, 25,
                             25, 10, 10, 7, 25,
                             25, 14, 25, 15, 5,
@@ -85,14 +137,23 @@
             "Torture"
         ];
 
-        for (var i = 1; i <= numCrimesCommit ; i++) {
-            var offNum = randOffence();
-            sentenceTime += offenceTime[offNum];
-            sentence += offences[offNum] + " = " + offenceTime[offNum] + " Years \n";
-        }
+        //var rollHundred = 0;
+        //for (var j = 0; j < 1000000 ; ++j)
+        //{
+            numCrimesCommit = randOffenceCommitNum();
+            for (var i = 1; i <= numCrimesCommit ; i++)
+            {
+                var offNum = randOffence();
+                sentenceTime += offenceTime[offNum];
+                sentence += offences[offNum] + " = " + offenceTime[offNum] + " Years \n";
+                //rollHundred += offenceTime[offNum];
+            }
+        //}
+ 
 
-        console.log("You Have Committed : \n" + sentence);
-        console.log("Total Offence Time : " + sentenceTime + " Years.");
+         console.log("You Have Committed : \n" + sentence);
+         console.log("Total Offence Time : " + sentenceTime + " Years.");
+        //console.log("Avg Offence Time : " + rollHundred/1000000 + " Years.");
     }
 
     /*
@@ -120,7 +181,7 @@
 
 
 
-
+    /*
     function print() {
         var str = "\n";
         for (var y = 0; y < gaurds; y++) {
@@ -133,7 +194,7 @@
         }
         console.log(str);
     }
-
+    */
     return {
         //EXPOSED FUNCTIONS IN HERE
         initialize: initialize,

@@ -3,7 +3,7 @@ var prison = (function ()
 
     var settings =
     {
-        inmates: 19,
+        inmates: 20,
         guards: 10,
         baseScore: 100,
         numOffences: 39,
@@ -41,7 +41,9 @@ var prison = (function ()
 		}
 	}
 	
-	
+	function getLoadProgress() {
+	    return numResourcesLoaded / numResources;
+	}
 	
 	function load(src, callback)
 	{
@@ -70,7 +72,14 @@ var prison = (function ()
 		image.src = src;
 	}
 	
-	
+	function preload(src) {
+	    var image = new Image();
+	    image.src = src;
+	}
+
+	function hasWebWorkers() {
+	    return ("Worker" in window);
+	}
 	
 	function showScreen(screenId)
 	{
@@ -108,7 +117,8 @@ var prison = (function ()
 	
 	
 	
-	return{
+	return {
+	getLoadProgress: getLoadProgress,
 	load: load,
 	setup: setup,
 	settings: settings,

@@ -11,9 +11,9 @@
 		window.addEventListener("load", function()
 		{
 			prison.load("Scripts/dom.js");
-			prison.load("Scripts/screen.splash.js");
+			prison.load("Scripts/screen.splash.js", prison.setup);
 			prison.load("Scripts/screen.main-menu.js");
-			prison.load("Scripts/game.js", prison.setup);
+			prison.load("Scripts/game.js");
 		});
 	</script>
 </head>
@@ -22,7 +22,10 @@
 		<div id="game">
 		
 			<div class="screen" id="splash-screen">	
-				<h1 class="logo">Prison Escape<br></br></h1>	
+				<h1 class="logo">Prison Escape<br></br></h1>
+                <div class="progress">
+                    <div class="indicator"></div>
+                </div>	
 				<span class="continue">Click to Enter Prison</span>	
 			</div>
 		

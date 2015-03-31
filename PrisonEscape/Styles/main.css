@@ -65,13 +65,13 @@ body
 	font-family:bearpawregular;
 	color:#000033;
 	text-align: center;
-	padding-top:2em;
+	padding-top:1em;
 }
 
 #splash-screen .continue
 {
 	cursor: pointer;
-	padding-top:5em;
+	padding-top:1em;
 	color:red;
 	font-size:5em;
 	text-shadow: 	2px 2px 3px black,
@@ -151,6 +151,29 @@ ul.menu li button:active
 	background: rgb(30,40,0)
 }
 
+
+/*---------------LOADING BAR------------------*/
+.progress 
+{
+    margin:0 auto;
+    margin-bottom:1em;
+    width: 20em;
+    height:2em;
+    border-radius:1em;
+    overflow : hidden;
+    border : 1px solid black;
+    -webkit-box-shadow : 0.2em 0.2em 0.3em black;
+	-moz-box-shadow:  0.2em 0.2em 0.3em black;
+	box-shadow:  0.2em 0.2em 0.3em black;
+}
+
+    .progress .indicator 
+    {
+        background-color: #1aff00;
+        height:100%;
+        width:0%;
+    }
+/*---------------------------------------------*/
 
 
 

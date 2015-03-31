@@ -10,8 +10,8 @@
         sentenceTime,
         numOffences,
         baseScore,
-		totalInmateNames = 39,
-		totalGuardNames = 19,
+		totalInmateNames = 40,
+		totalGuardNames = 20,
 		guardNameList = "", 
 		inmateNameList = ""
         ;
@@ -33,9 +33,11 @@
 
         //FUNCTIONS
         randomSentence();
-        //randomNameIM();
+        randomNameIM();
 		randomNameGRD();
-        
+		displayNPCs();
+
+
         if (callback)
         {
             callback();
@@ -45,50 +47,73 @@
 
 
     //TO DO
+    function alreadyOnList(list, item)
+    {
+        if (list.length > 0)
+        {
+            for (var x = 0 ; x < list.length; x++) {
+                if (list[x] == item) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
     function randomNameIM()
     {	
-		var inmateNames = ["Blade", "Bubba", "Razor", "Shanks", "Brains", "ButterFingers", "Dasher", "Digger",
+        var inmateNameList = ["Blade", "Bubba", "Razor", "Shanks", "Brains", "ButterFingers", "Dasher", "Digger",
 						   "Fat-Boy", "Icepick", "Monster", "Mad-Dog", "O. G.", "Old Creepy", "Plumber", "Pretty boy",
 						   "Princess", "Snake", "Smiley", "Joker", "Taco", "Two-Holes", "Wild man", "Wolf",
 						   "", "", "", "", "", "", "", "",
 						   "", "", "", "", "", "", "", ""];
-		
-		for(var i = 1; i <= inmates; i++)
-		{
-			var nameNum = Math.floor(Math.random() * totalInmateNames);
-			inmateNameList += inmateNames[nameNum];
+
+        while (inmateNames.length <= inmates) {
+		    var nameNum = Math.floor(Math.random() * totalInmateNames);
+
+		    if (!alreadyOnList(inmateNames, inmateNameList[nameNum])) {
+		        inmateNames.push(inmateNameList[nameNum]);
+		    }
 		}
-		console.log(inmateNameList);
     }
 	
     function randomNameGRD()
     {
-        var guardNames = ["Adam", "Bill", "Bob", "Carlos", "Dan",
+        var guardNameList = ["Adam", "Bill", "Bob", "Carlos", "Dan",
 						  "Frank", "George", "Hugo", "Ian", "James",
 						  "Joe", "Jordan", "Kevin", "Lester", "Mark", 
 						  "Mike", "Randy", "Scott", "Tyrone", "Will"];
 		
-		for(var i = 1; i <= guards; i++)
+        while (guardNames.length <= guards)
 		{
-			var nameNum = Math.floor(Math.random() * totalGuardNames);
-			guardNameList += guardNames[nameNum];
+		    var nameNum = Math.floor(Math.random() * totalGuardNames);
+
+		    if (!alreadyOnList(guardNames, guardNameList[nameNum]))
+		    {
+		        guardNames.push(guardNameList[nameNum]);
+		    }	
 		}
-		console.log(guardNameList);
+		
     }
-/*
+
     function displayNPCs()
     {
+        var Num = 0;
+        var Num2 = 0;
         for (var i = 1 ; i < inmates ; ++i)
         {
-            inmateNames[i];
+            Num++;
+            console.log("Inmate " +Num+ " = " + inmateNames[i]);
         }
-        for (var i = 1 ; i < guards ; ++i)
+        for (var i = 1 ; i < guardNames.length ; ++i)
         {
-            guardNames[i];
+            Num2++;
+            console.log("Guard " +Num2+ " = " + guardNames[i]);
         }
 
     }
-*/
+
 
     function randomSentence()
     {

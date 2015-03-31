@@ -7,7 +7,7 @@ var prison = (function ()
         guards: 10,
         baseScore: 100,
         numOffences: 39,
-        sentence: ""
+        sentence: []
     };
 
 	var scriptQueue = [], numResourcesLoaded = 0, numResources = 0, executeRunning = false;

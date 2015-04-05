@@ -22,7 +22,7 @@ prison.screens["splash-screen"] = (function()
             p = prison.getLoadProgress() * 100;
 	    $("#splash-screen .indicator")[0].style.width = p + "%";
 	    if (p == 100) {
-	        console.log("fully loaded, executing setup()..")
+	        //console.log("fully loaded, executing setup()..")
 	        setup();
 	    } else {
 	        setTimeout(checkProgress, 30);

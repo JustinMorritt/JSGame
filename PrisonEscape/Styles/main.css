@@ -177,6 +177,136 @@ ul.menu li button:active
 
 
 
+.screen footer
+{
+    display: block;
+    position : absolute;
+    bottom : 2em; 
+    height : 1em;
+    width:100%;
+     z-index: 100;
+}
+
+.screen footer button
+{
+    cursor:pointer;
+    margin-left: 0.25em;
+    margin-right:0.25em;
+	font-family:capture_itregular;
+	font-size:1.5em;
+	color: red;
+	width:6em;
+	height:1.5em;
+	background:black;
+	border: 0.05em solid rgb(255,255,0);
+	border-radius: 0.5em;
+	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
+	-moz-box-shadow:  0.2em 0.2em 0.3em black;
+	box-shadow:  0.2em 0.2em 0.3em black;
+}
+.screen footer button:hover
+{
+    border: 0.12em solid rgb(255,255,0);
+    background:rgba(0,0,0,0);
+}
+
+/*============================GAME OVERLAYS============================*/
+#game-screen .pause-overlay,.inventory-overlay,.crafting-overlay
+{
+    font-size:2em;
+    display:none;
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:99;
+    background: rgba(20,20,20,0.8);
+}
+
+#game-screen .pause-overlay .pause-text,.inventory-text,.crafting-text
+{
+    width:100%;
+    text-align:center;
+    font-size:5em;
+    text-shadow:1px 1px 2px rgb(255,255,0),
+				-1px -1px 2px rgb(255,255,0),
+				0px 0px 0px black;
+    color:red;
+}
+
+#game-screen .back
+{
+    display:none;
+    cursor:pointer;
+    margin-left: 0.25em;
+    margin-right:0.25em;
+    bottom:2em;
+    position:absolute;
+    text-align:center;
+	font-family:capture_itregular;
+	font-size:2em;
+	color: red;
+	width:15em;
+	height:1.5em;
+	background:black;
+	border: 0.05em solid rgb(255,255,0);
+	border-radius: 0.5em;
+	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
+	-moz-box-shadow:  0.2em 0.2em 0.3em black;
+	box-shadow:  0.2em 0.2em 0.3em black;
+    z-index:100;
+}
+    #game-screen .back:hover 
+{
+    border: 0.12em solid rgb(255,255,0);
+    background:rgba(0,0,0,0);
+}
+
+}
+/*==================================================================*/
+
+
+
+/*============================MAP CANVAS============================*/
+#game-screen .game-map {
+
+    position : relative;
+    width : 100%;
+    height : 100%;
+    perspective : 16em;
+    -webkit-perspective :16em;
+    -moz-perspective:16em;
+    -ms-perspective:16em;
+}
+
+#game-screen .game-map .background,
+#game-screen .game-map .map {
+    position : absolute;
+    left: 0;
+    top: 0;
+    width : 100%;
+    height : 100%;
+}
+
+
+
+#game-screen .game-map .map
+{
+    z-index: 50;
+}
+
+#game-screen .game-map .background
+{
+   
+    width : 100%;
+    height : 100%;
+    z-index: 50;
+}
+
+/*==================================================================*/
+
+
 
 /*SMART PHONES*/
 @media only screen and (max-width: 480px) 

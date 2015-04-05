@@ -1,0 +1,95 @@
+MAINGAME
+	settings = {controls = {};};
+	setup()
+	getLoadProgress()
+	getSIZE()
+	hasWebWorkers()
+	preload(src)
+	executeScriptQueue()
+	load(src, callback)
+	showScreen(screenId)
+	isStandalone()
+	(in Return)screens: {}
+	
+----MAINGAME.dom
+		$(path,parent)
+		hasClass(el, clsName)
+		addClass(el, clsName)
+		removeClass(el,clsName)
+		bind(element, event, handler)
+		transform(element, value)
+	
+----MAINGAME.input
+		keys = {}; , inputHandlers
+		initialize()
+		handleClick(event, control, click)
+		bind(action, handler)
+		trigger(action)
+	
+----MAINGAME.board   (game logic)
+		run()
+		initialize(callback)
+		randomJewel()
+		fillBoard()
+		getJewel(x,y)
+		checkChain(x, y)
+		canSwap(x1, y1, x2, y2)
+		isAdjacent(x1, y1, x2, y2)
+		getChains()
+		getBoard()
+		check(events)
+		hasMoves()
+		canJewelMove(x,y)
+		swap(x1, y1, x2, y2, callback)
+		print() 
+		
+		MAINGAME.BOARD-WORKER -(imports the MAINGAME.board)
+		MAINGAME.BOARD-WORKER-INTERFACE
+	
+----MAINGAME.display     canvas, cursor, ctx, cols , rows, Sprites
+		initialize(callback)
+		setup()
+		//ANIMATION ==============================
+		cycle()
+		addAnimation(runTime, fncs)
+		renderAnimations(time, lastTime)
+		drawJewel(type, x, y, scale, rot)
+		moveJewels(movedJewels, callback)
+		removeJewels(removedJewels, callback)
+		refill(newJewels, callback)
+		//========================================
+		createBackground()
+		redraw(newJewels, callback)
+		renderCursor(time)
+		clearCursor()
+		setCursor(x, y, selected)
+		clearJewel(x, y)
+	
+----MAINGAME.screens["splash-screen"]
+		run()
+		checkProgress()
+		setup()
+			
+----MAINGAME.screens["main-menu"]
+		run ()
+		setup ()
+		
+----MAINGAME.screens["game-screen"]   ,cursor
+		run()
+		setup() -initialize input
+		startGame() - init "MAINGAME.board" , "MAINGAME.display" (redraws MAINGAME.display.redraw(MAINGAME.board.getBoard))
+		setCursor(x, y, select)
+		moveCursor(x, y) moveUp(),moveDown(), moveLeft(), moveRight()
+		exitGame()
+		pauseGame()
+		resumeGame()
+		playBoardEvents(events)
+			boardEvent = events.shift() --- Removes first event
+				each event has a .type..
+					switch = "move" , "remove", "refill" default: next();
+					then recursively calls itself with the one event to handle
+			else(noEvents) - MAINGAME.display.redraw(MAINGAME.board.getBoard())
+		
+	
+		
+	

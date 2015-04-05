@@ -1,8 +1,8 @@
 ﻿prison.game = (function ()
 {
     //GAME FUNCTIONS GO HERE
-    //jewel.board.initialize(function(){}) to test
-    //jewel.board.print()
+    //prison.board.initialize(function(){}) to test
+    //prison.board.print()
     var settings,
         inmates,
         guards,
@@ -215,18 +215,18 @@
     /*
     function fillBoard() {
         var type;
-        jewels = [];
+        prisons = [];
         for (var x = 0; x < inmates; x++) {
-            jewels[x] = [];
+            prisons[x] = [];
             for (var y = 0 ; y < gaurds; y++) {
-                type = randomJewel();
-                while ((type == getJewel(x - 1, y) && type == getJewel(x - 2, y)) ||
-                      (type == getJewel(x, y - 1) && type == getJewel(x, y - 2))) {
-                    console.log("String of 3 or More encountered. -- Re-Rolling Jewel---")
-                    type = randomJewel();
+                type = randomprison();
+                while ((type == getprison(x - 1, y) && type == getprison(x - 2, y)) ||
+                      (type == getprison(x, y - 1) && type == getprison(x, y - 2))) {
+                    console.log("String of 3 or More encountered. -- Re-Rolling prison---")
+                    type = randomprison();
                 }
-                console.log("Jewel Position: X=" + x + " Y=" + y + "   <----")
-                jewels[x][y] = type;
+                console.log("prison Position: X=" + x + " Y=" + y + "   <----")
+                prisons[x][y] = type;
             }
         }
         if (!hasMoves) {

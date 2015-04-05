@@ -13,7 +13,11 @@
 			prison.load("Scripts/dom.js");
 			prison.load("Scripts/screen.splash.js", prison.setup);
 			prison.load("Scripts/screen.main-menu.js");
+			prison.load("Scripts/screen.game.js");
+			prison.load("Scripts/display.canvas.js");
 			prison.load("Scripts/game.js");
+			prison.load("Scripts/input.js");
+			prison.load("Scripts/map.js");
 		});
 	</script>
 </head>
@@ -39,7 +43,32 @@
 				</ul>
 			</div>
 			
-			<div class="screen" id="game-screen">	</div>
+			<div class="screen" id="game-screen">
+                <div class="game-map"> </div>
+                <div class="game-info">
+                    <label class="health">Health: <span></span></label>
+                    <label class="score">Score: <span></span></label>
+                </div>
+                <div class="time"><div class="indicator"></div></div>
+                <footer>
+                    <button class="exit">Exit</button>
+                    <button class="pause">Pause</button>
+                    <button class="inventory">Inventory</button>
+                    <button class="craft">Craft</button>
+                </footer>
+                <div class="pause-overlay">
+                    <div class="pause-text">Pause</div>
+                </div>
+                <div class="inventory-overlay">
+                    <div class="inventory-text">Inventory</div>
+                   
+                </div>
+                <div class="crafting-overlay">
+                    <div class="crafting-text">Crafting</div>
+                   
+                </div>
+                <button class="back">Back to Game</button>	
+            </div>
 			
 			<div class="screen" id="high-scores">	</div>
 			

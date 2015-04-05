@@ -7,8 +7,31 @@ var prison = (function ()
         guards: 10,
         baseScore: 100,
         numOffences: 39,
-        sentence: []
+        name: "",
+        sentence: [],
+
+        //CONTROLS
+        controls: {
+            // keyboard
+            KEY_UP: "moveUp",
+            KEY_LEFT: "moveLeft",
+            KEY_DOWN: "moveDown",
+            KEY_RIGHT: "moveRight",
+            KEY_ENTER: "action",
+            KEY_SPACE: "action",
+            // mouse and touch
+            CLICK: "action",
+            TOUCH: "action",
+            // gamepad
+            BUTTON_A: "action",
+            LEFT_STICK_UP: "moveUp",
+            LEFT_STICK_DOWN: "moveDown",
+            LEFT_STICK_LEFT: "moveLeft",
+            LEFT_STICK_RIGHT: "moveRight"
+        }
+
     };
+
 
 	var scriptQueue = [], numResourcesLoaded = 0, numResources = 0, executeRunning = false;
 	
@@ -104,18 +127,24 @@ var prison = (function ()
 		prison.screens[screenId].run();
 	}
 
-
 	function setup()
 	{
 	    console.log("Success! Loaded!");
 	    prison.showScreen("splash-screen");
 	}
 
+	function setName()
+	{
+	    var name = prompt("Please enter your name", "Tony Montana");
+	    settings.name = name;
+	}
+	function getName()
+	{
+	    return settings.name;
+	}
 
 
 	//Remember to expose the public functions in the return...
-	
-	
 	
 	return {
 	getLoadProgress: getLoadProgress,
@@ -123,8 +152,9 @@ var prison = (function ()
 	setup: setup,
 	settings: settings,
 	showScreen: showScreen,
+	setName: setName,
+	getName: getName,
 	screens: {}
-	
 	};
 	
 	

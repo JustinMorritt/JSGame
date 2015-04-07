@@ -23,7 +23,6 @@
         dom.bind(".pause-overlay", "click", resumeGame);
 
         dom.bind("#game-screen .back", "click", resumeGame);
-        dom.bind("#game-screen .back", "click", resumeGame);
 
         var input = prison.input;
         input.initialize();

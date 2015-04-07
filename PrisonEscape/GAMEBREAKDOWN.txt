@@ -26,21 +26,14 @@ MAINGAME
 		bind(action, handler)
 		trigger(action)
 	
-----MAINGAME.board   (game logic)
+----MAINGAME.map   (game logic)
 		run()
 		initialize(callback)
-		randomJewel()
-		fillBoard()
-		getJewel(x,y)
-		checkChain(x, y)
-		canSwap(x1, y1, x2, y2)
+		randomItem()
+		fillMap()
 		isAdjacent(x1, y1, x2, y2)
-		getChains()
-		getBoard()
+		getMap()
 		check(events)
-		hasMoves()
-		canJewelMove(x,y)
-		swap(x1, y1, x2, y2, callback)
 		print() 
 		
 		MAINGAME.BOARD-WORKER -(imports the MAINGAME.board)
@@ -54,7 +47,7 @@ MAINGAME
 		addAnimation(runTime, fncs)
 		renderAnimations(time, lastTime)
 		drawJewel(type, x, y, scale, rot)
-		moveJewels(movedJewels, callback)
+		
 		removeJewels(removedJewels, callback)
 		refill(newJewels, callback)
 		//========================================
@@ -83,13 +76,28 @@ MAINGAME
 		exitGame()
 		pauseGame()
 		resumeGame()
-		playBoardEvents(events)
-			boardEvent = events.shift() --- Removes first event
+		playmapEvents(events)
+			mapEvent = events.shift() --- Removes first event
 				each event has a .type..
 					switch = "move" , "remove", "refill" default: next();
 					then recursively calls itself with the one event to handle
 			else(noEvents) - MAINGAME.display.redraw(MAINGAME.board.getBoard())
 		
 	
+		
+		
+		
+		
+		
+		var dom = prison.dom,
+        $ = dom.$,
+        screen = $("#splash-screen")[0];
+	    $(".continue", screen)[0].style.display = "block";
+
+	    dom.bind(screen, "click", function ()
+	    {
+	        jewel.showScreen("main-menu");
+	    });
+		
 		
 	

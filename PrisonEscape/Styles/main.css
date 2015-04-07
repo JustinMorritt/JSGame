@@ -269,15 +269,13 @@ ul.menu li button:active
 
 
 /*============================MAP CANVAS============================*/
+
 #game-screen .game-map {
 
-    position : relative;
-    width : 100%;
-    height : 100%;
-    perspective : 16em;
-    -webkit-perspective :16em;
-    -moz-perspective:16em;
-    -ms-perspective:16em;
+    position : absolute;
+    width : 75em; /* 1.5 times the height (20x30 tiles)*/
+    height : 50em;
+    
 }
 
 #game-screen .game-map .background,
@@ -285,8 +283,8 @@ ul.menu li button:active
     position : absolute;
     left: 0;
     top: 0;
-    width : 100%;
-    height : 100%;
+    width :  75em;
+    height : 50em;
 }
 
 
@@ -298,9 +296,9 @@ ul.menu li button:active
 
 #game-screen .game-map .background
 {
-   
-    width : 100%;
-    height : 100%;
+
+    width : 75em;
+    height : 50em;
     z-index: 50;
 }
 

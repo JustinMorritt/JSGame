@@ -216,7 +216,7 @@
         paused = true;
     }
 
-    function showInventoryOL ()
+    function showInventoryOL()
     {
         var dom = prison.dom,
             //HIDING OTHER OVERLAYS SO NO OVERLAP

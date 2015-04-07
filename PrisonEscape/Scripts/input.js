@@ -68,8 +68,8 @@
         relX = click.clientX - rect.left;
         relY = click.clientY - rect.top;
         // prison coordinates
-        prisonX = Math.floor(relX / rect.width * settings.cols);
-        prisonY = Math.floor(relY / rect.height * settings.rows);
+        prisonX = Math.floor(relX /  settings.cols);
+        prisonY = Math.floor(relY /  settings.rows);
         // trigger functions bound to action
         console.log("The prison Clicked --> X: " + prisonX + " Y: " + prisonY);
         trigger(action, prisonX, prisonY);

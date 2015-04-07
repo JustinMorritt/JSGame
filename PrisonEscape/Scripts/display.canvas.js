@@ -2,6 +2,7 @@
 
     var cursor, canvas, ctx,
         cols, rows,
+        mapWidth, mapHeight,
         prisonSize,
         prisons,
         prisonSprite,
@@ -13,19 +14,21 @@
     function setup() {
         var $ = prison.dom.$,
         mapElement = $("#game-screen .game-map")[0];
-        //cols = prison.settings.cols;
-        //rows = prison.settings.rows;
+        cols = prison.settings.cols;
+        rows = prison.settings.rows;
 
         canvas = document.createElement("canvas");
         ctx = canvas.getContext("2d");
         prison.dom.addClass(canvas, "map");
 
-        //var rect = mapElement.getBoundingClientRect();
+        var rect = mapElement.getBoundingClientRect();
 
-        prisonSize = 64;
-        canvas.width = prisonSize * cols; //512 for 8x8 
-        canvas.height = prisonSize * cols;
+        prisonSize = 32;
+        canvas.width = prisonSize * 30; //512 for 8x8 
+        canvas.height = prisonSize * 20;
         //prisonSize = rect.width / cols;
+        mapWidth = 3200;
+        mapHeight = 3200;
 
 
 
@@ -44,21 +47,21 @@
 
     function initialize(callback) {
         if (firstRun) {
-            //console.log("====Attempting Canvas setup====");
+            console.log("====Attempting Canvas setup====");
             setup();
-            //prisonSprite = new Image();
-            //prisonSprite.addEventListener(
-            //    "load", callback, false);
-            //prisonSprite.src =
-            //    "Images/prisons" + prisonSize + ".png";
-            //console.log("Initialize prison Size: " + prisonSize);
+            prisonSprite = new Image(); 
+            prisonSprite.addEventListener(
+                "load", callback, false);
+            prisonSprite.src =
+                "Images/map.png";
+           console.log("Initialized prison Map");
             firstRun = false;
         } else {
             callback();
         }
     }
 
-    //ANIMATION ==============================
+    //ANIMATION // GAME LOOP==============================
     function cycle() {
         var now = Date.now();
 
@@ -119,20 +122,10 @@
 
     function drawprison(type, x, y, scale, rot) {
         ctx.save();
-        if (typeof scale !== "undefined" && scale > 0) {
-            ctx.beginPath();
-            ctx.translate((x + 0.5) * prisonSize, (y + 0.5) * prisonSize);
-            ctx.scale(scale, scale);
-            if (rot) {
-                ctx.rotate(rot);
-            }
-            ctx.translate(-(x + 0.5) * prisonSize, -(y + 0.5) * prisonSize);
-        }
-        ctx.drawImage(prisonSprite,
-            type * prisonSize, 0, prisonSize, prisonSize,
-            x * prisonSize, y * prisonSize,
-            prisonSize, prisonSize
-        );
+  
+        //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
+        ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
+
         ctx.restore();
         //console.log("drew prison! at  --> X:" + x + ", Y:" + y)
     }
@@ -216,7 +209,7 @@
             }
         });
     }
-    //========================================
+    //====================================================
 
     function createBackground() {
         var background = document.createElement("canvas"),

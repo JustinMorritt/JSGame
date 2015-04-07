@@ -212,30 +212,6 @@
         }
     }
 
-    /*
-    function fillBoard() {
-        var type;
-        prisons = [];
-        for (var x = 0; x < inmates; x++) {
-            prisons[x] = [];
-            for (var y = 0 ; y < gaurds; y++) {
-                type = randomprison();
-                while ((type == getprison(x - 1, y) && type == getprison(x - 2, y)) ||
-                      (type == getprison(x, y - 1) && type == getprison(x, y - 2))) {
-                    console.log("String of 3 or More encountered. -- Re-Rolling prison---")
-                    type = randomprison();
-                }
-                console.log("prison Position: X=" + x + " Y=" + y + "   <----")
-                prisons[x][y] = type;
-            }
-        }
-        if (!hasMoves) {
-            fillBoard();
-        }
-    }
-    */
-
-
 
     return {
         //EXPOSED FUNCTIONS IN HERE

@@ -1,6 +1,7 @@
 ﻿prison.map = (function () {
 
-    var settings;
+    var settings, rows, cols;
+    var prisons;
    
 
     function run() {
@@ -10,7 +11,10 @@
 
     function initialize(callback) {
 
-        //settings = prison.settings;
+        settings = prison.settings;
+        rows = prison.settings.rows;
+        cols = prison.settings.cols;
+        fillMap();
         console.log("---Map Fully Created---");
 
         if (callback) {
@@ -25,24 +29,16 @@
         return randprison;
     }
 
-    function fillBoard() {
-        var type;
+    function fillMap() {
+        console.log("attempting to fill grid..");
         prisons = [];
         for (var x = 0; x < cols; x++) {
             prisons[x] = [];
             for (var y = 0 ; y < rows; y++) {
-                type = randomprison();
-                while ((type == getprison(x - 1, y) && type == getprison(x - 2, y)) ||
-                      (type == getprison(x, y - 1) && type == getprison(x, y - 2))) {
-                    // console.log("String of 3 or More encountered. -- Re-Rolling prison---")
-                    type = randomprison();
-                }
-                // console.log("prison Position: X=" + x + " Y=" + y + "   <----" )
+                type = 1;
+                console.log("prison Position: X=" + x + " Y=" + y + "   <----" )
                 prisons[x][y] = type;
             }
-        }
-        if (!hasMoves) {
-            fillBoard();
         }
     }
 
@@ -50,6 +46,16 @@
         var dx = Math.abs(x1 - x2),
             dy = Math.abs(y1 - y2);
         return (dx + dy === 1);
+    }
+
+    function getprison(x, y) {
+        if (x < 0 || x > cols - 1 || y < 0 || y > rows - 1) {
+            console.log("Error: Node out of bounds!")
+            return -1;
+        }
+        else {
+            return prisons[x][y];
+        }
     }
 
     function getMap() {

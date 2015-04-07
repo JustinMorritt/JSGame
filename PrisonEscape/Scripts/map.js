@@ -18,7 +18,7 @@
         tileSheet.addEventListener(
             "load", callback, false);
         tileSheet.src =
-                "Images/prisons64.png";
+                "Images/prisons.png";
 
         fillMap();
         console.log("---Map Fully Created---");

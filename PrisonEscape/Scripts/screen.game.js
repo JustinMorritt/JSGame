@@ -1,5 +1,5 @@
 ﻿prison.screens["game-screen"] = (function () {
-    var firstRun = true, cursor,
+    var firstRun = true, player
      paused = false;
 
 
@@ -14,6 +14,7 @@
 
     function setup() {
         var dom = prison.dom;
+        player = prison.player;
         console.log("Binding Footer OverLay Buttons");
         dom.bind("footer button.exit", "click", exitGame);
         dom.bind("footer button.pause", "click", pauseGame);
@@ -47,22 +48,14 @@
             endTime: 0,
         }
         console.log("STARTING GAME");
-        map.initialize(function () {
-            display.initialize(function () {
-                cursor =
-                {
-                    x: 0,
-                    y: 0,
-                    selected: false
-                };
-                display.redraw(map.getMap(), function () {
-                    //nothin for now
-                    
-                });
-                
-            });
-        });
-        
+       // map.initialize(function () {
+           
+      //  });
+        map.initialize();
+        display.initialize();
+
+
+
         paused = false;
         var dom = prison.dom,
 
@@ -171,19 +164,20 @@
     }
 
     function moveUp() {
-        moveCursor(0, -1);
+        player.y--;
+        player.update();
     }
 
     function moveDown() {
-        moveCursor(0, 1);
+        player.y++;
     }
 
     function moveLeft() {
-        moveCursor(-1, 0);
+        player.x--;
     }
 
     function moveRight() {
-        moveCursor(1, 0);
+        player.x++;
     }
 
     function exitGame() {

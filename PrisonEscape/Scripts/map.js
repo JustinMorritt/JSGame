@@ -30,13 +30,13 @@
     }
 
     function fillMap() {
-        console.log("attempting to fill grid..");
+       // console.log("attempting to fill grid..");
         prisons = [];
         for (var x = 0; x < cols; x++) {
             prisons[x] = [];
             for (var y = 0 ; y < rows; y++) {
                 type = 1;
-                console.log("prison Position: X=" + x + " Y=" + y + "   <----" )
+               // console.log("prison Position: X=" + x + " Y=" + y + "   <----" )
                 prisons[x][y] = type;
             }
         }

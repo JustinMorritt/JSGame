@@ -8,6 +8,7 @@
         prisonSprite,
         firstRun = true,
         player,
+		map,
 
         previousCycle,
         animations = [];
@@ -19,6 +20,8 @@
         rows = prison.settings.rows;
         player = prison.player;
 
+		map = prison.map;
+		
         canvas = document.createElement("canvas");
         ctx = canvas.getContext("2d");
         prison.dom.addClass(canvas, "map");
@@ -37,6 +40,7 @@
         mapElement.appendChild(createBackground());
         mapElement.appendChild(canvas);
         console.log("attempting to run player");
+		map.run();
         player.run();
         
 
@@ -141,7 +145,8 @@
   
         //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
         ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
-        player.draw(ctx, 10, 10);
+        map.drawMap(ctx);
+		player.draw(ctx, 10, 10);
         ctx.restore();
     }
 

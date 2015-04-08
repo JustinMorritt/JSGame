@@ -204,9 +204,9 @@
         }
 
 
-        map.drawMap(ctx, sx, sy); //instead of 0 youll need sx , sy
+        //map.drawMap(ctx, sx, sy); //instead of 0 youll need sx , sy
         //console.log("VIEWS: " + sx + " " + sy);
-        //ctx.drawImage(prisonSprite, sx,  sy,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
+        ctx.drawImage(prisonSprite, sx,  sy,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
         //map.drawMap(ctx);
         player.draw(STEP, ctx, sx, sy);

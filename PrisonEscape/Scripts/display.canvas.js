@@ -80,7 +80,6 @@
 
         
         play();
-
         console.log("Canvas Setup Complete");
     }
 
@@ -182,7 +181,8 @@
         //map.draw(context, camera.xView, camera.yView);
         //ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
-        map.drawMap(ctx);
+        map.drawMap(ctx, 0);
+        map.drawMap(ctx, 1);
         player.draw(STEP, ctx, 90, 90);
 
         

@@ -23,6 +23,9 @@
     };
     */
 
+		map,
+
+
         previousCycle,
         animations = [];
 
@@ -35,6 +38,8 @@
         camera = prison.camera;
         
 
+		map = prison.map;
+		
         canvas = document.createElement("canvas");
         ctx = canvas.getContext("2d");
         prison.dom.addClass(canvas, "map");
@@ -53,8 +58,12 @@
 
         mapElement.appendChild(createBackground());
         mapElement.appendChild(canvas);
+
        
 
+
+        console.log("attempting to run player");
+		map.run();
         player.run();
         
    
@@ -166,13 +175,19 @@
 
     function draw() {
         ctx.save();
-       // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
         //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
 
         //REDRAW ALL OBJECTS
         //map.draw(context, camera.xView, camera.yView);
         ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
-        player.draw(STEP,ctx, 90, 90);
+
+        //map.drawMap(ctx);
+        player.draw(STEP, ctx, 90, 90);
+
+        
+
+
         ctx.restore();
     }
 

@@ -180,9 +180,9 @@
 
         //REDRAW ALL OBJECTS
         //map.draw(context, camera.xView, camera.yView);
-        ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
+        //ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
-        //map.drawMap(ctx);
+        map.drawMap(ctx);
         player.draw(STEP, ctx, 90, 90);
 
         

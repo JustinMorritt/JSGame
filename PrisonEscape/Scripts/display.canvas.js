@@ -178,26 +178,22 @@
 
         //REDRAW ALL OBJECTS
         //map.draw(context, camera.xView, camera.yView);
-<<<<<<< HEAD
-
         var sx = camera.getXView();
         var sy = camera.getYView();
         if (sx < 0)
         {
             sx = 0;
         }
-=======
         //ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
         map.drawMap(ctx);
         player.draw(STEP, ctx, 90, 90);
->>>>>>> dc91cf6be7de66557d487400c8e64ba8c968c40e
 
         if (sy < 0) {
             sy = 0;
         }
 
-
+        //98erypgoihresiguhy
         if (3200 - sx < 3200)
         {
             mapWidth = 3200 - sx;

@@ -164,8 +164,6 @@
         console.log(str);
     }
 
-
-
     function drawMap(ctx) {
         for(var x = 0; x < cols; x++)
         {

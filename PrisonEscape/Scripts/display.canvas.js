@@ -10,6 +10,7 @@
         player,
         runningId = -1,
         camera, xDeadZone, yDeadZone,
+       
 
     FPS = 30,
     INTERVAL = 1000 / FPS,
@@ -22,9 +23,7 @@
         map: new Game.Map(5000, 3000)
     };
     */
-
 		map,
-
 
         previousCycle,
         animations = [];
@@ -36,8 +35,6 @@
         rows = prison.settings.rows;
         player = prison.player;
         camera = prison.camera;
-        
-
 		map = prison.map;
 		
         canvas = document.createElement("canvas");
@@ -63,12 +60,13 @@
 
 
         console.log("attempting to run player");
-		map.run();
+
+        map.run();
         player.run();
         
    
         //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);
-        camera.initialize(0, 0, canvas.width, canvas.height, mapWidth, mapHeight);
+        camera.initialize(canvas.width, canvas.height, mapWidth, mapHeight);
        
 
 
@@ -180,13 +178,33 @@
 
         //REDRAW ALL OBJECTS
         //map.draw(context, camera.xView, camera.yView);
-        ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
+
+        var sx = camera.getXView();
+        var sy = camera.getYView();
+        if (sx < 0)
+        {
+            sx = 0;
+        }
+
+        if (sy < 0) {
+            sy = 0;
+        }
+
+
+        if (3200 - sx < 3200)
+        {
+            mapWidth = 3200 - sx;
+        }
+        if (3200 - sy < 3200)
+        {
+            mapHeight = 3200 - sy;
+        }
+
+        //console.log("VIEWS: " + sx + " " + sy);
+        ctx.drawImage(prisonSprite, sx,  sy,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
         //map.drawMap(ctx);
-        player.draw(STEP, ctx, 90, 90);
-
-        
-
+        player.draw(STEP, ctx, sx, sy);
 
         ctx.restore();
     }
@@ -194,7 +212,7 @@
     function update()
     {
         player.update(STEP, mapWidth, mapHeight);
-       // camera.update();
+        camera.update();
     }
 
     //====================================================

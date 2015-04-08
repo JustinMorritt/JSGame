@@ -1,6 +1,7 @@
 ﻿prison.camera = (function () {
     var xView,
         yView,
+        test,
         xDeadZone,
         yDeadZone,
         wView,
@@ -18,10 +19,10 @@
         BOTH: "both"
     }
 
-    function initialize(xView, yView, canvasWidth, canvasHeight, worldWidth, worldHeight)
+    function initialize(canvasWidth, canvasHeight, worldWidth, worldHeight)
     {
-        xView = xView;
-        yView = yView;
+        xView =  0;
+        yView =  0;
         xDeadZone = prison.display.getxDeadZone();
         yDeadZone = prison.display.getyDeadZone();
         wView = canvasWidth;
@@ -39,9 +40,9 @@
         seeStats();
     }
 
-
     function seeStats()
     {
+    
         console.log("xView: " + xView);
         console.log("yView: " + yView);
         console.log("wView: " + wView);
@@ -54,6 +55,23 @@
         console.log("followedY: " + followed.getY());
 
     }
+
+
+    function setXView(xView) {
+        xView = xView;
+    }
+    function setYView(yView) {
+        yView = yView;
+    }
+    function getXView()
+    {
+        return xView;
+    }
+    function getYView()
+    {
+        return yView;
+    }
+
 
     function update()
     {
@@ -110,6 +128,8 @@
     }
 
     return {
+        getXView: getXView,
+        getYView: getYView,
         update: update,
         seeStats: seeStats,
         initialize: initialize

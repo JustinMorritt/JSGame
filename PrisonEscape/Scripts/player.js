@@ -27,6 +27,7 @@
         x = 10;
         y = 10;
         pSpeed = 200;
+
         pWidth = 32;
         pHeight = 32;
         pHP = 100; //Health
@@ -83,7 +84,7 @@
         if (controls.left)  {        x -= pSpeed * step; }
         if (controls.up)    {        y -= pSpeed * step; }
         if (controls.right) {        x += pSpeed * step; }
-        if (controls.down) {         y += pSpeed * step; }
+        if (controls.down)  {        y += pSpeed * step; }
 
      
 
@@ -110,13 +111,15 @@
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
     {
-        xView = 0; //these will eventually be camera positions
-        yView = 0;
+        xView = xView; //these will eventually be camera positions
+        yView = yView;
 
         context.save();
         //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
+        var newX = (x-pWidth/2) - xView;
+        var newY = (y-pHeight/2) - yView;
 
-            context.drawImage(playerSprite, 32, 0, 32, 32, x, y, pWidth, pHeight);
+        context.drawImage(playerSprite, 32, 0, 32, 32, newX, newY, pWidth, pHeight);
        
         context.restore();
         //console.log("DREW PLAYER X:" +x+ " Y: " +y );
@@ -130,7 +133,10 @@
     {
         return y;
     }
-
+    function setSpeed(speed)
+    {
+        pSpeed
+    }
     return {
         //EXPOSED FUNCTIONS IN HERE
         getY: getY,

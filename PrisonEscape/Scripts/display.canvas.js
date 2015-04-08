@@ -186,14 +186,14 @@
         }
         //ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
-        map.drawMap(ctx);
-        player.draw(STEP, ctx, 90, 90);
+        
+        //player.draw(STEP, ctx, 90, 90);
 
         if (sy < 0) {
             sy = 0;
         }
 
-        //98erypgoihresiguhy
+      
         if (3200 - sx < 3200)
         {
             mapWidth = 3200 - sx;
@@ -203,8 +203,10 @@
             mapHeight = 3200 - sy;
         }
 
+
+        map.drawMap(ctx, sx, sy); //instead of 0 youll need sx , sy
         //console.log("VIEWS: " + sx + " " + sy);
-        ctx.drawImage(prisonSprite, sx,  sy,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
+        //ctx.drawImage(prisonSprite, sx,  sy,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
         //map.drawMap(ctx);
         player.draw(STEP, ctx, sx, sy);

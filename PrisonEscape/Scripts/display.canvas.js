@@ -8,6 +8,20 @@
         prisonSprite,
         firstRun = true,
         player,
+        runningId = -1,
+        camera, xDeadZone, yDeadZone,
+
+    FPS = 30,
+    INTERVAL = 1000 / FPS,
+    STEP = INTERVAL / 1000,
+
+    /*
+    room = {
+        width: 5000,
+        height: 3000,
+        map: new Game.Map(5000, 3000)
+    };
+    */
 
         previousCycle,
         animations = [];
@@ -18,6 +32,8 @@
         cols = prison.settings.cols;
         rows = prison.settings.rows;
         player = prison.player;
+        camera = prison.camera;
+        
 
         canvas = document.createElement("canvas");
         ctx = canvas.getContext("2d");
@@ -31,14 +47,20 @@
         //prisonSize = rect.width / cols;
         mapWidth = 3200;
         mapHeight = 3200;
-
+        xDeadZone = canvas.width / 2;
+        yDeadZone = canvas.height / 2;
 
 
         mapElement.appendChild(createBackground());
         mapElement.appendChild(canvas);
-        console.log("attempting to run player");
+       
+
         player.run();
         
+   
+        //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);
+        camera.initialize(0, 0, canvas.width, canvas.height, mapWidth, mapHeight);
+       
 
 
         //previousCycle = Date.now();   //ANIMATION
@@ -47,8 +69,8 @@
 
         //createBackground();
 
-        draw();
-
+        
+        play();
 
         console.log("Canvas Setup Complete");
     }
@@ -136,17 +158,40 @@
 
 
 
+    function gameLoop()
+    {
+        update();
+        draw();
+    }
+
     function draw() {
         ctx.save();
-  
+       // ctx.clearRect(0, 0, canvas.width, canvas.height);
         //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
+
+        //REDRAW ALL OBJECTS
+        //map.draw(context, camera.xView, camera.yView);
         ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
-        player.draw(ctx, 10, 10);
+        player.draw(STEP,ctx, 90, 90);
         ctx.restore();
     }
 
+    function update()
+    {
+        player.update(STEP, mapWidth, mapHeight);
+       // camera.update();
+    }
 
     //====================================================
+
+    function getxDeadZone()
+    {
+        return xDeadZone;
+    }
+    function getyDeadZone()
+    {
+        return yDeadZone;
+    }
 
     function createBackground() {
         var background = document.createElement("canvas"),
@@ -168,15 +213,33 @@
         return background;
     }
 
-    function redraw(newprisons, callback) {
-    
+    function play()
+    {
+        if (runningId == -1) {
+            runningId = setInterval(function () {
+                gameLoop();
+            }, INTERVAL);
+
+            console.log("----===playing!===----");
+        }
     }
 
+    function togglePause()
+    {
+        if (runningId == -1) {
+            Game.play();
+        }
+        else {
+            clearInterval(runningId);
+            runningId = -1;
+            console.log("paused");
+        }
+    }
 
     return {
-        initialize: initialize,
-        redraw: redraw
-
+        getxDeadZone: getxDeadZone,
+        getyDeadZone: getyDeadZone,
+        initialize: initialize
     };
 
 })();

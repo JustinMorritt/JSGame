@@ -160,3 +160,88 @@ var prison = (function ()
 	
 	
 })();
+
+prison.viewportRect = (function () 
+{
+    var left, top, width, height, right, bottom;
+
+    function initialize (left, top, width, height)
+    {
+        left = left;
+        top = top;
+        width = width || this.width;
+        height = height || this.height;
+        right = (left + width);
+        bottom = (top + height); 
+    }
+    function set(left, top, width, height)
+    {
+        left = left;
+        top = top;
+        width = width || this.width;
+        height = height || this.height;
+        right = (left + width);
+        bottom = (top + height);
+    }
+    function within(r)
+    {
+        return (r.left <= left &&
+                r.right >= right &&
+                r.top <= top &&
+                r.bottom >= bottom);
+    }
+    function overlaps(r)
+    {
+        return (left < r.right &&
+                r.left < right &&
+                top < r.bottom &&
+                r.top < bottom);
+    }
+
+    return {
+        initialize: initialize,
+        set: set,
+        within: within,
+        overlaps: overlaps
+    };
+})();
+
+prison.worldRect = (function () {
+    var left, top, width, height, right, bottom;
+
+    function initialize(left, top, width, height) {
+        left = left;
+        top = top;
+        width = width || this.width;
+        height = height || this.height;
+        right = (left + width);
+        bottom = (top + height);
+    }
+    function set(left, top, width, height) {
+        left = left;
+        top = top;
+        width = width || this.width;
+        height = height || this.height;
+        right = (left + width);
+        bottom = (top + height);
+    }
+    function within(r) {
+        return (r.left <= left &&
+                r.right >= right &&
+                r.top <= top &&
+                r.bottom >= bottom);
+    }
+    function overlaps(r) {
+        return (left < r.right &&
+                r.left < right &&
+                top < r.bottom &&
+                r.top < bottom);
+    }
+
+    return {
+        initialize: initialize,
+        set: set,
+        within: within,
+        overlaps: overlaps
+    };
+})();

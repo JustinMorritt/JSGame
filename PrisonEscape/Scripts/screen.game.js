@@ -164,20 +164,23 @@
     }
 
     function moveUp() {
-        player.y--;
-        player.update();
+       // console.log("UP");
+      //  player.y--;
     }
 
     function moveDown() {
-        player.y++;
+       // console.log("DOWN");
+      //  player.y++;
     }
 
     function moveLeft() {
-        player.x--;
+      ////  console.log("LEFT");
+        //player.x--;
     }
 
     function moveRight() {
-        player.x++;
+     //   console.log("RIGHT");
+     //   player.x++;
     }
 
     function exitGame() {

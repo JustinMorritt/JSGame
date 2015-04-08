@@ -275,7 +275,7 @@
 				sHeight = this.image.height - sy; 
 			}
 			
-			// location on canvas to draw the croped image
+			// location on canvas to draw tfohe croped image
 			dx = 0;
 			dy = 0;
 			// match destination with source to not scale the image
@@ -350,10 +350,13 @@
 		var runningId = -1;
 		
 		Game.play = function(){	
-			if(runningId == -1){
-				runningId = setInterval(function(){
+			if(runningId == -1)
+			{
+				runningId = setInterval(function()
+				{
 					gameLoop();
 				}, INTERVAL);
+				
 				console.log("play");
 			}
 		}

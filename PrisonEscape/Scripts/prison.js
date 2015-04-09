@@ -172,7 +172,8 @@ prison.viewportRect = (function ()
         width = width || this.width;
         height = height || this.height;
         right = (left + width);
-        bottom = (top + height); 
+        bottom = (top + height);
+        console.log("Fully Initialized ViewportRect   left: "+ left +" top: "+ top +" width: "+ width +" Right: "+ right + " bot: " + bottom);
     }
     function set(left, top, width, height)
     {
@@ -182,9 +183,12 @@ prison.viewportRect = (function ()
         height = height || this.height;
         right = (left + width);
         bottom = (top + height);
+        //console.log("ViewportRect   left: " + left + " top: " + top);
     }
     function within(r)
     {
+        console.log("WVrec   left: " + r.left + " top: " + r.top + " width: " + r.width + " Right: " + r.right + " bot: " + r.bottom +" ViewportRect   left: " + left + " top: " + top + " width: " + width + " Right: " + right + " bot: " + bottom);
+  
         return (r.left <= left &&
                 r.right >= right &&
                 r.top <= top &&
@@ -197,9 +201,13 @@ prison.viewportRect = (function ()
                 top < r.bottom &&
                 r.top < bottom);
     }
+    function stats() {
+        console.log("viewportRect--> left: " + left + " Right: " + right + " height: " + height + " width: " + width + " top: " + top + " bot: " + bottom);
+    }
 
     return {
         initialize: initialize,
+        stats:stats,
         set: set,
         within: within,
         overlaps: overlaps
@@ -216,6 +224,7 @@ prison.worldRect = (function () {
         height = height || this.height;
         right = (left + width);
         bottom = (top + height);
+        console.log("Fully Initialized worldRect   left: " + left + " top: " + top + " width: " + width + " Right: " + right + " bot: " + bottom);
     }
     function set(left, top, width, height) {
         left = left;
@@ -237,11 +246,41 @@ prison.worldRect = (function () {
                 top < r.bottom &&
                 r.top < bottom);
     }
+    function stats()
+    {
+        console.log("worldRect--> left: " + left + " Right: " + right + " height: " + height + " width: " + width + " top: " + top + " bot: " + bottom);
+    }
 
     return {
         initialize: initialize,
+        stats: stats,
         set: set,
         within: within,
         overlaps: overlaps
     };
 })();
+
+
+
+
+
+
+
+/*
+
+VPW = canvasWidth;
+VPH = canvasHeight;
+VPLeft = xView
+VPRight = (VPLeft + VPW);
+VPTop = yView
+VPBot = VPTop + VPH;
+
+//WORLDVIEW Rectangle
+WVW = worldWidth;
+WVH = worldHeight;
+WVLeft = 0;
+WVRight = (WVLeft + WVW);
+WVTop = 0;
+WVBot = WVTop + WVH;
+
+*/

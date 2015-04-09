@@ -1,7 +1,6 @@
 ﻿prison.camera = (function () {
     var xView,
         yView,
-        test,
         xDeadZone,
         yDeadZone,
         wView,
@@ -11,6 +10,27 @@
         viewportRect,
         worldRect,
         player,
+        worldWidth,
+        worldHeight,
+        canvasWidth,
+        canvasHeight,
+
+        //VIEWPORT Rectangle
+        VPLeft,
+        VPRight,
+        VPTop,
+        VPBot,
+        VPW,
+        VPH,
+
+        //WORLDVIEW Rectangle
+        WVLeft,
+        WVRight,
+        WVTop,
+        WVBot,
+        WVW,
+        WVH,
+
 
      AXIS = {
         NONE: "none",
@@ -27,16 +47,34 @@
         yDeadZone = prison.display.getyDeadZone();
         wView = canvasWidth;
         hView = canvasHeight;
+        canvasWidth = prison.display.canvasWidth;
+        canvasHeight = prison.display.canvasHeight;
         axis = AXIS.BOTH;
         viewportRect = prison.viewportRect;
         worldRect = prison.worldRect;
         player = prison.player;
         followed = player;
+        worldWidth = worldWidth;
+        worldHeight = worldHeight;
 
-        viewportRect.initialize(xView, yView, wView, hView);
-        worldRect.initialize(0, 0, worldWidth, worldHeight);
+        //VIEWPORT Rectangle
+        VPW     = canvasWidth;
+        VPH     = canvasHeight;
+        VPLeft  = xView;
+        VPRight = (VPLeft + VPW);
+        VPTop   = yView;
+        VPBot   = VPTop + VPH;
 
-        console.log("Camera Fully Initialized ! xView: " + xView + " yView: " + yView );
+        //WORLDVIEW Rectangle
+        WVW     = worldWidth;
+        WVH     = worldHeight;
+        WVLeft  = 0;
+        WVRight = (WVLeft + WVW);
+        WVTop   = 0;
+        WVBot   = WVTop + WVH;
+
+        //console.log("WVLeft:" + WVLeft + " WVRight:" + WVRight + " WVTop:" + WVTop + " WVBot:" + WVBot + " VPLeft:" + VPLeft + " VPRight:" + VPRight + " VPTop:" + VPTop + " VPBot: " + VPBot);
+        //console.log("Camera Fully Initialized ! xView: " + xView + " yView: " + yView );
         seeStats();
     }
 
@@ -55,8 +93,6 @@
         console.log("followedY: " + followed.getY());
 
     }
-
-
     function setXView(xView) {
         xView = xView;
     }
@@ -72,6 +108,26 @@
         return yView;
     }
 
+    function updateVP(xView, yView)
+    {
+        VPW = prison.display.getCanvasWidth();
+        VPH = prison.display.getCanvasHeight();
+        VPLeft = xView;
+        VPRight = (VPLeft + VPW);
+        VPTop = yView;
+        VPBot = (VPTop + VPH);
+        //console.log("VPW: " + VPW + " VPH: " + VPH);
+        //console.log("WVLeft:" + WVLeft + " WVRight:" + WVRight + " WVTop:" + WVTop + " WVBot:" + WVBot + " VPLeft:" + VPLeft + " VPRight:" + VPRight + " VPTop:" + VPTop + " VPBot: " + VPBot);
+    }
+
+    function withinWV()
+    {
+        //console.log("WVLeft:" + WVLeft + " WVRight:" + WVRight + " WVTop:" + WVTop + " WVBot:" + WVBot + " VPLeft:" + VPLeft + " VPRight:" + VPRight + " VPTop:" + VPTop + " VPBot: " + VPBot);
+        return (    WVLeft  <= VPLeft   &&
+                    WVRight >= VPRight  &&
+                    WVTop   <= VPTop    &&
+                    WVBot   >= VPBot);
+    }
 
     function update()
     {
@@ -100,29 +156,32 @@
                 } 
             }
         }
-        // update viewportRect
-        viewportRect.set(xView, yView);
+
+        // update viewportRect 
+        updateVP(xView, yView);
+
+        //console.log(withinWV());
         // don't let camera leaves the world's boundary
-        if (!viewportRect.within(worldRect))
+        if (!withinWV())
         {
-            if (viewportRect.left < worldRect.left)
+            if (VPLeft < WVLeft)
             {
-                xView = worldRect.left;
+                xView = WVLeft;
             }
                 
-            if (viewportRect.top < worldRect.top)
+            if (VPTop < WVTop)
             {
-                yView = worldRect.top;
+                yView = WVTop;
             }
                
-            if (viewportRect.right > worldRect.right)
+            if (VPRight > WVRight)
             {
-                xView = worldRect.right - wView;
+                xView = WVRight - wView -32;
             }
                
-            if (viewportRect.bottom > worldRect.bottom)
+            if (VPBot > WVBot)
             {
-                yView = worldRect.bottom - hView;
+                yView = WVBot - hView -32;
             } 
         }
     }

@@ -2,6 +2,7 @@
 
     var cursor, canvas, ctx,
         cols, rows,
+        constMapWidth, constMapHeight,
         mapWidth, mapHeight,
         prisonSize,
         prisons,
@@ -10,19 +11,13 @@
         player,
         runningId = -1,
         camera, xDeadZone, yDeadZone,
+        canvasWidth, canvasHeight,
        
 
     FPS = 30,
     INTERVAL = 1000 / FPS,
     STEP = INTERVAL / 1000,
 
-    /*
-    room = {
-        width: 5000,
-        height: 3000,
-        map: new Game.Map(5000, 3000)
-    };
-    */
 		map,
 
         previousCycle,
@@ -47,11 +42,14 @@
         canvas.width = prisonSize * 30; //512 for 8x8 
         canvas.height = prisonSize * 20;
         //prisonSize = rect.width / cols;
+        constMapWidth = 3200;
+        constMapHeight = 3200;
         mapWidth = 3200;
         mapHeight = 3200;
         xDeadZone = canvas.width / 2;
         yDeadZone = canvas.height / 2;
-
+        canvasWidth = canvas.width;
+        canvasHeight = canvas.height;
 
         mapElement.appendChild(createBackground());
         mapElement.appendChild(canvas);
@@ -66,7 +64,7 @@
         
    
         //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);
-        camera.initialize(canvas.width, canvas.height, mapWidth, mapHeight);
+        camera.initialize(canvas.width, canvas.height, constMapWidth, constMapHeight);
        
 
 
@@ -180,19 +178,21 @@
         //map.draw(context, camera.xView, camera.yView);
         var sx = camera.getXView();
         var sy = camera.getYView();
-        if (sx < 0)
-        {
-            sx = 0;
-        }
+
         //ctx.drawImage(prisonSprite, 0,  0,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
         
         //player.draw(STEP, ctx, 90, 90);
 
-        if (sy < 0) {
-            sy = 0;
+        if (sx < 0)
+        {
+            sx = 0;
         }
 
+        if (sy < 0)
+        {
+            sy = 0;
+        }
       
         if (3200 - sx < 3200)
         {
@@ -203,11 +203,10 @@
             mapHeight = 3200 - sy;
         }
 
-
         //map.drawMap(ctx, sx, sy); //instead of 0 youll need sx , sy
         //console.log("VIEWS: " + sx + " " + sy);
-        ctx.drawImage(prisonSprite, sx,  sy,  mapWidth,   mapHeight,  0,  0,  mapWidth,   mapHeight);
 
+        ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
         //map.drawMap(ctx);
         player.draw(STEP, ctx, sx, sy);
 
@@ -216,7 +215,7 @@
 
     function update()
     {
-        player.update(STEP, mapWidth, mapHeight);
+        player.update(STEP, 3200, 3200);
         camera.update();
     }
 
@@ -230,6 +229,15 @@
     {
         return yDeadZone;
     }
+    function getCanvasWidth()
+    {
+        return canvasWidth;
+    }
+    function getCanvasHeight()
+    {
+        return canvasHeight;
+    }
+
 
     function createBackground() {
         var background = document.createElement("canvas"),
@@ -275,6 +283,8 @@
     }
 
     return {
+        getCanvasWidth: getCanvasWidth,
+        getCanvasHeight: getCanvasHeight,
         getxDeadZone: getxDeadZone,
         getyDeadZone: getyDeadZone,
         initialize: initialize

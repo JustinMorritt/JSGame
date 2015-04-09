@@ -26,7 +26,7 @@
     {
         x = 10;
         y = 10;
-        pSpeed = 200;
+        pSpeed = 400; //originally 200
 
         pWidth = 32;
         pHeight = 32;
@@ -41,17 +41,20 @@
 
         window.addEventListener("keydown", function (e) {
             switch (e.keyCode) {
-                case 37: // left arrow
+                case 37:
+                case 65: // left arrow
                     controls.left = true;
-                    //console.log("LEFT PUSHED");
                     break;
                 case 38: // up arrow
+                case 87:
                     controls.up = true;
                     break;
-                case 39: // right arrow
+                case 39:
+                case 68: // right arrow
                     controls.right = true;
                     break;
-                case 40: // down arrow
+                case 40:
+                case 83: // down arrow
                     controls.down = true;
                     break;
             }
@@ -59,16 +62,20 @@
 
         window.addEventListener("keyup", function (e) {
             switch (e.keyCode) {
-                case 37: // left arrow
+                case 37:
+                case 65: // left arrow
                     controls.left = false;
                     break;
-                case 38: // up arrow
+                case 38:
+                case 87: // up arrow
                    controls.up = false;
                     break;
-                case 39: // right arrow
+                case 39:
+                case 68: // right arrow
                     controls.right = false;
                     break;
-                case 40: // down arrow
+                case 40:
+                case 83: // down arrow
                     controls.down = false;
                     break;
                 case 80: // key P pauses the game
@@ -86,9 +93,6 @@
         if (controls.right) {        x += pSpeed * step; }
         if (controls.down)  {        y += pSpeed * step; }
 
-     
-
-       
     // don't let player leaves the world's boundary
         if (x - pWidth / 2 < 0)
         {
@@ -98,15 +102,14 @@
         {
             y = pHeight / 2;
         }
-        if (x + pWidth / 2 > worldWidth)
+        if (x + (pWidth * 1.5) > worldWidth)
         {
-            x = worldWidth - pWidth / 2;
+            x = worldWidth - (pWidth*1.5) ;
         }
-        if (y + pHeight / 2 > worldHeight)
+        if (y + (pHeight * 1.5) > worldHeight)
         {
-            y = worldHeight - pHeight / 2;
+            y = worldHeight - (pHeight*1.5) ;
         }
-    
     }
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
@@ -135,12 +138,14 @@
     }
     function setSpeed(speed)
     {
-        pSpeed
+        pSpeed = speed;
     }
+
     return {
         //EXPOSED FUNCTIONS IN HERE
         getY: getY,
         getX: getX,
+        setSpeed: setSpeed,
         run: run,
         update: update,
         draw : draw,

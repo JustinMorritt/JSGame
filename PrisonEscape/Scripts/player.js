@@ -9,6 +9,7 @@
         pOffences,
         pTime,
         playerSprite,
+        collsionBlocks,
       
 
     controls = {
@@ -38,6 +39,9 @@
             "load", callback, false);
         playerSprite.src =
             "Images/$Char2.png";
+
+
+        collsionBlocks = prison.map.getCollisions();
 
         window.addEventListener("keydown", function (e) {
             switch (e.keyCode) {
@@ -93,7 +97,29 @@
         if (controls.right) {        x += pSpeed * step; }
         if (controls.down)  {        y += pSpeed * step; }
 
-    // don't let player leaves the world's boundary
+        // don't let player leaves the world's boundary
+        for(var i = 0; i < collsionBlocks.length; i++)
+        {
+            if (x - pWidth / 2 < 0) {
+                x = pWidth / 2;
+            }
+            if (y - pHeight / 2 < 0) {
+                y = pHeight / 2;
+            }
+            if (x + (pWidth * 1.5) > collsionBlocks.X) {
+                x = worldWidth - (pWidth * 1.5);
+            }
+            if (y + (pHeight * 1.5) > worldHeight) {
+                y = worldHeight - (pHeight * 1.5);
+            }
+        }
+
+
+
+
+
+
+
         if (x - pWidth / 2 < 0)
         {
            x = pWidth / 2;

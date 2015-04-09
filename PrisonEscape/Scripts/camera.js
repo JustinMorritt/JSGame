@@ -69,9 +69,9 @@
         WVW     = worldWidth;
         WVH     = worldHeight;
         WVLeft  = 0;
-        WVRight = (WVLeft + WVW);
+        WVRight = (WVLeft + WVW)-32; //32 == CHARACTER WIDTH /HEIGHT
         WVTop   = 0;
-        WVBot   = WVTop + WVH;
+        WVBot   = (WVTop + WVH)-32;  // SAME AS ABOVE
 
         //console.log("WVLeft:" + WVLeft + " WVRight:" + WVRight + " WVTop:" + WVTop + " WVBot:" + WVBot + " VPLeft:" + VPLeft + " VPRight:" + VPRight + " VPTop:" + VPTop + " VPBot: " + VPBot);
         //console.log("Camera Fully Initialized ! xView: " + xView + " yView: " + yView );
@@ -176,12 +176,12 @@
                
             if (VPRight > WVRight)
             {
-                xView = WVRight - wView -32;
+                xView = WVRight - wView ;
             }
                
             if (VPBot > WVBot)
             {
-                yView = WVBot - hView -32;
+                yView = WVBot - hView ;
             } 
         }
     }

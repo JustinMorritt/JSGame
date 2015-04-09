@@ -10,6 +10,7 @@
         pTime,
         playerSprite,
         collsionBlocks,
+        blockWidth,
       
 
     controls = {
@@ -28,7 +29,7 @@
         x = 10;
         y = 10;
         pSpeed = 400; //originally 200
-
+        blockWidth = 32;
         pWidth = 32;
         pHeight = 32;
         pHP = 100; //Health
@@ -97,21 +98,43 @@
         if (controls.right) {        x += pSpeed * step; }
         if (controls.down)  {        y += pSpeed * step; }
 
+        console.log("collision blocks total amount: " + collsionBlocks.length);
         // don't let player leaves the world's boundary
         for(var i = 0; i < collsionBlocks.length; i++)
         {
-            if (x - pWidth / 2 < 0) {
+            var colBlockL   = collsionBlocks[i].X;
+            var colBlockR   = collsionBlocks[i].X + blockWidth;
+            var colBlockTOP = collsionBlocks[i].Y;
+            var colBlockBOT = collsionBlocks[i].Y + blockWidth;
+
+            var PL = x;
+            var PR = x + blockWidth;
+            var PT = y;
+            var PB = y + blockWidth;
+
+
+            //	(r2.left > r1.right ||
+	
+            //r2.right < r1.left || 
+	
+            //r2.top > r1.bottom ||
+			 	 
+            //r2.bottom < r1.top);
+
+            /*
+            if () {
                 x = pWidth / 2;
             }
-            if (y - pHeight / 2 < 0) {
+            if () {
                 y = pHeight / 2;
             }
-            if (x + (pWidth * 1.5) > collsionBlocks.X) {
+            if () {
                 x = worldWidth - (pWidth * 1.5);
             }
-            if (y + (pHeight * 1.5) > worldHeight) {
+            if () {
                 y = worldHeight - (pHeight * 1.5);
             }
+            */
         }
 
 

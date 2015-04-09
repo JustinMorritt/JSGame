@@ -3,7 +3,7 @@ var prison = (function ()
 
     var settings =
     {
-        cols: 99, rows:99,
+        cols: 100, rows:100,
         inmates: 20,
         guards: 10,
         baseScore: 100,

@@ -205,7 +205,6 @@
             mapHeight = 3200 - sy;
         }
 
-        //map.drawMap(ctx, sx, sy); //instead of 0 youll need sx , sy
         //console.log("VIEWS: " + sx + " " + sy);
 
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);

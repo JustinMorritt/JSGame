@@ -136,6 +136,13 @@
     {
         return y;
     }
+
+    function setXY(x,y) {
+        x = x;
+        y = y;
+    }
+
+
     function setSpeed(speed)
     {
         pSpeed = speed;
@@ -145,6 +152,7 @@
         //EXPOSED FUNCTIONS IN HERE
         getY: getY,
         getX: getX,
+        setXY: setXY,
         setSpeed: setSpeed,
         run: run,
         update: update,

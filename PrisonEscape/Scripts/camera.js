@@ -93,12 +93,11 @@
         console.log("followedY: " + followed.getY());
 
     }
-    function setXView(xView) {
+    function setCAMview(xView, yView) {
         xView = xView;
-    }
-    function setYView(yView) {
         yView = yView;
     }
+
     function getXView()
     {
         return xView;
@@ -189,6 +188,7 @@
     return {
         getXView: getXView,
         getYView: getYView,
+        setCAMview: setCAMview,
         update: update,
         seeStats: seeStats,
         initialize: initialize

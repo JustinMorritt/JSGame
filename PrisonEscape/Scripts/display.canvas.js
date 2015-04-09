@@ -41,6 +41,7 @@
         prisonSize = 32;
         canvas.width = prisonSize * 30; //512 for 8x8 
         canvas.height = prisonSize * 20;
+
         //prisonSize = rect.width / cols;
         constMapWidth = 3200;
         constMapHeight = 3200;
@@ -88,6 +89,7 @@
             prisonSprite = new Image();
           //  prisonSprite.addEventListener(
             //    "load", callback, false);
+
             prisonSprite.src =
                 "Images/map.png";
             console.log("Initialized prison Map");

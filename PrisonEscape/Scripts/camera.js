@@ -41,21 +41,21 @@
 
     function initialize(canvasWidth, canvasHeight, worldWidth, worldHeight)
     {
-        xView =  0;
-        yView =  0;
-        xDeadZone = prison.display.getxDeadZone();
-        yDeadZone = prison.display.getyDeadZone();
-        wView = canvasWidth;
-        hView = canvasHeight;
-        canvasWidth = prison.display.canvasWidth;
-        canvasHeight = prison.display.canvasHeight;
-        axis = AXIS.BOTH;
-        viewportRect = prison.viewportRect;
-        worldRect = prison.worldRect;
-        player = prison.player;
-        followed = player;
-        worldWidth = worldWidth;
-        worldHeight = worldHeight;
+        xView           =  0;
+        yView           =  0;
+        xDeadZone       = prison.display.getxDeadZone();
+        yDeadZone       = prison.display.getyDeadZone();
+        wView           = canvasWidth;
+        hView           = canvasHeight;
+        canvasWidth     = prison.display.canvasWidth;
+        canvasHeight    = prison.display.canvasHeight;
+        axis            = AXIS.BOTH;
+        viewportRect    = prison.viewportRect;
+        worldRect       = prison.worldRect;
+        player          = prison.player;
+        followed        = player;
+        worldWidth      = worldWidth;
+        worldHeight     = worldHeight;
 
         //VIEWPORT Rectangle
         VPW     = canvasWidth;

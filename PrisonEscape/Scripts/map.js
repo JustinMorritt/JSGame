@@ -44,9 +44,8 @@
             }
         }
         setCollision();
-        console.log("Completed mapping tiles!");
+       // console.log("Completed mapping tiles!");
     }
-
 
     function print() {
         var str = "\n";
@@ -61,8 +60,8 @@
         console.log(str);
     }
 
-
     function setCollision() {
+        var colBlockNum = 0;
         for(var x = 0; x < cols; x++)
         {
             for(var y = 0; y < rows; y++)
@@ -72,12 +71,15 @@
                     case 0:
                         break;
                     default:
+                        colBlockNum++;
                         collision.push({ X: x * 32, Y: y * 32});
-                        //console.log(prisons[y][x]);
+                        //console.log(walls[y][x] + "cor->X:" + x + " Y:" + y + " -->PX =" + x * 32 + "x" + y * 32);
                         break;
                 }
             }
         }
+        console.log("Total Collision Blocks: " + colBlockNum);
+        //console.log("1st element" + collision[0].X + "x" + collision[0].Y);
     }
 
 
@@ -85,7 +87,6 @@
     {
         return collision;
     }
-
 
     return {
         //EXPOSED FUNCTIONS IN HERE

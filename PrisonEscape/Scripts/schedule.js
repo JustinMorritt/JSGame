@@ -43,13 +43,13 @@ prison.schedule = (function()
 	{
 		if(currentTime == 12 && PM == false)
 		{
-			console.log("Days left:" + " " + gameDay);
+			//console.log("Days left:" + " " + gameDay);
 			gameDay--;
 		}
 		
 		if(PM == false)
 		{
-			console.log("the time is:" + " " + currentTime + " " + "am");
+			//console.log("the time is:" + " " + currentTime + " " + "am");
 			currentTime++;
 			if(currentTime == 12)
 			{
@@ -61,7 +61,7 @@ prison.schedule = (function()
 			}
 		}
 		else{
-			console.log("the time is:" + " " + currentTime + " " + "pm");
+			//console.log("the time is:" + " " + currentTime + " " + "pm");
 			currentTime++;
 			if(currentTime == 12)
 			{

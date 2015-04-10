@@ -75,12 +75,11 @@
 
         //console.log("WVLeft:" + WVLeft + " WVRight:" + WVRight + " WVTop:" + WVTop + " WVBot:" + WVBot + " VPLeft:" + VPLeft + " VPRight:" + VPRight + " VPTop:" + VPTop + " VPBot: " + VPBot);
         //console.log("Camera Fully Initialized ! xView: " + xView + " yView: " + yView );
-        seeStats();
     }
 
     function seeStats()
     {
-    
+        
         console.log("xView: " + xView);
         console.log("yView: " + yView);
         console.log("wView: " + wView);

@@ -72,7 +72,15 @@
                         break;
                     default:
                         colBlockNum++;
-                        collision.push({ X: x * 32, Y: y * 32});
+                        collision.push({    Width:      32, 
+                                            Height:     32,  
+                                            X:          x * 32,     //For 32 tile width
+                                            Y:          y * 32,
+                                            Hw:         Width / 2,
+                                            Hh:         Height / 2,
+                                            Cx:         X + Hw,     //Center X
+                                            Cy:         Y + Hh      //Center Y
+                        });
                         //console.log(walls[y][x] + "cor->X:" + x + " Y:" + y + " -->PX =" + x * 32 + "x" + y * 32);
                         break;
                 }

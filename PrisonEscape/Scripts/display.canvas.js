@@ -207,6 +207,7 @@
 
         //console.log("VIEWS: " + sx + " " + sy);
 
+  
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
         //map.drawMap(ctx);
         player.draw(STEP, ctx, sx, sy);

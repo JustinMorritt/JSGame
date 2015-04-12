@@ -94,62 +94,146 @@
         }, false);
     }
 
+    function checkIntersecting(PXcenter, BXcenter)
+    {
+
+        
+
+        var HW = 16;
+        var length = Math.sqrt((PXcenter.X - BXcenter.X) + (PXcenter.Y - BXcenter.Y));
+        var gap_between_boxes = length - (HW * 2);
+        //console.log(length);
+        if (gap_between_boxes > 0) {  return 0; }
+
+        if(gap_between_boxes == 0) {return 0;}
+
+         if(gap_between_boxes < 0) 
+        {
+           // console.log("COLLISON");
+             // overlapping check how much overlap  
+             /*
+            var hitBot = PXcenter.Y-16 - BXcenter.Y+16;
+            var hitTop = PXcenter.Y+16 - BXcenter.Y-16;
+            var hitR = PXcenter.X-16 - BXcenter.X+16;
+            var hitL = PXcenter.X+16 - BXcenter.X-16;
+          
+
+            if(hitBot < 16)
+            {
+                return 1;
+            }
+            if(hitTop < 16)
+            {
+                return 2;
+            }
+            if(hitL < 16)
+            {
+                return 3;
+            }
+            if(hitR < 16)
+            {
+                return 4;
+            }  */
+         }
+
+         return 0;
+
+    }
+
+
     function update(step, worldWidth, worldHeight)
     {
-        
-        // parameter step is the time between frames ( in seconds )
+          // parameter step is the time between frames ( in seconds )
          if (controls.left)     {x -= pSpeed * step; checkCollision(); }
          if (controls.up)       {y -= pSpeed * step; checkCollision() ; }
          if (controls.right)    {x += pSpeed * step; checkCollision() ;}
          if (controls.down)     {y += pSpeed * step; checkCollision() ;}
 
-
-
-
         //console.log("collision blocks total amount: " + collsionBlocks.length/2);
-        // don't let player leaves the world's boundary
+        // don't let player leave the world's boundary
         function checkCollision()
         {
-            for (var i = 0; i < collsionBlocks.length / 2; i++) {
-                var colBlockL = collsionBlocks[i].X;
-                var colBlockR = collsionBlocks[i].X + blockWidth;
-                var colBlockTOP = collsionBlocks[i].Y;
-                var colBlockBOT = collsionBlocks[i].Y + blockWidth;
 
-                var PL = x;
-                var PR = x + blockWidth;
-                var PT = y;
-                var PB = y + blockWidth;
+            for (var i = 0; i < collsionBlocks.length / 2; i++) 
+            {
+                    var colBlockX = collsionBlocks[i].X;
+                    var colBlockR = collsionBlocks[i].X + 32;
+                    var colBlockTOP = collsionBlocks[i].Y;
+                    var colBlockBOT = collsionBlocks[i].Y +32;
 
-                //check overlap
-                if (PL < colBlockR &&
-                        colBlockL < PR &&
-                        PT < colBlockBOT &&
-                        colBlockTOP < PB)
-                 
+                    var PL = x;
+                    var PR = x + blockWidth;
+                    var PT = y;
+                    var PB = y + (blockWidth-14);
 
-                {
-                    console.log("collision!");
+                    var BCenterX = colBlockX + 16;
+                    var BCenterY = colBlockTOP + 16;
+                    var PCenterX = PL + 16 ;
+                    var PCenterY = PT + 16;
+
+                    var BXcenter = { X: BCenterX, Y: BCenterY };
+                    var PXcenter = { X: PCenterX, Y: PCenterY };
+                    //console.log("PX: " + PL + " PCX" + PCenterX + " PY: " + PT + " PCY: " + PCenterY)
+                    //check overlap
+
+                    var OL = checkIntersecting(PXcenter, BXcenter);
+                    switch(OL)
+                    {
+                    //BOT HIT
+                    case 1:
+                        y = colBlockTOP - (blockWidth-14);
+                        break;
+
+                    //TOP HIT
+                    case 2:
+                        y = colBlockTOP - (blockWidth-14);
+                        break;
+
+                     //LEFT HIT
+                    case 3:
+                       // x = colBlockR;
+                        break;
+
+                    //RIGHT HIT
+                    case 4:
+                        //x = colBlockL + blockWidth;
+                        break;
+
+                    default:
+                        //console.log("No collide");
+                            break;
+                }
+                
+
+
+
+                /*
+                     console.log("collision! Player ->PL: " + PL + " PR:" + PR + " PT:" + PT  + " PB:" + PB );
+                    console.log("collision! Block ->L: " + colBlockL + " R:" + colBlockR + " T:" + colBlockTOP + " B:" + colBlockBOT);
                     //GOING UP ON BLOCK
-                    if (PT < colBlockBOT && PB > colBlockBOT)
+                  
+                    if ()
                     {
                         y = colBlockBOT;
                     }
                     //GOING DOWN ON BLOCK
                     if (PT < colBlockTOP && PB > colBlockTOP)
                     {
-                       // y = colBlockTOP + blockWidth;
+                       y = colBlockTOP - (blockWidth-14);
                     }
                     //GOING RIGHT ON BLOCK
                     if (PR > colBlockL && PL < colBlockL) {
-                       // x = colBlockL + blockWidth;
+                      // x = colBlockL + blockWidth;
                     }
                     //GOING LEFT ON BLOCK
                     if (PL-32 < colBlockL && PR > colBlockL) {
-                       // x = colBlockR;
+                        //x = colBlockR;
                     }
+                    
                 }
+                */
             }
+            
         }
   
         

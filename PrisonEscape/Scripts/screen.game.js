@@ -25,6 +25,9 @@
 
         dom.bind("#game-screen .back", "click", resumeGame);
 
+        dom.$("#game-screen .game-info .time span")[0].innerHTML =
+            prison.schedule.getTime();
+
         var input = prison.input;
         input.initialize();
        
@@ -255,7 +258,9 @@
         backOL.style.display = "none";
         paused = false;
     }
-
+    function time(){
+        prison.schedule.run();
+    }
     return {
         run: run
     };

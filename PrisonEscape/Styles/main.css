@@ -174,7 +174,25 @@ ul.menu li button:active
         width:0%;
     }
 /*---------------------------------------------*/
-
+.screen .game-info .time
+{
+    text-align:center;
+    margin-left: 90%;
+    display: block;
+    position: absolute;
+    height: 1.5em;
+    width: 6em;
+    z-index: 100;
+	font-family:capture_itregular;
+	font-size:1.5em;
+	color: red;
+	background:black;
+	border: 0.05em solid rgb(255,255,0);
+	border-radius: 0.5em;
+	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
+	-moz-box-shadow:  0.2em 0.2em 0.3em black;
+	box-shadow:  0.2em 0.2em 0.3em black;
+}
 
 
 .screen footer

@@ -13,18 +13,18 @@ prison.schedule = (function()
 	    CTX = ctx;
 	    CTX.font = "30px Verdana";
 	    setInterval(UpdateTime, gameHour);
-	    setInterval(DisplayTime, fps);
 	}
-	function DisplayTime()
+	function getTime()
 	{
-        //CTX.clearRect(0,0,500,500)
-	    if(PM)
+	    if (PM)
 	    {
-	        CTX.fillText(currentTime + " P.M." , 15, 30);
+	        var rt = currentTime + " P.M.";
+	        return rt;
 	    }
 	    else
 	    {
-	        CTX.fillText(currentTime + " A.M.", 15, 30);
+	        var rt = currentTime + " A.M.";
+	        return rt;
 	    }
 	}
 	function UpdateTime()
@@ -60,9 +60,14 @@ prison.schedule = (function()
 				currentTime = 1;
 			}
 		}
+		var dom = prison.dom;
+		var $ = dom.$;
+		$("#game-screen .game-info .time span")[0].innerHTML =
+            prison.schedule.getTime();
 	}
 	return {
 	    //EXPOSED FUNCTIONS IN HERE
-	    run: run
+	    run: run,
+	    getTime: getTime
 	};
 })();

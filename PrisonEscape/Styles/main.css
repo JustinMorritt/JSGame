@@ -89,6 +89,14 @@ body
 	text-shadow: 	2px 2px 3px rgb(255,255,0),
 					-2px -2px 3px rgb(255,255,0),
 					6px 10px 10px black;
+    /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 
 
@@ -109,6 +117,14 @@ body
 	text-shadow: 	2px 2px 3px rgb(255,255,0),
 					-2px -2px 3px rgb(255,255,0),
 					6px 10px 10px black;
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 
 
@@ -136,6 +152,14 @@ ul.menu li button
 	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
 	-moz-box-shadow:  0.2em 0.2em 0.3em black;
 	box-shadow:  0.2em 0.2em 0.3em black;
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 	
 }
 
@@ -192,6 +216,15 @@ ul.menu li button:active
 	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
 	-moz-box-shadow:  0.2em 0.2em 0.3em black;
 	box-shadow:  0.2em 0.2em 0.3em black;
+
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 
 
@@ -221,6 +254,14 @@ ul.menu li button:active
 	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
 	-moz-box-shadow:  0.2em 0.2em 0.3em black;
 	box-shadow:  0.2em 0.2em 0.3em black;
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 .screen footer button:hover
 {
@@ -240,6 +281,14 @@ ul.menu li button:active
     height:100%;
     z-index:99;
     background: rgba(20,20,20,0.8);
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 
 #game-screen .pause-overlay .pause-text,.inventory-text,.crafting-text
@@ -251,6 +300,14 @@ ul.menu li button:active
 				-1px -1px 2px rgb(255,255,0),
 				0px 0px 0px black;
     color:red;
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 
 #game-screen .back
@@ -274,6 +331,14 @@ ul.menu li button:active
 	-moz-box-shadow:  0.2em 0.2em 0.3em black;
 	box-shadow:  0.2em 0.2em 0.3em black;
     z-index:100;
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 #game-screen .back:hover 
 {
@@ -291,6 +356,14 @@ ul.menu li button:active
 	height:5em;
     display: none;
     z-index:100;
+     /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
 }
 #game-screen .invent1
 {

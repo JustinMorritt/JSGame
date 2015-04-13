@@ -82,16 +82,14 @@
                         var Hh  = Height / 2;
                         var Cx  = X + Hw;
                         var Cy  = Y + Hh;
-                        var Mag = Math.sqrt(Math.pow(Cx, 2) + Math.pow(Cy, 2));
-
+                        
                         collision.push({   
                                             X:          X,      //For 32 tile width
                                             Y:          Y,
                                             Hw:         Hw,
                                             Hh:         Hh,
                                             Cx:         Cx,     //Center X
-                                            Cy:         Cy,     //Center Y
-                                            Mag:        Mag     //Magnitude of collisionBlock
+                                            Cy: Cy,             //Center Y
                         });
                         //console.log(walls[y][x] + "cor->X:" + x + " Y:" + y + " -->PX =" + x * 32 + "x" + y * 32);
                         break;

@@ -131,7 +131,7 @@
         x += vx * step;
         y += vy * step;
 
-        //SLOW DOWN STUFF
+        //DECELERATION
         if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
         if (slowDown.up)    { vy += slowDownSpeed; if (vy > 0) { slowDown.up    = false; vy = 0 } }
         if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
@@ -151,7 +151,7 @@
                 playerMagnitude = Math.sqrt(Math.pow(PCenterX, 2) + Math.pow(PCenterY, 2));
 
                 //Only continue checking blocks with closer distances
-                if (collsionBlocks[i].Mag - playerMagnitude > 50)
+                if (collsionBlocks[i].Mag - playerMagnitude < 50)
                 {
                     continue;
                 }

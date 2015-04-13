@@ -30,7 +30,8 @@
         rows = prison.settings.rows;
         player = prison.player;
         camera = prison.camera;
-		map = prison.map;
+        map = prison.map;
+        schedule = prison.schedule;
 		
         canvas = document.createElement("canvas");
         ctx = canvas.getContext("2d");
@@ -62,7 +63,7 @@
 
         map.run();
         player.run();
-        
+        schedule.run(ctx);
    
         //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);
         camera.initialize(canvas.width, canvas.height, constMapWidth, constMapHeight);

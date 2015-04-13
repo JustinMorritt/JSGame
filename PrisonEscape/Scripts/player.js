@@ -18,6 +18,7 @@
         acceleration,
         center,
         onTile,
+        pColBlocks, //Possible Collision Blocks Array.
 
     controls = {
         left    : false,
@@ -40,8 +41,8 @@
         y                   = 1000;
         vx                  = 0;
         vy                  = 0;
-        center = new Victor(0, 0);
-        onTile = new Victor(0, 0);
+        center              = new Victor(0, 0);
+        onTile              = new Victor(0, 0);
         acceleration        = 20;
         slowDownSpeed       = 40;
         pSpeed              = 400; //originally 200
@@ -52,7 +53,8 @@
         pHP                 = 100; //Health
         getColBlockNum      = prison.map.getColBlockNum();
         pName               = prison.settings.name;
-     
+        pColBlocks          = [];
+
         playerSprite = new Image();
         playerSprite.addEventListener("load", callback, false);
         playerSprite.src ="Images/$Char2.png";
@@ -142,10 +144,10 @@
         center.x = x + 16; center.y = y + 16;
         onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
 
-        console.log("On tile: " + onTile.x + " " + onTile.y);
+        //console.log("On tile: " + onTile.x + " " + onTile.y);
 
         //Update Potential Collision Blocks 
-        
+        possibleCollisionBlocks();
 
         //DECELERATION
         if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
@@ -221,6 +223,32 @@
         //console.log("DREW PLAYER X:" +x+ " Y: " +y );
     }
 
+    //HELPER FUNCTIONS
+    function possibleCollisionBlocks()
+    {
+        pColBlocks = []; //Empty Current
+        pColBlocks[0] = new Victor(onTile.x - 1, onTile.y - 1);     //Topleft
+        pColBlocks[1] = new Victor(onTile.x + 1, onTile.y - 1);     //TopRight
+        pColBlocks[2] = new Victor(onTile.x - 1, onTile.y + 1);     //BotLeft
+        pColBlocks[3] = new Victor(onTile.x + 1, onTile.y + 1);     //BotRight
+
+        pColBlocks[4] = new Victor(onTile.x - 1, onTile.y);         //Left
+        pColBlocks[5] = new Victor(onTile.x + 1, onTile.y);         //Right
+        pColBlocks[6] = new Victor(onTile.x, onTile.y - 1);         //Above
+        pColBlocks[7] = new Victor(onTile.x, onTile.y + 1);         //Below
+
+        pColBlocks[8] = new Victor(onTile.x, onTile.y);             //Your Current Tile
+    }
+    
+    function dPosCB()  //DISPLAY POSSIBLE COLLISION BLOCKS
+    {
+        var block = 0;
+        for(var i = 0 ; i < 9; i ++)
+        {
+            block++;
+            console.log("BLock " +block +" X:" +pColBlocks[i].x + " Y:" + pColBlocks[i].y)
+        }
+    }
 
     //GETTERS SETTERS
     function getX()
@@ -230,6 +258,10 @@
     function getY()
     {
         return y;
+    }
+    function getOnTile()
+    {
+        return onTile;
     }
     function setXY(x,y) {
         x = x;
@@ -271,6 +303,7 @@
         run             :run,
         update          :update,
         draw            :draw,
+        dPosCB          :dPosCB,
         initialize      :initialize
     };
 })();

@@ -15,10 +15,16 @@
         blockWidth,
         getColBlockNum,
         playerMagnitude,
-   
+        slowDownSpeed,
 
       
     controls = {
+        left: false,
+        up: false,
+        right: false,
+        down: false,
+    }
+    slowDown = {
         left: false,
         up: false,
         right: false,
@@ -35,6 +41,7 @@
         y = 1000;
         vx = 0;
         vy = 0;
+        slowDownSpeed = 40;
         pSpeed = 400; //originally 200
         blockWidth = 32;
         pWidth = 32;
@@ -62,18 +69,22 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = true;
+                    slowDown.left = false;
                     break;
                 case 38: // up arrow
                 case 87:
                     controls.up = true;
+                    slowDown.up = false;
                     break;
                 case 39:
                 case 68: // right arrow
                     controls.right = true;
+                    slowDown.right = false;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = true;
+                    slowDown.down = false;
                     break;
             }
         }, false);
@@ -83,22 +94,26 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = false;
-                    vx = 0;
+                    slowDown.left = true;
+                    //vx = 0;
                     break;
                 case 38:
                 case 87: // up arrow
                     controls.up = false;
-                    vy = 0;
+                    slowDown.up = true;
+                    //vy = 0;
                     break;
                 case 39:
                 case 68: // right arrow
                     controls.right = false;
-                    vx = 0;
+                    slowDown.right = true;
+                    //vx = 0;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = false;
-                    vy = 0;
+                    slowDown.down = true;
+                    //vy = 0;
                     break;
                 case 80: // key P pauses the game
                     prison.display.togglePause();
@@ -117,6 +132,14 @@
         if (controls.down)  {           vy = pSpeed;        checkCollision();}
         x += vx * step;
         y += vy * step;
+        
+        if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left = false; vx = 0 } }
+        if (slowDown.up)    { vy += slowDownSpeed; if (vy > 0) { slowDown.up = false; vy = 0 } }
+        if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
+        if (slowDown.down)  { vy -= slowDownSpeed; if (vy < 0) { slowDown.down = false; vy = 0 } }
+
+
+
 
 
         function checkCollision()
@@ -241,6 +264,9 @@
     {
         pSpeed = speed;
     }
+    function setSlowDownSpeed(speed) {
+        slowDownSpeed = speed;
+    }
 
     return {
         //EXPOSED FUNCTIONS IN HERE
@@ -248,6 +274,7 @@
         getX: getX,
         setXY: setXY,
         setSpeed: setSpeed,
+        setSlowDownSpeed : setSlowDownSpeed,
         run: run,
         update: update,
         draw : draw,

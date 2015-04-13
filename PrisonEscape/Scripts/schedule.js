@@ -7,6 +7,7 @@ prison.schedule = (function()
 		var PM = false;
 		var CTX;
 		var fps = 1000 / 30;
+		var paused = false; // Bool
 
 	function run(ctx)
 	{
@@ -29,45 +30,47 @@ prison.schedule = (function()
 	}
 	function UpdateTime()
 	{
-		if(currentTime == 12 && PM == false)
-		{
-			//console.log("Days left:" + " " + gameDay);
-			gameDay--;
-		}
-		
-		if(PM == false)
-		{
-			//console.log("the time is:" + " " + currentTime + " " + "am");
-			currentTime++;
-			if(currentTime == 12)
-			{
-				PM = true;
-			}
-			if(currentTime == 13)
-			{
-				currentTime = 1;
-			}
-		}
-		else{
-			//console.log("the time is:" + " " + currentTime + " " + "pm");
-			currentTime++;
-			if(currentTime == 12)
-			{
-				PM = false;
-			}
-			if(currentTime == 13)
-			{
-				currentTime = 1;
-			}
-		}
+	    if (paused == false)
+	    {
+	        if (currentTime == 12 && PM == false) {
+	            //console.log("Days left:" + " " + gameDay);
+	            gameDay--;
+	        }
+
+	        if (PM == false) {
+	            //console.log("the time is:" + " " + currentTime + " " + "am");
+	            currentTime++;
+	            if (currentTime == 12) {
+	                PM = true;
+	            }
+	            if (currentTime == 13) {
+	                currentTime = 1;
+	            }
+	        }
+	        else {
+	            //console.log("the time is:" + " " + currentTime + " " + "pm");
+	            currentTime++;
+	            if (currentTime == 12) {
+	                PM = false;
+	            }
+	            if (currentTime == 13) {
+	                currentTime = 1;
+	            }
+	        }
+	    }
 		var dom = prison.dom;
 		var $ = dom.$;
 		$("#game-screen .game-info .time span")[0].innerHTML =
             prison.schedule.getTime();
 	}
+	function setPaused(running)
+	{
+	    paused = running;
+	}
 	return {
 	    //EXPOSED FUNCTIONS IN HERE
 	    run: run,
-	    getTime: getTime
+	    getTime: getTime,
+        setPaused: setPaused
 	};
 })();

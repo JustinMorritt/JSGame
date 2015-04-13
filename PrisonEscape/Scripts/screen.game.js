@@ -213,6 +213,7 @@
         overlay = dom.$("#game-screen .pause-overlay")[0];
         overlay.style.display = "block";
         paused = true;
+        prison.schedule.setPaused(paused);
     }
 
     function showInventoryOL()
@@ -223,12 +224,29 @@
             overlayC = dom.$("#game-screen .crafting-overlay")[0];
             overlayC.style.display = "none";
             overlayP.style.display = "none";
+
+
+            overlaya1 = dom.$("#game-screen .invent1")[0];
+            overlaya1.style.display = "block";
+            overlaya2 = dom.$("#game-screen .invent2")[0];
+            overlaya2.style.display = "block";
+            overlaya3 = dom.$("#game-screen .invent3")[0];
+            overlaya3.style.display = "block";
+            overlaya4 = dom.$("#game-screen .invent4")[0];
+            overlaya4.style.display = "block";
+            overlaya5 = dom.$("#game-screen .invent5")[0];
+            overlaya5.style.display = "block";
+            overlayG1 = dom.$("#game-screen .gear1")[0];
+            overlayG1.style.display = "block";
+
+
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
 
         overlay = dom.$("#game-screen .inventory-overlay")[0];
         overlay.style.display = "block";
         paused = true;
+        prison.schedule.setPaused(paused);
     }
 
     function showCraftingOL() {
@@ -238,12 +256,27 @@
             overlayI = dom.$("#game-screen .inventory-overlay")[0];
             overlayI.style.display = "none";
             overlayP.style.display = "none";
+
+            overlaya1 = dom.$("#game-screen .invent1")[0];
+            overlaya1.style.display = "block";
+            overlaya2 = dom.$("#game-screen .invent2")[0];
+            overlaya2.style.display = "block";
+            overlaya3 = dom.$("#game-screen .invent3")[0];
+            overlaya3.style.display = "block";
+            overlaya4 = dom.$("#game-screen .invent4")[0];
+            overlaya4.style.display = "block";
+            overlaya5 = dom.$("#game-screen .invent5")[0];
+            overlaya5.style.display = "block";
+            overlayG1 = dom.$("#game-screen .gear1")[0];
+            overlayG1.style.display = "block";
+
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
 
         overlay = dom.$("#game-screen .crafting-overlay")[0];
         overlay.style.display = "block";
         paused = true;
+        prison.schedule.setPaused(paused);
     }
 
     function resumeGame() {
@@ -256,7 +289,24 @@
         overlayI.style.display = "none";
         overlayP.style.display = "none";
         backOL.style.display = "none";
+
+
+
+        overlaya1 = dom.$("#game-screen .invent1")[0];
+        overlaya1.style.display = "none";
+        overlaya2 = dom.$("#game-screen .invent2")[0];
+        overlaya2.style.display = "none";
+        overlaya3 = dom.$("#game-screen .invent3")[0];
+        overlaya3.style.display = "none";
+        overlaya4 = dom.$("#game-screen .invent4")[0];
+        overlaya4.style.display = "none";
+        overlaya5 = dom.$("#game-screen .invent5")[0];
+        overlaya5.style.display = "none";
+        overlayG1 = dom.$("#game-screen .gear1")[0];
+        overlayG1.style.display = "none";
+
         paused = false;
+        prison.schedule.setPaused(paused);
     }
     function time(){
         prison.schedule.run();

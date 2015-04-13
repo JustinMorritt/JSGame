@@ -275,12 +275,78 @@ ul.menu li button:active
 	box-shadow:  0.2em 0.2em 0.3em black;
     z-index:100;
 }
-    #game-screen .back:hover 
+#game-screen .back:hover 
 {
     border: 0.12em solid rgb(255,255,0);
     background:rgba(0,0,0,0);
 }
 
+
+#game-screen .invent1
+{
+    position:absolute;
+    margin-left: 15em;
+    margin-top: 7.0em;
+    background: black;
+	width:5em;
+	height:5em;
+    display: none;
+    z-index:100;
+}
+#game-screen .invent2
+{
+    position:absolute;
+    margin-left: 20em;
+    margin-top: 7.0em;
+    background: black;
+	width:5em;
+	height:5em;
+    display: none;
+    z-index:100;
+}
+#game-screen .invent3
+{
+    position:absolute;
+    margin-left: 25em;
+    margin-top: 7.0em;
+    background: black;
+	width:5em;
+	height:5em;
+    display: none;
+    z-index:100;
+}
+#game-screen .invent4
+{
+    position:absolute;
+    margin-left: 30em;
+    margin-top: 7.0em;
+    background: black;
+	width:5em;
+	height:5em;
+    display: none;
+    z-index:100;
+}
+#game-screen .invent5
+{
+    position:absolute;
+    margin-left: 35em;
+    margin-top: 7.0em;
+    background: black;
+	width:5em;
+	height:5em;
+    display: none;
+    z-index:100;
+}
+#game-screen .gear1
+{
+    position:absolute;
+    margin-left: 2em;
+    margin-top: 7.0em;
+    background: red;
+	width:5em;
+	height:5em;
+    display: none;
+    z-index:100;
 }
 /*==================================================================*/
 

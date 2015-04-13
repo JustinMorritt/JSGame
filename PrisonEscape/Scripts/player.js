@@ -1,6 +1,8 @@
 ﻿prison.player = (function () {
     var x,
         y,
+        vx,
+        vy,
         pSpeed,
         pWidth,
         pHeight,
@@ -31,6 +33,8 @@
     {
         x = 1000;
         y = 1000;
+        vx = 0;
+        vy = 0;
         pSpeed = 400; //originally 200
         blockWidth = 32;
         pWidth = 32;
@@ -39,6 +43,7 @@
         pHP = 100; //Health
         getColBlockNum = prison.map.getColBlockNum();
         pName = prison.settings.name;
+     
 
         playerSprite = new Image();
         playerSprite.addEventListener(
@@ -78,18 +83,22 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = false;
+                    vx = 0;
                     break;
                 case 38:
                 case 87: // up arrow
-                   controls.up = false;
+                    controls.up = false;
+                    vy = 0;
                     break;
                 case 39:
                 case 68: // right arrow
                     controls.right = false;
+                    vx = 0;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = false;
+                    vy = 0;
                     break;
                 case 80: // key P pauses the game
                     prison.display.togglePause();
@@ -101,14 +110,15 @@
 
     function update(step, worldWidth, worldHeight)
     {
-        
           // parameter step is the time between frames ( in seconds )
-         if (controls.left)     {x -= pSpeed * step; checkCollision(); }
-         if (controls.up)       {y -= pSpeed * step; checkCollision() ; }
-         if (controls.right)    {x += pSpeed * step; checkCollision() ;}
-         if (controls.down)     {y += pSpeed * step; checkCollision() ;}
+        if (controls.left)  {           vx = -pSpeed;       checkCollision();}
+        if (controls.up)    {           vy = -pSpeed;       checkCollision();}
+        if (controls.right) {           vx = pSpeed;        checkCollision();}
+        if (controls.down)  {           vy = pSpeed;        checkCollision();}
+        x += vx * step;
+        y += vy * step;
 
-    
+
         function checkCollision()
         {
             for (var i = 0; i < getColBlockNum ; i++)

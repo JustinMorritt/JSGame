@@ -14,9 +14,10 @@
         collsionBlocks,
         blockWidth,
         getColBlockNum,
-        playerMagnitude,
         slowDownSpeed,
         acceleration,
+        center,
+        onTile,
 
     controls = {
         left    : false,
@@ -39,6 +40,8 @@
         y                   = 1000;
         vx                  = 0;
         vy                  = 0;
+        center = new Victor(0, 0);
+        onTile = new Victor(0, 0);
         acceleration        = 20;
         slowDownSpeed       = 40;
         pSpeed              = 400; //originally 200
@@ -121,15 +124,28 @@
     {
         // parameter step is the time between frames ( in seconds )
 
-        //ACCELERATION
-        if (controls.left)  { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } checkCollision(); }
-        if (controls.up)    { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } checkCollision(); }
-        if (controls.right) { if (vx != pSpeed)  { vx += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } checkCollision(); }
-        if (controls.down)  { if (vy != pSpeed)  { vy += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } checkCollision(); }
+        //Update Collision Quadrant Potential Collision Array
 
-        //ATTEMPT TO MOVE NOW , Collision should set the velocitys to 0 if hit
+
+
+        //ACCELERATION
+        if (controls.left)  { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } }  }
+        if (controls.up)    { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } }  }
+        if (controls.right) { if (vx != pSpeed)  { vx += acceleration; if (vx > pSpeed)  { vx = pSpeed  } }  }
+        if (controls.down)  { if (vy != pSpeed)  { vy += acceleration; if (vx > pSpeed)  { vx = pSpeed  } }  }
+
+        //ATTEMPT TO MOVE NOW 
         x += vx * step;
         y += vy * step;
+
+        //Update Center Vector
+        center.x = x + 16; center.y = y + 16;
+        onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
+
+        console.log("On tile: " + onTile.x + " " + onTile.y);
+
+        //Update Potential Collision Blocks 
+        
 
         //DECELERATION
         if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
@@ -137,7 +153,7 @@
         if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
         if (slowDown.down)  { vy -= slowDownSpeed; if (vy < 0) { slowDown.down  = false; vy = 0 } }
 
-
+        /*
         function checkCollision()
         {
             for (var i = 0; i < getColBlockNum ; i++)
@@ -146,8 +162,7 @@
                 var PR = x + blockWidth;
                 var PT = y;
                 var PB = y + (blockWidth-14);
-                var PCenterX = PL + 16 ;
-                var PCenterY = PT + 16;
+
                 playerMagnitude = Math.sqrt(Math.pow(PCenterX, 2) + Math.pow(PCenterY, 2));
 
                 //Only continue checking blocks with closer distances
@@ -167,8 +182,10 @@
                 var OL = prison.collision.collisionCheck(P, B);
             }
         }
- 
-        //Dont Leave world 
+        */
+
+
+        //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
         if (x - pWidth / 2 < 0)
         {
            x = pWidth / 2;

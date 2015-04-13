@@ -1,0 +1,36 @@
+px and py for player centre.
+pw/2 and ph/2 for player half height and half width.
+collision array 0's for non collision and 1's for collision.
+rect to rect collision- returns overlap vector
+
+//returns the vector to move r1 away from r2(r1 would be the player)
+vector2 AARectToAARect(r1x, r1y, r2x, r2y) //half width and half height predefined to 16
+{
+	float distX = Math.abs(r1x - r2x);
+	float distY = Math.abs(r1y - r2y);
+	
+	float overlapX = (halfWidth * 2) - distX;
+	float overlapY = (halfHeight * 2) - distY;
+	
+	if(overlapX > 0)
+	{
+		if(overlapX < overlapY)
+		{
+			return new vector2(overlapX, 0);
+			
+			if(r1x > r2x)
+			{
+				return(overlapX, 0); //repeat for y
+			}
+			else
+			{
+				return(-overlapX, 0); //repeat for y
+			}
+		}
+		else if(overlapY > 0)
+		{
+			return new vector2(0, overlapY);
+		}
+	}
+	return new vector 2(0, 0); //if there is no collision
+}

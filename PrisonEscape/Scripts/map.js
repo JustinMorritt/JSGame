@@ -7,6 +7,7 @@
     var collision = [];
     var Width = 32;
     var Height = 32;
+    var colBlockNum = 0;
 
     function run() {
         initialize(console.log("init map"));
@@ -63,7 +64,7 @@
     }
 
     function setCollision() {
-        var colBlockNum = 0;
+      
         for(var x = 0; x < cols; x++)
         {
             for(var y = 0; y < rows; y++)
@@ -92,12 +93,19 @@
                                             Mag:        Mag     //Magnitude of collisionBlock
                         });
                         //console.log(walls[y][x] + "cor->X:" + x + " Y:" + y + " -->PX =" + x * 32 + "x" + y * 32);
+                        
                         break;
                 }
             }
         }
+        //console.log("cor->CX:" + collision[0].Cx + " CY:" + collision[0].Cy + " MAG: " + collision[0].Mag);
         console.log("Total Collision Blocks: " + colBlockNum);
         //console.log("1st element" + collision[0].X + "x" + collision[0].Y);
+    }
+
+    function getColBlockNum()
+    {
+        return colBlockNum;
     }
 
 
@@ -111,6 +119,7 @@
         run: run,
         initialize: initialize,
         print: print,
+        getColBlockNum: getColBlockNum,
         getCollisions: getCollisions
     };
 })();

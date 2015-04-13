@@ -33,10 +33,10 @@
 
 
      AXIS = {
-        NONE: "none",
-        HORIZONTAL: "horizontal",
-        VERTICAL: "vertical",
-        BOTH: "both"
+        NONE        : "none",
+        HORIZONTAL  : "horizontal",
+        VERTICAL    : "vertical",
+        BOTH        : "both"
     }
 
     function initialize(canvasWidth, canvasHeight, worldWidth, worldHeight)
@@ -78,8 +78,7 @@
     }
 
     function seeStats()
-    {
-        
+    { 
         console.log("xView: " + xView);
         console.log("yView: " + yView);
         console.log("wView: " + wView);

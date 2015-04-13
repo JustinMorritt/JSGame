@@ -17,19 +17,16 @@
         playerMagnitude,
         slowDownSpeed,
 
-      
     controls = {
-        left: false,
-        up: false,
-        right: false,
-        down: false,
-    }
+        left    : false,
+        up      : false,
+        right   : false,
+        down    : false,}
     slowDown = {
-        left: false,
-        up: false,
-        right: false,
-        down: false,
-    }
+        left    : false,
+        up      : false,
+        right   : false,
+        down    : false,}
 
     function run() {
         initialize(console.log("initialized player"));
@@ -37,31 +34,26 @@
 
     function initialize(callback)
     {
-        x = 1000;
-        y = 1000;
-        vx = 0;
-        vy = 0;
-        slowDownSpeed = 40;
-        pSpeed = 400; //originally 200
-        blockWidth = 32;
-        pWidth = 32;
-        pHeight = 32;
-        playerMagnitude = 0;
-        pHP = 100; //Health
-        getColBlockNum = prison.map.getColBlockNum();
-        pName = prison.settings.name;
+        x                   = 1000;
+        y                   = 1000;
+        vx                  = 0;
+        vy                  = 0;
+        slowDownSpeed       = 40;
+        pSpeed              = 400; //originally 200
+        blockWidth          = 32;
+        pWidth              = 32;
+        pHeight             = 32;
+        playerMagnitude     = 0;
+        pHP                 = 100; //Health
+        getColBlockNum      = prison.map.getColBlockNum();
+        pName               = prison.settings.name;
      
-
         playerSprite = new Image();
-        playerSprite.addEventListener(
-            "load", callback, false);
-        playerSprite.src =
-            "Images/$Char2.png";
+        playerSprite.addEventListener("load", callback, false);
+        playerSprite.src ="Images/$Char2.png";
 
-
+        //GET ARRAY OF COLLISION BLOCKS 
         collsionBlocks = prison.map.getCollisions();
-
-        console.log(collsionBlocks[0].X + " Y:" + collsionBlocks[0].Y + "    X:" + collsionBlocks[1].X + "    Y:" + collsionBlocks[1].Y);
 
 
         window.addEventListener("keydown", function (e) {
@@ -125,21 +117,21 @@
 
     function update(step, worldWidth, worldHeight)
     {
-          // parameter step is the time between frames ( in seconds )
+        // parameter step is the time between frames ( in seconds )
         if (controls.left)  {           vx = -pSpeed;       checkCollision();}
         if (controls.up)    {           vy = -pSpeed;       checkCollision();}
         if (controls.right) {           vx = pSpeed;        checkCollision();}
         if (controls.down)  {           vy = pSpeed;        checkCollision();}
+
+        //ATTEMPT TO MOVE NOW , Collision should set the velocitys to 0 if hit
         x += vx * step;
         y += vy * step;
         
-        if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left = false; vx = 0 } }
-        if (slowDown.up)    { vy += slowDownSpeed; if (vy > 0) { slowDown.up = false; vy = 0 } }
+        //SLOW DOWN STUFF
+        if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
+        if (slowDown.up)    { vy += slowDownSpeed; if (vy > 0) { slowDown.up    = false; vy = 0 } }
         if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
-        if (slowDown.down)  { vy -= slowDownSpeed; if (vy < 0) { slowDown.down = false; vy = 0 } }
-
-
-
+        if (slowDown.down)  { vy -= slowDownSpeed; if (vy < 0) { slowDown.down  = false; vy = 0 } }
 
 
         function checkCollision()
@@ -155,14 +147,11 @@
                 playerMagnitude = Math.sqrt(Math.pow(PCenterX, 2) + Math.pow(PCenterY, 2));
 
                 //Only continue checking blocks with closer distances
-                
                 if (collsionBlocks[i].Mag - playerMagnitude > 50)
                 {
                     continue;
                 }
              
-               
-
                 var colBlockX = collsionBlocks[i].X;
                 var colBlockR = collsionBlocks[i].X + 32;
                 var colBlockTOP = collsionBlocks[i].Y;
@@ -171,43 +160,10 @@
                 var B = { X: collsionBlocks[i].Cx, Y: collsionBlocks[i].Cy };
                 var P = { X: PCenterX, Y: PCenterY };
 
-
                 var OL = prison.collision.collisionCheck(P, B);
-                //console.log("PX: " + PL + " PCX" + PCenterX + " PY: " + PT + " PCY: " + PCenterY)
-                //check overlap
-                /*
-                
-                switch(OL)
-                {
-                    //BOT HIT
-                    case 1:
-                        y = colBlockTOP - (blockWidth-14);
-                        break;
-
-                        //TOP HIT
-                    case 2:
-                        y = colBlockTOP - (blockWidth-14);
-                        break;
-
-                        //LEFT HIT
-                    case 3:
-                        // x = colBlockR;
-                        break;
-
-                        //RIGHT HIT
-                    case 4:
-                        //x = colBlockL + blockWidth;
-                        break;
-
-                    default:
-                        //console.log("No collide");
-                        break;
-                }
-                */
             }
         }
-  
-        
+ 
         //Dont Leave world 
         if (x - pWidth / 2 < 0)
         {
@@ -225,7 +181,6 @@
         {
             y = worldHeight - (pHeight*1.5) ;
         }
-
     }
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
@@ -245,6 +200,8 @@
         //console.log("DREW PLAYER X:" +x+ " Y: " +y );
     }
 
+
+    //GETTERS SETTERS
     function getX()
     {
         return x;
@@ -253,13 +210,10 @@
     {
         return y;
     }
-
     function setXY(x,y) {
         x = x;
         y = y;
     }
-
-
     function setSpeed(speed)
     {
         pSpeed = speed;
@@ -267,18 +221,35 @@
     function setSlowDownSpeed(speed) {
         slowDownSpeed = speed;
     }
+    function setVX(vx)
+    {
+        vx = vx;
+    }
+    function setVY(vy) {
+        vy = vy;
+    }
+    function getVX()
+    {
+        return vx;
+    }
+    function getVY() {
+        return vy;
+    }
 
     return {
         //EXPOSED FUNCTIONS IN HERE
-        getY: getY,
-        getX: getX,
-        setXY: setXY,
-        setSpeed: setSpeed,
-        setSlowDownSpeed : setSlowDownSpeed,
-        run: run,
-        update: update,
-        draw : draw,
-        initialize: initialize
-
+        setVX           :setVX,
+        setVY           :setVY,
+        getVX           :getVX,
+        getVY           :getVY,
+        getY            :getY,
+        getX            :getX,
+        setXY           :setXY,
+        setSpeed        :setSpeed,
+        setSlowDownSpeed:setSlowDownSpeed,
+        run             :run,
+        update          :update,
+        draw            :draw,
+        initialize      :initialize
     };
 })();

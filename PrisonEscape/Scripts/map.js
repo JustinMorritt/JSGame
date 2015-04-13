@@ -93,7 +93,6 @@
                                             Mag:        Mag     //Magnitude of collisionBlock
                         });
                         //console.log(walls[y][x] + "cor->X:" + x + " Y:" + y + " -->PX =" + x * 32 + "x" + y * 32);
-                        
                         break;
                 }
             }
@@ -107,7 +106,6 @@
     {
         return colBlockNum;
     }
-
 
     function getCollisions()
     {

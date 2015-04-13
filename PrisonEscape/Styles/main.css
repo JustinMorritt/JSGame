@@ -281,72 +281,111 @@ ul.menu li button:active
     background:rgba(0,0,0,0);
 }
 
-
-#game-screen .invent1
+#game-screen .invent1, .invent2, .invent3, .invent4, .invent5, .invent6,
+.invent7,.invent8,.invent9,.invent10,.invent11,.invent12,.invent13,
+.invent14,.invent15,.gear1,.gear2,.gear3
 {
     position:absolute;
-    margin-left: 15em;
-    margin-top: 7.0em;
     background: black;
 	width:5em;
 	height:5em;
     display: none;
     z-index:100;
+}
+#game-screen .invent1
+{
+    margin-left: 15em;
+    margin-top: 7.0em;
 }
 #game-screen .invent2
 {
-    position:absolute;
     margin-left: 20em;
     margin-top: 7.0em;
-    background: black;
-	width:5em;
-	height:5em;
-    display: none;
-    z-index:100;
 }
 #game-screen .invent3
 {
-    position:absolute;
     margin-left: 25em;
     margin-top: 7.0em;
-    background: black;
-	width:5em;
-	height:5em;
-    display: none;
-    z-index:100;
 }
 #game-screen .invent4
 {
-    position:absolute;
     margin-left: 30em;
     margin-top: 7.0em;
-    background: black;
-	width:5em;
-	height:5em;
-    display: none;
-    z-index:100;
 }
 #game-screen .invent5
 {
-    position:absolute;
     margin-left: 35em;
     margin-top: 7.0em;
-    background: black;
-	width:5em;
-	height:5em;
-    display: none;
-    z-index:100;
 }
+#game-screen .invent6
+{
+    margin-left: 15em;
+    margin-top: 12em;
+}
+#game-screen .invent7
+{
+    margin-left: 20em;
+    margin-top: 12em;
+}
+#game-screen .invent8
+{
+    margin-left: 25em;
+    margin-top: 12em;
+}
+#game-screen .invent9
+{
+    margin-left: 30em;
+    margin-top: 12em;
+}
+#game-screen .invent10
+{
+    margin-left: 35em;
+    margin-top: 12em;
+}
+
+#game-screen .invent11
+{
+    margin-left: 15em;
+    margin-top: 17em;
+}
+#game-screen .invent12
+{
+    margin-left: 20em;
+    margin-top: 17em;
+}
+#game-screen .invent13
+{
+    margin-left: 25em;
+    margin-top: 17em;
+}
+#game-screen .invent14
+{
+    margin-left: 30em;
+    margin-top: 17em;
+}
+#game-screen .invent15
+{
+    margin-left: 35em;
+    margin-top: 17em;
+}
+
 #game-screen .gear1
 {
-    position:absolute;
-    margin-left: 2em;
-    margin-top: 7.0em;
     background: red;
-	width:5em;
-	height:5em;
-    display: none;
-    z-index:100;
+    margin-left: 2em;
+    margin-top: 7em;
+}
+#game-screen .gear2
+{
+    background: red;
+    margin-left: 2em;
+    margin-top: 12em;
+}
+#game-screen .gear3
+{
+    background: red;
+    margin-left: 2em;
+    margin-top: 17em;
 }
 /*==================================================================*/
 

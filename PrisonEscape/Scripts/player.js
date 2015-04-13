@@ -16,6 +16,7 @@
         getColBlockNum,
         playerMagnitude,
         slowDownSpeed,
+        acceleration,
 
     controls = {
         left    : false,
@@ -38,6 +39,7 @@
         y                   = 1000;
         vx                  = 0;
         vy                  = 0;
+        acceleration        = 20;
         slowDownSpeed       = 40;
         pSpeed              = 400; //originally 200
         blockWidth          = 32;
@@ -118,15 +120,17 @@
     function update(step, worldWidth, worldHeight)
     {
         // parameter step is the time between frames ( in seconds )
-        if (controls.left)  {           vx = -pSpeed;       checkCollision();}
-        if (controls.up)    {           vy = -pSpeed;       checkCollision();}
-        if (controls.right) {           vx = pSpeed;        checkCollision();}
-        if (controls.down)  {           vy = pSpeed;        checkCollision();}
+
+        //ACCELERATION
+        if (controls.left)  { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } checkCollision(); }
+        if (controls.up)    { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } checkCollision(); }
+        if (controls.right) { if (vx != pSpeed)  { vx += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } checkCollision(); }
+        if (controls.down)  { if (vy != pSpeed)  { vy += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } checkCollision(); }
 
         //ATTEMPT TO MOVE NOW , Collision should set the velocitys to 0 if hit
         x += vx * step;
         y += vy * step;
-        
+
         //SLOW DOWN STUFF
         if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
         if (slowDown.up)    { vy += slowDownSpeed; if (vy > 0) { slowDown.up    = false; vy = 0 } }

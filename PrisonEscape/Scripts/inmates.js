@@ -5,13 +5,8 @@
         sPositions  = [], //Spawns
         inmatesA    = [],
         inmateNames = [],
-        DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
+        DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7, STILL: 8},
 
-    controls = {
-        left    : false,
-        up      : false,
-        right   : false,
-        down    : false,},
     slowDown = {
         left    : false,
         up      : false,
@@ -52,15 +47,17 @@
             Sprite.src = "Images/$Char"+ i +".png";
 
             var randResp = prison.math.randomRange(20, 70);
+            var randDir =  prison.math.randomRange(0, 8);
 
             var newInmate = {   
                 sx: 0,
                 sy: 0,
+                dir: randDir,                                   //Direction
                 pos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Position
                 v: new Victor(0, 0),                            //Velocity
                 c: new Victor(0, 0),                            //Center
                 onT: new Victor(0, 0),                          //On Tile
-                speed: 200,                                     //Speed
+                speed: 20,                                     //Speed
                 accel: 20,                                      //Acceleration
                 sdspeed: 40,                                    //SlowDownSpeed
                 name: inmateNames[i],
@@ -78,8 +75,40 @@
     {
         for (var i = 0 ; i < numInmates; i++)
         {
+            //ACCELERATION
+            switch(inmatesA[i].dir)
+            {
+                //UP
+                case 0: if (inmatesA[i].v.y != -inmatesA[i].speed) { inmatesA[i].v.y -= inmatesA[i].accel; if (inmatesA[i].v.y < -inmatesA[i].speed) { inmatesA[i].v.y = -inmatesA[i].speed } } break;
+                //UPRIGHT
+                case 1: if (inmatesA[i].v.y != -inmatesA[i].speed) { inmatesA[i].v.y -= inmatesA[i].accel; if (inmatesA[i].v.y < -inmatesA[i].speed) { inmatesA[i].v.y = -inmatesA[i].speed } }
+                        if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel; if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed } }
+                         break;
+                //RIGHT
+                case 2: if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel; if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed } } break;
+                //DOWN RIGHT
+                case 3: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed } }
+                        if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel; if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed } }
+                    break;
+                //DOWN
+                case 4: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed } } break;
+                //DOWNLEFT
+                case 5: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed } }
+                        if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } }
+                        break;
+                //LEFT
+                case 6: if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } } break;
+                //UPLEFT
+                case 7: if (inmatesA[i].v.y != -inmatesA[i].speed) { inmatesA[i].v.y -= inmatesA[i].accel; if (inmatesA[i].v.y < -inmatesA[i].speed) { inmatesA[i].v.y = -inmatesA[i].speed } }
+                        if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } } 
+                    break;
+                //STILL 
+                case 8: if (inmatesA[i].v.x != 0 && inmatesA[i].v.y != 0) { inmatesA[i].v.x = 0; inmatesA[i].v.y = 0; }
+                    break;
+            }
 
-           // inmatesA[i].pos.x++;
+            inmatesA[i].pos.x += (inmatesA[i].v.x * step);
+            inmatesA[i].pos.y += (inmatesA[i].v.y * step);
         }
     }
     function draw(step, ctx, xView, yView)

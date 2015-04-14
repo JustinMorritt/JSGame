@@ -38,10 +38,10 @@
     function initialize(callback)
     {
 
-        var spawnPos = prison.map.getSpawns();
-        var index = array.indexOf(5);
-        x                   = spawnPos[0].x; //USE THIS TO GRAB A RANDOM SPAWN POSITION
-        y                   = spawnPos[0].y;
+       // var spawnPos = prison.map.getSpawns();
+       // var index = array.indexOf(5);
+        x                   = 1000//spawnPos[0].x; //USE THIS TO GRAB A RANDOM SPAWN POSITION
+        y                   = 1000//spawnPos[0].y;
         vx                  = 0;
         vy                  = 0;
         center              = new Victor(0, 0);

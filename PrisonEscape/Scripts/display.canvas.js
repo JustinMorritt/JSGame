@@ -190,7 +190,7 @@
         if (3200 - sy < 3200){mapHeight = 3200 - sy;}
 
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
-        inmates.draw(STEP, ctx);
+        inmates.draw(STEP, ctx, sx, sy);
         player.draw(STEP, ctx, sx, sy);
         
 

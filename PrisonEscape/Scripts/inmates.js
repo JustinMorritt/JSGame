@@ -3,7 +3,7 @@
     var numInmates,
         game, 
         sPositions  = [], //Spawns
-        inmatesA = [],
+        inmatesA    = [],
         inmateNames = [],
         DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
 
@@ -76,15 +76,16 @@
     {
         for (var i = 0 ; i < numInmates; i++)
         {
-           
+           // inmatesA[i].pos.x++;
         }
     }
     function draw(step, ctx, xView, yView)
     {
         for (var i = 0 ; i < numInmates; i++)
         {
-            var newX = (inmatesA[i].pos.x - 32 / 2) - xView;
-            var newY = (inmatesA[i].pos.y - 32 / 2) - yView;
+            //OFFSET CAMERA VIEW
+            var newX = (inmatesA[i].pos.x) - xView;
+            var newY = (inmatesA[i].pos.y) - yView;
 
             ctx.save();
             //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);

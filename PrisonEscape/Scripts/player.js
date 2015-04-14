@@ -37,15 +37,18 @@
 
     function initialize(callback)
     {
-        x                   = 1000;
-        y                   = 1000;
+
+        var spawnPos = prison.map.getSpawns();
+        var index = array.indexOf(5);
+        x                   = spawnPos[0].x; //USE THIS TO GRAB A RANDOM SPAWN POSITION
+        y                   = spawnPos[0].y;
         vx                  = 0;
         vy                  = 0;
         center              = new Victor(0, 0);
         onTile              = new Victor(0, 0);
         acceleration        = 20;
         slowDownSpeed       = 40;
-        pSpeed              = 400; //originally 200
+        pSpeed              = 200; //originally 200
         blockWidth          = 32;
         pWidth              = 32;
         pHeight             = 32;
@@ -154,7 +157,6 @@
             if (collsionBlocks[pColBlocks[i].x-1][pColBlocks[i].y-1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
             {
                 //console.log("****Possible Collision Block Near!****");
-                
                 temp = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
                 if (Math.abs(temp.x) > Math.abs(collisionCorrection.x) &&
                     Math.abs(temp.x) > Math.abs(collisionCorrection.y) ||
@@ -168,7 +170,7 @@
         //IF CORRECTION APPLY IT ...
         if (collisionCorrection.x != 0 || collisionCorrection.y != 0)
         {
-            //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
+            console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
             x += collisionCorrection.x;
             y += collisionCorrection.y;
         }

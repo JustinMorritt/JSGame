@@ -137,11 +137,16 @@
     {
         return spawns1d;
     }
+    function shiftSpawn()
+    {
+        spawns1d.shift();
+    }
 
     return {
         //EXPOSED FUNCTIONS IN HERE
         run: run,
         initialize: initialize,
+        shiftSpawn : shiftSpawn,
         print: print,
         getColBlockNum: getColBlockNum,
         getCollisions: getCollisions,

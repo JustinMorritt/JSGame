@@ -28,6 +28,7 @@
         numInmates = prison.settings.inmates;
         inmateNames = game.getInmateNames(); //Array of Random Inmate Names
 
+       /*
         console.log("1Inmate Name:" + inmateNames[0])
         console.log("2Inmate Name:" + inmateNames[1])
         console.log("3Inmate Name:" + inmateNames[2])
@@ -35,6 +36,7 @@
         console.log("5Inmate Name:" + inmateNames[4])
         console.log("6Inmate Name:" + inmateNames[5])
         console.log("7Inmate Name:" + inmateNames[6])
+        */
 
         spawnInmates();
     }
@@ -42,7 +44,7 @@
     function spawnInmates()
     {
         //get spawn positions!!
-        
+        var spawnPos = prison.map.getSpawns();
 
         for (var i = 0 ; i < numInmates; i ++)
         {
@@ -53,18 +55,19 @@
             var newInmate = {   
                 sx: 0,
                 sy: 0,
-             // pos: new Victor(spawnPos[i].x, spawnPos[i].y),  //Position
+                pos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Position
                 v: new Victor(0, 0),                            //Velocity
                 c: new Victor(0, 0),                            //Center
                 onT: new Victor(0, 0),                          //On Tile
                 speed: 200,                                     //Speed
                 accel: 20,                                      //Acceleration
                 sdspeed: 40,                                    //SlowDownSpeed
-                //name: inmateNames[i],
+                name: inmateNames[i],
                //sprite: Sprite,
-                health: 0,
+                health: 100,
                 respect: 100                                   //Decrease Respect when player bumps into them  if no respect HURT player
             }
+            spawnPos.shift();
            // inmates.push()
         }
     }
@@ -80,7 +83,10 @@
 
     function seeInmateStats(i)
     {
-        console.log("Inmate Name: " + inmatesA[i].name);
+        for (var i = 0 ; i < numInmates; i++)
+        {
+            console.log("Inmate Name: " + inmatesA[i].name);
+        }
     }
 
     //GETTERS SETTERS

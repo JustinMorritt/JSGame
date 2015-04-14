@@ -190,14 +190,18 @@
         if (3200 - sy < 3200){mapHeight = 3200 - sy;}
 
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
+        inmates.draw(STEP, ctx);
         player.draw(STEP, ctx, sx, sy);
+        
 
         ctx.restore();
     }
 
     function update()
     {
+        inmates.update(STEP, 3200, 3200);
         player.update(STEP, 3200, 3200);
+        
         camera.update();
     }
 

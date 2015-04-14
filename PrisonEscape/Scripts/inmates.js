@@ -46,7 +46,7 @@
         //get spawn positions!!
         var spawnPos = prison.map.getSpawns();
 
-        for (var i = 0 ; i < numInmates; i ++)
+        for (var i = 1 ; i < numInmates+1; i ++)
         {
             Sprite = new Image();
             Sprite.src = "Images/$Char"+ i +".png";
@@ -71,14 +71,38 @@
         }
     }
 
-    function draw()
+
+    function update(step, worldWidth, worldHeight)
     {
+        for (var i = 0 ; i < numInmates; i++)
+        {
+           
+        }
+    }
+    function draw(step, ctx, xView, yView)
+    {
+        for (var i = 0 ; i < numInmates; i++)
+        {
+            var newX = (inmatesA[i].pos.x - 32 / 2) - xView;
+            var newY = (inmatesA[i].pos.y - 32 / 2) - yView;
+
+            ctx.save();
+            //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
+            ctx.drawImage(
+                inmatesA[i].sprite,
+                inmatesA[i].sx,
+                inmatesA[i].sy,
+                32,
+                32,
+                newX,
+                newY,
+                32,
+                32);
+            ctx.restore();
+        }
 
     }
-    function update()
-    {
 
-    }
 
     function seeInmateStats()
     {

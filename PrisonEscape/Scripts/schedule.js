@@ -67,6 +67,10 @@ prison.schedule = (function()
 	{
 	    paused = running;
 	}
+	function getPaused()
+	{
+	    return paused;
+	}
 	return {
 	    //EXPOSED FUNCTIONS IN HERE
 	    run: run,

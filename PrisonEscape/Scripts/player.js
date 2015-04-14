@@ -126,7 +126,7 @@
     {
         // parameter step is the time between frames ( in seconds )
 
-        //Update Center Vector
+        
      
 
         //Update Potential Collision Blocks 
@@ -138,13 +138,12 @@
         if (controls.right) { if (vx != pSpeed)  { vx += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } }
         if (controls.down)  { if (vy != pSpeed)  { vy += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } }
 
-
         x += vx * step;
         y += vy * step;
+
+        //Update Center Vector
         center.x = x + 16; center.y = y + 16;
         onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
-
-
 
 
         var collisionCorrection = new Victor(0, 0);
@@ -166,9 +165,7 @@
                 }
             }
         }
-
-
-        //ATTEMPT TO MOVE NOW 
+        //IF CORRECTION APPLY IT ...
         if (collisionCorrection.x != 0 || collisionCorrection.y != 0)
         {
             //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)

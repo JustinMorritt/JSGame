@@ -9,6 +9,7 @@
         prisonSprite,
         firstRun = true,
         player,
+        inmates,
         runningId = -1,
         camera, xDeadZone, yDeadZone,
         canvasWidth, canvasHeight,
@@ -30,6 +31,7 @@
         rows = prison.settings.rows;
         player = prison.player;
         camera = prison.camera;
+        inmates = prison.inmates;
         map = prison.map;
         schedule = prison.schedule;
 		
@@ -63,6 +65,7 @@
 
         map.run();
         player.run();
+        inmates.run();
         schedule.run(ctx);
    
         //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);

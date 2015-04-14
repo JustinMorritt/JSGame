@@ -1,8 +1,10 @@
 ﻿prison.inmates = (function () {
 
     var numInmates,
+        game, 
         sPositions  = [], //Spawns
-        inmatesA    = [],
+        inmatesA = [],
+        inmateNames = [],
         DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7 },
 
     controls = {
@@ -22,20 +24,31 @@
     }
 
     function initialize(callback) {
+        game = prison.game;
         numInmates = prison.settings.inmates;
+        inmateNames = game.getInmateNames(); //Array of Random Inmate Names
+
+        console.log("1Inmate Name:" + inmateNames[0])
+        console.log("2Inmate Name:" + inmateNames[1])
+        console.log("3Inmate Name:" + inmateNames[2])
+        console.log("4Inmate Name:" + inmateNames[3])
+        console.log("5Inmate Name:" + inmateNames[4])
+        console.log("6Inmate Name:" + inmateNames[5])
+        console.log("7Inmate Name:" + inmateNames[6])
+
         spawnInmates();
     }
 
     function spawnInmates()
     {
         //get spawn positions!!
+        
 
         for (var i = 0 ; i < numInmates; i ++)
         {
             //Sprite = new Image();
             //Sprite.addEventListener("load", callback, false);
             //Sprite.src = "Images/$Char"+ i +".png";
-
 
             var newInmate = {   
                 sx: 0,
@@ -47,7 +60,7 @@
                 speed: 200,                                     //Speed
                 accel: 20,                                      //Acceleration
                 sdspeed: 40,                                    //SlowDownSpeed
-               // name: nameList[i],
+                //name: inmateNames[i],
                //sprite: Sprite,
                 health: 0,
                 respect: 100                                   //Decrease Respect when player bumps into them  if no respect HURT player
@@ -63,6 +76,11 @@
     function update()
     {
 
+    }
+
+    function seeInmateStats(i)
+    {
+        console.log("Inmate Name: " + inmatesA[i].name);
     }
 
     //GETTERS SETTERS
@@ -113,6 +131,7 @@
         setXY: setXY,
         setSpeed: setSpeed,
         setSlowDownSpeed: setSlowDownSpeed,
+        seeInmateStats: seeInmateStats,
         run: run,
         update: update,
         draw: draw,

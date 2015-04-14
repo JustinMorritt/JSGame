@@ -6,6 +6,7 @@
     function run() {
         if (firstRun) {
             prison.setName();
+            prison.game.initialize();
             setup();
             firstRun = false;
         }

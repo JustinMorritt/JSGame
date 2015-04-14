@@ -13,8 +13,12 @@
 		totalInmateNames = 48,
 		totalGuardNames = 20,
 		guardNameList = "", 
-		inmateNameList = ""
-        ;
+		inmateNameList = "",
+        inmateNames,
+        offenceTime,
+        guardNames,
+        offences
+       
 
     function initialize(callback)
     {
@@ -36,8 +40,7 @@
         randomNameIM();
         randomNameGRD();
 
-        
-		displayNPCs();
+		//displayNPCs();
 		displayCriminalRecord();
 
         if (callback)
@@ -70,7 +73,8 @@
 						   "Miss Kitty", "Stonewall", "Scarface", "Ramblin' Man", "Sweet Cakes", "Buttercup", "Moneybags", "Lowdown Lenny",
                             "King Kool", "Skumbag", "Monkey Boy", "Hot Lips", "Big Tuna", "Jack the Rabbit", "Baby Face", "Pillow-Boy"];
 
-        while (inmateNames.length <= inmates) {
+        while (inmateNames.length <= inmates)
+        {
 		    var nameNum = Math.floor(Math.random() * totalInmateNames);
 
 		    if (!alreadyOnList(inmateNames, inmateNameList[nameNum])) {
@@ -102,7 +106,7 @@
     {
         var Num = 0;
         var Num2 = 0;
-        for (var i = 1 ; i < inmates ; ++i)
+        for (var i = 1 ; i < inmateNames.length ; ++i)
         {
             Num++;
             console.log("Inmate " +Num+ " = " + inmateNames[i]);
@@ -212,9 +216,21 @@
         }
     }
 
+    function getInmateNames()
+    {
+        return inmateNames;
+    }
+    function getGuardNames()
+    {
+        return guardNames;
+    }
+
 
     return {
         //EXPOSED FUNCTIONS IN HERE
         initialize: initialize,
+        displayNPCs: displayNPCs,
+        getInmateNames: getInmateNames,
+        getGuardNames: getGuardNames
     };
 })();

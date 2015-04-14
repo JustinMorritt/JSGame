@@ -188,7 +188,21 @@
         if (y + (pHeight * 1.5) > worldHeight)  {y = worldHeight - (pHeight * 1.5);}
 
         //console.log("On tile: " + onTile.x + " " + onTile.y);
-    }
+		
+		/* Animation 
+		if(_vx === 0)
+		{
+			setRange("");
+		}
+		if(_vx < 0)
+		{
+			setRange("Player Walk Left");
+		}
+		if(_vx > 0)
+		{
+			setRange("Player Walk Right");
+		}*/
+	}
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
     {
@@ -205,6 +219,27 @@
         
         context.restore();
         //console.log("DREW PLAYER X:" +x+ " Y: " +y );
+		
+		/* Animation 
+		var currentFrame = 0;
+		for(var i = 0; i < _ranges.length; ++i)
+		{
+			if(_currentRange === _ranges[i].getName())
+			{
+				currentFrame = _ranges[i].currentFrame();
+				//console.log(currentFrame);
+			}
+		}*/
+
+		/*c.drawImage(_img, 
+					_frames[currentFrame].getx(), 
+					_frames[currentFrame].gety(),
+					_frames[currentFrame].getWidth(), 
+					_frames[currentFrame].getHeight(),
+					_x, 
+					_y, 
+					_width, 
+					_height);*/
     }
 
     //HELPER FUNCTIONS
@@ -286,6 +321,152 @@
     function getVY() {
         return vy;
     }
+	
+/* Character Animation 
+
+function playerFrame(xPos, yPos, w, h)
+{
+	var _x = xPos;
+	var _y = yPos;
+	var _width = w;
+	var _height = h;
+
+	function getX()
+	{
+		return _x;
+	};
+
+	function getY()
+	{
+		return _y;
+	};
+
+	function getWidth()
+	{
+		return _width;  
+	};
+
+	function getHeight()
+	{
+		return _height;
+	};
+};
+
+function AnimationRange(rangeName, first, end)
+{
+	if(end <= first)
+	{
+		console.log("End less than first: Range not changed.");
+		return;
+	}
+	
+	var _name = rangeName;
+	var _first = first;
+	var _end = end;
+
+	var _currentFrame = _first;
+
+	function setRange(first, end)
+	{
+		if(end <= first)
+		{
+			console.log("End less than first: Range not changed.");
+			return;
+		}
+		_first = first
+		_end = end;
+	};
+
+	function getEnd()
+	{
+		return _end;
+	};
+
+	function getFirst()
+	{
+		return _first;
+	};
+
+	function getName()
+	{
+		return _name;
+	};
+
+	function currentFrame()
+	{
+		return _currentFrame;
+	};
+
+	function nextFrame()
+	{
+		//console.log("Before: " + _currentFrame);    
+		++_currentFrame;
+		
+		if(_currentFrame == _end)
+		{
+			_currentFrame = _first;
+		}
+		//console.log("After: " + _currentFrame);    
+		return _currentFrame;
+	};
+};
+
+var _frames = new Array();
+_frames.push(new playerFrame(sx, sy, sw, sh));
+
+var _ranges = new Array();
+_ranges.push(new AnimationRange("", 0, 1));
+
+var _currentRange = "";
+
+function addRange(rangeName, start, end)
+{
+	_ranges.push(new AnimationRange(rangeName, start, end));
+};  
+
+function setRange(rangeId)
+{
+	for(var i = 0; i < _ranges.length; ++i)
+	{
+		if(rangeId === _ranges[i].getName())
+		{
+			_currentRange = _ranges[i].getName();
+			//_ranges[i].resetCurrentFrame();
+		}
+	}
+};
+
+function setRangeFrames(rangename, start, end)
+{
+	for(var i = 0; i < _ranges.length; ++i)
+	{
+		if(rangename == _ranges[i].getName())
+		{
+			_ranges[i].setRange(start, end);
+			return;
+		}
+	}    
+}
+
+function nextFrame()
+{
+	for(var i = 0; i < _ranges.length; ++i)
+	{
+		if(_currentRange == _ranges[i].getName())
+		{
+			var ret = _ranges[i].nextFrame()
+			return ret;
+		}
+	}
+	console.log("Something broken in the frames mechanism");
+	return 0;
+};
+
+function addFrame(xPos, yPos, w, h)
+{
+	_frames.push(new playerFrame(xPos, yPos, w, h));
+};
+*/
 
     return {
         //EXPOSED FUNCTIONS IN HERE

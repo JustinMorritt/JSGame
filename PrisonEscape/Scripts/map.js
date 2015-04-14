@@ -147,7 +147,7 @@
     function shuffleSpawns(array)
     {
       
-        var currentIndex = array.length, temporaryValue, randomIndex;
+        var currentIndex = 20, temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex)

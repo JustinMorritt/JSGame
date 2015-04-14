@@ -170,7 +170,7 @@
         //IF CORRECTION APPLY IT ...
         if (collisionCorrection.x != 0 || collisionCorrection.y != 0)
         {
-            console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
+            //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
             x += collisionCorrection.x;
             y += collisionCorrection.y;
         }

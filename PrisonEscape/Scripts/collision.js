@@ -27,15 +27,14 @@
 
             if (overLapX < overLapY)
             {
-
                 if (A.x > B.x)
                 {
-                    console.log("Collision on right of block");
+                    //console.log("Collision on right of block");
                     return new Victor(overLapX, 0);
                 }
                 else
                 {
-                    console.log("Collision on left of block");
+                   // console.log("Collision on left of block");
                     return new Victor(-overLapX, 0);
                 }
             }
@@ -43,28 +42,19 @@
                 //console.log("Collision ON Y" + overLapX);
                 if (A.y > B.y)
                 {
-                    console.log("Collision on bot of block");
+                    //console.log("Collision on bot of block");
                     return new Victor(0, overLapY);
                 }
                 else
                 {
-                    console.log("Collision on top of block");
+                    //console.log("Collision on top of block");
                     return new Victor(0, -overLapY);
                 }
-
             }
-
-          
         }
 
-
         return new Victor(0, 0); //if there is no collision
-
     }
-
-
-
-
 
     return {
         collisionCheck: collisionCheck

@@ -146,21 +146,6 @@
 
 
 
-        //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
-        if (x - pWidth / 2 < 0) {
-            x = pWidth / 2;
-        }
-        if (y - pHeight / 2 < 0) {
-            y = pHeight / 2;
-        }
-        if (x + (pWidth * 1.5) > worldWidth) {
-            x = worldWidth - (pWidth * 1.5);
-        }
-        if (y + (pHeight * 1.5) > worldHeight) {
-            y = worldHeight - (pHeight * 1.5);
-        }
-
-
 
         var collisionCorrection = new Victor(0, 0);
         var temp = new Victor(0, 0);
@@ -183,22 +168,13 @@
         }
 
 
-
-
-
-
-
         //ATTEMPT TO MOVE NOW 
         if (collisionCorrection.x != 0 || collisionCorrection.y != 0)
         {
             //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
             x += collisionCorrection.x;
             y += collisionCorrection.y;
-        } 
-        
-        //add Correction if 0 then no Correction
-   
-        //console.log("On tile: " + onTile.x + " " + onTile.y);
+        }
 
         //DECELERATION
         if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
@@ -206,7 +182,13 @@
         if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
         if (slowDown.down)  { vy -= slowDownSpeed; if (vy < 0) { slowDown.down  = false; vy = 0 } }
 
-    
+        //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
+        if (x - pWidth / 2 < 0)                 {x = pWidth / 2;}
+        if (y - pHeight / 2 < 0)                {y = pHeight / 2;}
+        if (x + (pWidth * 1.5) > worldWidth)    {x = worldWidth - (pWidth * 1.5);}
+        if (y + (pHeight * 1.5) > worldHeight)  {y = worldHeight - (pHeight * 1.5);}
+
+        //console.log("On tile: " + onTile.x + " " + onTile.y);
     }
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
@@ -230,17 +212,27 @@
     function possibleCollisionBlocks()
     {
         pColBlocks = []; //Empty Current
-        pColBlocks[0] = new Victor(onTile.x - 1, onTile.y - 1);     //Topleft
-        pColBlocks[1] = new Victor(onTile.x + 1, onTile.y - 1);     //TopRight
-        pColBlocks[2] = new Victor(onTile.x - 1, onTile.y + 1);     //BotLeft
+        //CHECK IF ITS OFF MAP GRID < 0
+        if (onTile.x - 1 <= 0 || onTile.y - 1 <= 0)
+        {
+            pColBlocks[0] = new Victor(onTile.x, onTile.y);         //Topleft
+            pColBlocks[2] = new Victor(onTile.x, onTile.y);         //BotLeft
+            pColBlocks[4] = new Victor(onTile.x, onTile.y);         //Left
+            pColBlocks[6] = new Victor(onTile.x, onTile.y);         //Above
+            pColBlocks[1] = new Victor(onTile.x, onTile.y);         //TopRight
+        }
+        else
+        {
+            pColBlocks[1] = new Victor(onTile.x + 1, onTile.y - 1); //TopRight
+            pColBlocks[0] = new Victor(onTile.x - 1, onTile.y - 1); //Topleft
+            pColBlocks[2] = new Victor(onTile.x - 1, onTile.y + 1); //BotLeft
+            pColBlocks[4] = new Victor(onTile.x - 1, onTile.y    ); //Left
+            pColBlocks[6] = new Victor(onTile.x,     onTile.y - 1); //Above
+        }
         pColBlocks[3] = new Victor(onTile.x + 1, onTile.y + 1);     //BotRight
-
-        pColBlocks[4] = new Victor(onTile.x - 1, onTile.y);         //Left
-        pColBlocks[5] = new Victor(onTile.x + 1, onTile.y);         //Right
-        pColBlocks[6] = new Victor(onTile.x, onTile.y - 1);         //Above
-        pColBlocks[7] = new Victor(onTile.x, onTile.y + 1);         //Below
-
-        pColBlocks[8] = new Victor(onTile.x, onTile.y);             //Your Current Tile
+        pColBlocks[5] = new Victor(onTile.x + 1, onTile.y    );     //Right
+        pColBlocks[7] = new Victor(onTile.x,     onTile.y + 1);     //Below
+        pColBlocks[8] = new Victor(onTile.x,     onTile.y    );     //Your Current Tile
     }
     
     function dPosCB()  //DISPLAY POSSIBLE COLLISION BLOCKS

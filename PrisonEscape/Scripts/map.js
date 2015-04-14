@@ -86,8 +86,8 @@
                         var Y   = y * Height;
                         var Hw  = Width / 2;
                         var Hh  = Height / 2;
-                        var Cx  = X + Hw;
-                        var Cy  = Y + Hh;
+                        var Cx  = X + 32;
+                        var Cy  = Y + 32;
                         
                         collision[x][y]={   
                                             X:          X,              //For 32 tile width
@@ -105,7 +105,7 @@
             }
         }
         //console.log("cor->CX:" + collision[0].Cx + " CY:" + collision[0].Cy + " MAG: " + collision[0].Mag);
-        console.log("Total Collision Blocks: " + colBlockNum);
+        //console.log("Total Collision Blocks: " + colBlockNum);
         console.log("Total Blocks: " + totalTiles);
         //console.log("1st element" + collision[0].X + "x" + collision[0].Y);
     }

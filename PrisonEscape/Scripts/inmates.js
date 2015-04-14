@@ -51,6 +51,8 @@
             Sprite = new Image();
             Sprite.src = "Images/$Char"+ i +".png";
 
+            var randResp = prison.math.randomRange(20, 70);
+
             var newInmate = {   
                 sx: 0,
                 sy: 0,
@@ -63,8 +65,8 @@
                 sdspeed: 40,                                    //SlowDownSpeed
                 name: inmateNames[i],
                 sprite: Sprite,
-                health: 100,
-                respect: 100                                   //Decrease Respect when player bumps into them  if no respect HURT player
+                health: 70,
+                respect: randResp                                   //Decrease Respect when player bumps into them  if no respect HURT player
             }
             prison.map.shiftSpawn();
             inmatesA.push(newInmate);
@@ -76,6 +78,7 @@
     {
         for (var i = 0 ; i < numInmates; i++)
         {
+
            // inmatesA[i].pos.x++;
         }
     }
@@ -89,6 +92,23 @@
 
             ctx.save();
             //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
+
+            //DRAW NAME
+            ctx.textAlign = 'center'; ctx.font = '10pt Calibri';
+            ctx.fillText(inmatesA[i].name, newX + 16, newY - 16);
+
+            //DRAW HEALTH
+            ctx.beginPath(); ctx.rect(newX-16, newY - 14, inmatesA[i].health, 6);
+            ctx.fillStyle = 'red'; ctx.fill(); ctx.stroke();
+
+            //DRAW RESPECT
+            ctx.beginPath(); ctx.rect(newX - 16, newY - 6, inmatesA[i].respect, 6);
+            ctx.fillStyle = 'blue'; ctx.fill(); ctx.stroke();
+
+            //BOXES AROUND HP AND RESP
+            ctx.beginPath(); ctx.rect(newX - 16, newY - 14, 70, 6); ctx.stroke();
+            ctx.beginPath(); ctx.rect(newX - 16, newY - 6, 70, 6);  ctx.stroke();
+
             ctx.drawImage(
                 inmatesA[i].sprite,
                 inmatesA[i].sx,
@@ -112,7 +132,7 @@
         {
             num++;
             console.log("Inmate " + num + " Name: " + inmatesA[i].name);
-            console.log("Inmate " + num + " Pos: " + inmatesA[i].pos.x + " " + inmatesA[i].pos.y);
+            console.log("Inmate " + num + " Pos: " + inmatesA[i].onT.x + " " + inmatesA[i].onT.y);
         }
     }
 

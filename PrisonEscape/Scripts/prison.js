@@ -161,3 +161,26 @@ var prison = (function ()
 	
 })();
 
+
+prison.math = (function () {
+/**
+ * Radom number range
+ */
+function randomRange(minVal, maxVal)
+{
+    return Math.floor(Math.random() * (maxVal - minVal - 1)) + minVal;
+}
+
+/**
+ * Clamp value between range
+ */
+function clampRange(val, min, max)
+{
+    return (val + 1) / 2 * (max - min) + min;
+}
+
+return{
+    randomRange: randomRange,
+    clampRange: clampRange
+};
+})();

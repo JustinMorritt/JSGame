@@ -41,7 +41,7 @@
        // var spawnPos = prison.map.getSpawns();
        // var index = array.indexOf(5);
         x                   = 1000//spawnPos[0].x; //USE THIS TO GRAB A RANDOM SPAWN POSITION
-        y                   = 1000//spawnPos[0].y;
+        y                   = 1000//spawnPos[0].y; prison.map.shiftSpawn();
         vx                  = 0;
         vy                  = 0;
         center              = new Victor(0, 0);
@@ -60,7 +60,7 @@
 
         playerSprite = new Image();
         playerSprite.addEventListener("load", callback, false);
-        playerSprite.src ="Images/$Char2.png";
+        playerSprite.src ="Images/$Char.png";
 
         //GET ARRAY OF COLLISION BLOCKS 
         collsionBlocks = prison.map.getCollisions();

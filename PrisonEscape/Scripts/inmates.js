@@ -48,9 +48,8 @@
 
         for (var i = 0 ; i < numInmates; i ++)
         {
-            //Sprite = new Image();
-            //Sprite.addEventListener("load", callback, false);
-            //Sprite.src = "Images/$Char"+ i +".png";
+            Sprite = new Image();
+            Sprite.src = "Images/$Char"+ i +".png";
 
             var newInmate = {   
                 sx: 0,
@@ -63,12 +62,12 @@
                 accel: 20,                                      //Acceleration
                 sdspeed: 40,                                    //SlowDownSpeed
                 name: inmateNames[i],
-               //sprite: Sprite,
+                sprite: Sprite,
                 health: 100,
                 respect: 100                                   //Decrease Respect when player bumps into them  if no respect HURT player
             }
-            spawnPos.shift();
-           // inmates.push()
+            prison.map.shiftSpawn();
+            inmatesA.push(newInmate);
         }
     }
 
@@ -81,11 +80,14 @@
 
     }
 
-    function seeInmateStats(i)
+    function seeInmateStats()
     {
+        var num = 0;
         for (var i = 0 ; i < numInmates; i++)
         {
-            console.log("Inmate Name: " + inmatesA[i].name);
+            num++;
+            console.log("Inmate " + num + " Name: " + inmatesA[i].name);
+            console.log("Inmate " + num + " Pos: " + inmatesA[i].pos.x + " " + inmatesA[i].pos.y);
         }
     }
 

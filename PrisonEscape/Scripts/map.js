@@ -84,7 +84,7 @@
                     case 0:
                         break;
                     case 12:
-                        spawns1d.push(new Victor(X * Width, Y * Height));
+                        spawns1d.push(new Victor(x * Width, y * Height));
                         break;
                 }
                 switch (walls[y][x])

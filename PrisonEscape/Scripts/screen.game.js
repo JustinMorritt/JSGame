@@ -1,7 +1,9 @@
 ﻿prison.screens["game-screen"] = (function () {
     var firstRun = true, player
      paused = false;
-
+     var invents = ["#game-screen .invent1", "#game-screen .invent2", "#game-screen .invent3", "#game-screen .invent4", "#game-screen .invent5", "#game-screen .invent6", "#game-screen .invent7",
+         "#game-screen .invent8", "#game-screen .invent9", "#game-screen .invent10", "#game-screen .invent11", "#game-screen .invent12", "#game-screen .invent13", "#game-screen .invent14", "#game-screen .invent15",
+     "#game-screen .gear1", "#game-screen .gear2", "#game-screen .gear3"]
 
     function run() {
         if (firstRun) {
@@ -226,44 +228,11 @@
             overlayC.style.display = "none";
             overlayP.style.display = "none";
 
-
-            overlaya1 = dom.$("#game-screen .invent1")[0];
-            overlaya1.style.display = "block";
-            overlaya2 = dom.$("#game-screen .invent2")[0];
-            overlaya2.style.display = "block";
-            overlaya3 = dom.$("#game-screen .invent3")[0];
-            overlaya3.style.display = "block";
-            overlaya4 = dom.$("#game-screen .invent4")[0];
-            overlaya4.style.display = "block";
-            overlaya5 = dom.$("#game-screen .invent5")[0];
-            overlaya5.style.display = "block";
-            overlaya6 = dom.$("#game-screen .invent6")[0];
-            overlaya6.style.display = "block";
-            overlaya7 = dom.$("#game-screen .invent7")[0];
-            overlaya7.style.display = "block";
-            overlaya8 = dom.$("#game-screen .invent8")[0];
-            overlaya8.style.display = "block";
-            overlaya9 = dom.$("#game-screen .invent9")[0];
-            overlaya9.style.display = "block";
-            overlaya10 = dom.$("#game-screen .invent10")[0];
-            overlaya10.style.display = "block";
-            overlaya11 = dom.$("#game-screen .invent11")[0];
-            overlaya11.style.display = "block";
-            overlaya12 = dom.$("#game-screen .invent12")[0];
-            overlaya12.style.display = "block";
-            overlaya13 = dom.$("#game-screen .invent13")[0];
-            overlaya13.style.display = "block";
-            overlaya14 = dom.$("#game-screen .invent14")[0];
-            overlaya14.style.display = "block";
-            overlaya15 = dom.$("#game-screen .invent15")[0];
-            overlaya15.style.display = "block";
-            overlayG1 = dom.$("#game-screen .gear1")[0];
-            overlayG1.style.display = "block";
-            overlayG2 = dom.$("#game-screen .gear2")[0];
-            overlayG2.style.display = "block";
-            overlayG3 = dom.$("#game-screen .gear3")[0];
-            overlayG3.style.display = "block";
-
+            for (var i = 0; i < invents.length; i++)
+            {
+                overlaya = dom.$(invents[i])[0];
+                overlaya.style.display = "block";
+            }
 
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
@@ -282,42 +251,11 @@
             overlayI.style.display = "none";
             overlayP.style.display = "none";
 
-            overlaya1 = dom.$("#game-screen .invent1")[0];
-            overlaya1.style.display = "block";
-            overlaya2 = dom.$("#game-screen .invent2")[0];
-            overlaya2.style.display = "block";
-            overlaya3 = dom.$("#game-screen .invent3")[0];
-            overlaya3.style.display = "block";
-            overlaya4 = dom.$("#game-screen .invent4")[0];
-            overlaya4.style.display = "block";
-            overlaya5 = dom.$("#game-screen .invent5")[0];
-            overlaya5.style.display = "block";
-            overlaya6 = dom.$("#game-screen .invent6")[0];
-            overlaya6.style.display = "block";
-            overlaya7 = dom.$("#game-screen .invent7")[0];
-            overlaya7.style.display = "block";
-            overlaya8 = dom.$("#game-screen .invent8")[0];
-            overlaya8.style.display = "block";
-            overlaya9 = dom.$("#game-screen .invent9")[0];
-            overlaya9.style.display = "block";
-            overlaya10 = dom.$("#game-screen .invent10")[0];
-            overlaya10.style.display = "block";
-            overlaya11 = dom.$("#game-screen .invent11")[0];
-            overlaya11.style.display = "block";
-            overlaya12 = dom.$("#game-screen .invent12")[0];
-            overlaya12.style.display = "block";
-            overlaya13 = dom.$("#game-screen .invent13")[0];
-            overlaya13.style.display = "block";
-            overlaya14 = dom.$("#game-screen .invent14")[0];
-            overlaya14.style.display = "block";
-            overlaya15 = dom.$("#game-screen .invent15")[0];
-            overlaya15.style.display = "block";
-            overlayG1 = dom.$("#game-screen .gear1")[0];
-            overlayG1.style.display = "block";
-            overlayG2 = dom.$("#game-screen .gear2")[0];
-            overlayG2.style.display = "block";
-            overlayG3 = dom.$("#game-screen .gear3")[0];
-            overlayG3.style.display = "block";
+
+            for (var i = 0; i < invents.length; i++) {
+                overlaya = dom.$(invents[i])[0];
+                overlaya.style.display = "block";
+            }
 
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
@@ -340,43 +278,11 @@
         backOL.style.display = "none";
 
 
+        for (var i = 0; i < invents.length; i++) {
+            overlaya = dom.$(invents[i])[0];
+            overlaya.style.display = "none";
+        }
 
-        overlaya1 = dom.$("#game-screen .invent1")[0];
-        overlaya1.style.display = "none";
-        overlaya2 = dom.$("#game-screen .invent2")[0];
-        overlaya2.style.display = "none";
-        overlaya3 = dom.$("#game-screen .invent3")[0];
-        overlaya3.style.display = "none";
-        overlaya4 = dom.$("#game-screen .invent4")[0];
-        overlaya4.style.display = "none";
-        overlaya5 = dom.$("#game-screen .invent5")[0];
-        overlaya5.style.display = "none";
-        overlaya6 = dom.$("#game-screen .invent6")[0];
-        overlaya6.style.display = "none";
-        overlaya7 = dom.$("#game-screen .invent7")[0];
-        overlaya7.style.display = "none";
-        overlaya8 = dom.$("#game-screen .invent8")[0];
-        overlaya8.style.display = "none";
-        overlaya9 = dom.$("#game-screen .invent9")[0];
-        overlaya9.style.display = "none";
-        overlaya10 = dom.$("#game-screen .invent10")[0];
-        overlaya10.style.display = "none";
-        overlaya11 = dom.$("#game-screen .invent11")[0];
-        overlaya11.style.display = "none";
-        overlaya12 = dom.$("#game-screen .invent12")[0];
-        overlaya12.style.display = "none";
-        overlaya13 = dom.$("#game-screen .invent13")[0];
-        overlaya13.style.display = "none";
-        overlaya14 = dom.$("#game-screen .invent14")[0];
-        overlaya14.style.display = "none";
-        overlaya15 = dom.$("#game-screen .invent15")[0];
-        overlaya15.style.display = "none";
-        overlayG1 = dom.$("#game-screen .gear1")[0];
-        overlayG1.style.display = "none";
-        overlayG2 = dom.$("#game-screen .gear2")[0];
-        overlayG2.style.display = "none";
-        overlayG3 = dom.$("#game-screen .gear3")[0];
-        overlayG3.style.display = "none";
 
         paused = false;
         prison.schedule.setPaused(paused);

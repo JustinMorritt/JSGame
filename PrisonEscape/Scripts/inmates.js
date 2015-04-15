@@ -49,8 +49,8 @@
                 v: new Victor(0, 0),                                //Velocity
                 c: new Victor(0, 0),                                //Center
                 onT: new Victor(0, 0),                              //On Tile
-                speed: 20,                                          //Speed
-                accel: 20,                                          //Acceleration
+                speed: 150,                                          //Speed
+                accel: 9,                                           //Acceleration
                 sdspeed: 40,                                        //SlowDownSpeed
                 name: inmateNames[i],
                 sprite: Sprite,
@@ -68,9 +68,9 @@
     {
         for (var i = 0 ; i < numInmates; i++)
         {
-            //UPDATE CENTER AND ONTILE
-            inmatesA[i].c.x = inmatesA[i].pos.x +32;
-            inmatesA[i].c.y = inmatesA[i].pos.y +32;
+            //UPDATE ONTILE
+            inmatesA[i].c.x = inmatesA[i].pos.x + 32;
+            inmatesA[i].c.y = inmatesA[i].pos.y + 32;
             inmatesA[i].onT.x = Math.round(inmatesA[i].c.x / 32); inmatesA[i].onT.y = Math.round(inmatesA[i].c.y / 32);
             //UPDATE POSSIBLE COLLISION BLOCKS
             possibleCollisionBlocks(inmatesA[i]);
@@ -79,28 +79,40 @@
             switch(inmatesA[i].dir)
             {
                 //UP
-                case 0: if (inmatesA[i].v.y != -inmatesA[i].speed) { inmatesA[i].v.y -= inmatesA[i].accel; if (inmatesA[i].v.y < -inmatesA[i].speed) { inmatesA[i].v.y = -inmatesA[i].speed } } break;
+                case 0: if (inmatesA[i].v.y != inmatesA[i].speed * -1) { inmatesA[i].v.y -= inmatesA[i].accel;} if (inmatesA[i].v.y < inmatesA[i].speed * -1) { inmatesA[i].v.y = inmatesA[i].speed * -1; } 
+                    break;
                 //UPRIGHT
-                case 1: if (inmatesA[i].v.y != -inmatesA[i].speed) { inmatesA[i].v.y -= inmatesA[i].accel; if (inmatesA[i].v.y < -inmatesA[i].speed) { inmatesA[i].v.y = -inmatesA[i].speed } }
-                        if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel; if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed } }
+                case 1: if (inmatesA[i].v.y != inmatesA[i].speed * -1) { inmatesA[i].v.y -= inmatesA[i].accel;} if (inmatesA[i].v.y < inmatesA[i].speed * -1) { inmatesA[i].v.y = inmatesA[i].speed * -1;} 
+                    if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel;} if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed; } 
                          break;
                 //RIGHT
-                case 2: if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel; if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed } } break;
+                case 2: if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel;} if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed; } 
+                    break;
                 //DOWN RIGHT
-                case 3: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed } }
-                        if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel; if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed } }
+                case 3: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; } if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed; }
+                    if (inmatesA[i].v.x != inmatesA[i].speed) { inmatesA[i].v.x += inmatesA[i].accel;} if (inmatesA[i].v.x > inmatesA[i].speed) { inmatesA[i].v.x = inmatesA[i].speed; } 
                     break;
                 //DOWN
-                case 4: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed } } break;
+                case 4: if (inmatesA[i].v.y != inmatesA[i].speed)
+                            {
+                                inmatesA[i].v.y += inmatesA[i].accel;
+                            }
+                            if (inmatesA[i].v.y > inmatesA[i].speed)
+                            {
+                                inmatesA[i].v.y = inmatesA[i].speed;
+                            }
+                            
+                    break;
                 //DOWNLEFT
-                case 5: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel; if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed } }
-                        if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } }
+                case 5: if (inmatesA[i].v.y != inmatesA[i].speed) { inmatesA[i].v.y += inmatesA[i].accel;} if (inmatesA[i].v.y > inmatesA[i].speed) { inmatesA[i].v.y = inmatesA[i].speed; } 
+            if (inmatesA[i].v.x != inmatesA[i].speed * -1) { inmatesA[i].v.x -= inmatesA[i].accel;} if (inmatesA[i].v.x < inmatesA[i].speed * -1) { inmatesA[i].v.x = inmatesA[i].speed * -1; } 
                         break;
                 //LEFT
-                case 6: if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } } break;
+                case 6: if (inmatesA[i].v.x != inmatesA[i].speed * -1) { inmatesA[i].v.x -= inmatesA[i].accel;} if (inmatesA[i].v.x < inmatesA[i].speed * -1) { inmatesA[i].v.x = inmatesA[i].speed * -1; } 
+                    break;
                 //UPLEFT
-                case 7: if (inmatesA[i].v.y != -inmatesA[i].speed) { inmatesA[i].v.y -= inmatesA[i].accel; if (inmatesA[i].v.y < -inmatesA[i].speed) { inmatesA[i].v.y = -inmatesA[i].speed } }
-                        if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } } 
+                case 7: if (inmatesA[i].v.y != inmatesA[i].speed * -1) { inmatesA[i].v.y -= inmatesA[i].accel;} if (inmatesA[i].v.y < inmatesA[i].speed * -1) { inmatesA[i].v.y = inmatesA[i].speed * -1; } 
+                if (inmatesA[i].v.x != inmatesA[i].speed * -1) { inmatesA[i].v.x -= inmatesA[i].accel;} if (inmatesA[i].v.x < inmatesA[i].speed * -1) { inmatesA[i].v.x = inmatesA[i].speed * -1; } 
                     break;
                 //STILL 
                 case 8: if(inmatesA[i].v.x != 0) { inmatesA[i].v.x = 0;}
@@ -108,37 +120,59 @@
                     break;
             }
 
-            //ATTEMPT STEP 
+          
+
+            //ATTEMPT STEP //*******MAJOR ISSUE HERE  ONLY STEP ON X FIRST RESOLVE IT FIRST
             inmatesA[i].pos.x += (inmatesA[i].v.x * step);
-            inmatesA[i].pos.y += (inmatesA[i].v.y * step);
+            
+
+            inmatesA[i].c.x = inmatesA[i].pos.x + 32;
+            inmatesA[i].c.y = inmatesA[i].pos.y + 32;
+           
            
             //COLLISION CHECK /
-            var collisionCorrection = new Victor(0, 0);
-            var temp = new Victor(0, 0);
+            var collisionCorrectionX = new Victor(0, 0);
+            var temp1 = new Victor(0, 0);
             for (var j = 0 ; j < 9; j++) {
                 if (collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
                 {
-
-                    //console.log("****Possible Collision Block Near!****");
-                    
-                    temp = prison.collision.collisionCheck(inmatesA[i].c, collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1]);
-                    if (Math.abs(temp.x) > Math.abs(collisionCorrection.x) &&
-                        Math.abs(temp.x) > Math.abs(collisionCorrection.y) ||
-                        Math.abs(temp.y) > Math.abs(collisionCorrection.y) &&
-                        Math.abs(temp.y) > Math.abs(collisionCorrection.x)) {
-                        collisionCorrection = temp;
-                        //console.log("Temp CLone: x " + temp.x + " y " + temp.y)
-                    }
+                    temp1 = prison.collision.collisionCheck(inmatesA[i].c, collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1]);
+                    if (Math.abs(temp1.x) > Math.abs(collisionCorrectionX.x) &&
+                        Math.abs(temp1.x) > Math.abs(collisionCorrectionX.y))
+                        { collisionCorrectionX = temp1; }
                 }
             }
             //IF CORRECTION APPLY IT ...
-            if (collisionCorrection.x != 0 || collisionCorrection.y != 0) {
-                //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
-                inmatesA[i].pos.x += collisionCorrection.x;
-                inmatesA[i].pos.y += collisionCorrection.y;
-                //RANDOM NEW DIRECTION TO WALK IN 
+            if (collisionCorrectionX.x != 0)
+            {
+                inmatesA[i].pos.x += collisionCorrectionX.x;
                 randIMDir(inmatesA[i]);
             }
+            //NOW STEP ON Y AND CHECK COLLISION AND RESOLVE IT
+            inmatesA[i].pos.y += (inmatesA[i].v.y * step);
+            inmatesA[i].c.x = inmatesA[i].pos.x + 32;
+            inmatesA[i].c.y = inmatesA[i].pos.y + 32;
+
+            var collisionCorrectionY = new Victor(0, 0);
+            var temp2 = new Victor(0, 0);
+            for (var j = 0 ; j < 9; j++) {
+                if (collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+                {
+                    temp2 = prison.collision.collisionCheck(inmatesA[i].c, collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1]);
+                    if (Math.abs(temp2.y) > Math.abs(collisionCorrectionY.y) &&
+                        Math.abs(temp2.y) > Math.abs(collisionCorrectionY.x))
+                    { collisionCorrectionY = temp2; }
+                }
+            }
+            //IF CORRECTION APPLY IT ...
+            if (collisionCorrectionY.y != 0) {
+                inmatesA[i].pos.y += collisionCorrectionY.y;
+                randIMDir(inmatesA[i]);
+            }
+
+
+            //RANDOM NEW DIRECTION TO WALK IN 
+            
         }
     }
     function draw(step, ctx, xView, yView)
@@ -258,8 +292,9 @@
     }
     function randIMDir(inmate)
     {
-        var randDir = prison.math.randomRange(0, 7);
+        var randDir = Math.floor(Math.random() * 8);
         inmate.dir = randDir;
+        //console.log(randDir);
     }
     function backToCell()
     {

@@ -6,6 +6,8 @@
         inmatesA        = [],
         collsionBlocks  = [],
         inmateNames     = [],
+        pTile,
+
         DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7, STILL: 8}, 
 
     slowDown = {
@@ -29,6 +31,8 @@
 
     function spawnInmates()
     {
+      
+        
         //get spawn positions!!
         var spawnPos = prison.map.getSpawns();
 
@@ -39,7 +43,6 @@
 
             var randResp = prison.math.randomRange(20, 70);
             
-
             var newInmate = {   
                 sx: 0,
                 sy: 0,
@@ -68,6 +71,10 @@
     {
         for (var i = 0 ; i < numInmates; i++)
         {
+            //UPDATE PLAYERS BLOCK
+            setPlayerBlock();
+            playerCollision(inmatesA[i], step);
+
             //ACCELERATION
             applyDirection(inmatesA[i]);
 
@@ -116,8 +123,6 @@
             ctx.beginPath(); ctx.rect(newX - 16, newY - 14, 70, 6); ctx.stroke();
             ctx.beginPath(); ctx.rect(newX - 16, newY - 6, 70, 6); ctx.stroke();
 
-            
-
             ctx.drawImage(
                 inmatesA[i].sprite,
                 inmatesA[i].sx,
@@ -133,12 +138,29 @@
 
     }
 
-
+    function setPlayerBlock()
+    {
+        var pCenter = prison.player.getPCenter();
+        var playerTile = prison.player.getOnTile();
+        var X = pCenter-16;
+        var Y = pCenter-16;
+        var Cx = pCenter.x;
+        var Cy = pCenter.y;
+        pTile =
+        {
+            X: X,
+            Y: Y,
+            Cx: Cx,
+            Cy: Cy,
+            Type: "Player"
+        }
+    }
 
     //HELPER FUNCTIONS
     function possibleCollisionBlocks(inmate)
     {
         inmate.cBlocks = []; //Empty Current
+
         //CHECK IF ITS OFF MAP GRID < 0
         if (inmate.onT.x - 1 <= 0 || inmate.onT.y - 1 <= 0) {
             inmate.cBlocks[0] = new Victor(inmate.onT.x, inmate.onT.y);         //Topleft
@@ -158,6 +180,23 @@
         inmate.cBlocks[5] = new Victor(inmate.onT.x + 1, inmate.onT.y);         //Right
         inmate.cBlocks[7] = new Victor(inmate.onT.x,     inmate.onT.y + 1);     //Below
         inmate.cBlocks[8] = new Victor(inmate.onT.x, inmate.onT.y);             //Your Current Tile
+    }
+
+    function playerCollision(inmate , step)
+    {
+        //COLLISION CHECK /
+        var collisionCorrectionX = new Victor(0, 0);
+        var temp1 = new Victor(0, 0);
+        temp1 = prison.collision.collisionCheck(inmate.c, pTile);
+            collisionCorrectionX = temp1; 
+            inmate.pos.x += collisionCorrectionX.x;
+
+        var collisionCorrectionY = new Victor(0, 0);
+        var temp2 = new Victor(0, 0);
+   
+        temp2 = prison.collision.collisionCheck(inmate.c, pTile);
+        collisionCorrectionY = temp2;
+        inmate.pos.y += collisionCorrectionY.y;
     }
 
     function inmateCollisionCorrection(inmate, step)

@@ -2,11 +2,11 @@
 
     var numGuards,
         game,
-        sPositions = [], //Spawns
-        guardsA = [],
-        collsionBlocks = [],
-        guardNames = [],
-        DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7, STILL: 8 },
+        sPositions      = [], //Spawns
+        guardsA         = [],
+        collsionBlocks  = [],
+        guardNames      = [],
+        DIR             = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7, STILL: 8 },
 
     slowDown = {
         left: false,

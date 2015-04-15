@@ -2,9 +2,10 @@
 
     var numInmates,
         game, 
-        sPositions  = [], //Spawns
-        inmatesA    = [],
-        inmateNames = [],
+        sPositions      = [], //Spawns
+        inmatesA        = [],
+        collsionBlocks  = [],
+        inmateNames     = [],
         DIR = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7, STILL: 8},
 
     slowDown = {
@@ -22,17 +23,7 @@
         game = prison.game;
         numInmates = prison.settings.inmates;
         inmateNames = game.getInmateNames(); //Array of Random Inmate Names
-
-       /*
-        console.log("1Inmate Name:" + inmateNames[0])
-        console.log("2Inmate Name:" + inmateNames[1])
-        console.log("3Inmate Name:" + inmateNames[2])
-        console.log("4Inmate Name:" + inmateNames[3])
-        console.log("5Inmate Name:" + inmateNames[4])
-        console.log("6Inmate Name:" + inmateNames[5])
-        console.log("7Inmate Name:" + inmateNames[6])
-        */
-
+        collsionBlocks = prison.map.getCollisions();
         spawnInmates();
     }
 
@@ -47,12 +38,12 @@
             Sprite.src = "Images/$Char"+ i +".png";
 
             var randResp = prison.math.randomRange(20, 70);
-            var randDir =  prison.math.randomRange(0, 8);
+            
 
             var newInmate = {   
                 sx: 0,
                 sy: 0,
-                dir: randDir,                                       //Direction
+                dir: 4,                                             //Direction START WALKING OUT OF CELLS
                 pos: new Victor(spawnPos[0].x, spawnPos[0].y),      //Position
                 cellPos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Cell Position
                 v: new Victor(0, 0),                                //Velocity
@@ -64,7 +55,8 @@
                 name: inmateNames[i],
                 sprite: Sprite,
                 health: 70,
-                respect: randResp                                   //Decrease Respect when player bumps into them  if no respect HURT player
+                respect: randResp,                                  //Decrease Respect when player bumps into them  if no respect HURT player
+                cBlocks: []
             }
             prison.map.shiftSpawn();
             inmatesA.push(newInmate);
@@ -76,6 +68,13 @@
     {
         for (var i = 0 ; i < numInmates; i++)
         {
+            //UPDATE CENTER AND ONTILE
+            inmatesA[i].c.x = inmatesA[i].pos.x +32;
+            inmatesA[i].c.y = inmatesA[i].pos.y +32;
+            inmatesA[i].onT.x = Math.round(inmatesA[i].c.x / 32); inmatesA[i].onT.y = Math.round(inmatesA[i].c.y / 32);
+            //UPDATE POSSIBLE COLLISION BLOCKS
+            possibleCollisionBlocks(inmatesA[i]);
+
             //ACCELERATION
             switch(inmatesA[i].dir)
             {
@@ -109,8 +108,37 @@
                     break;
             }
 
+            //ATTEMPT STEP 
             inmatesA[i].pos.x += (inmatesA[i].v.x * step);
             inmatesA[i].pos.y += (inmatesA[i].v.y * step);
+           
+            //COLLISION CHECK /
+            var collisionCorrection = new Victor(0, 0);
+            var temp = new Victor(0, 0);
+            for (var j = 0 ; j < 9; j++) {
+                if (collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+                {
+
+                    //console.log("****Possible Collision Block Near!****");
+                    
+                    temp = prison.collision.collisionCheck(inmatesA[i].c, collsionBlocks[inmatesA[i].cBlocks[j].x - 1][inmatesA[i].cBlocks[j].y - 1]);
+                    if (Math.abs(temp.x) > Math.abs(collisionCorrection.x) &&
+                        Math.abs(temp.x) > Math.abs(collisionCorrection.y) ||
+                        Math.abs(temp.y) > Math.abs(collisionCorrection.y) &&
+                        Math.abs(temp.y) > Math.abs(collisionCorrection.x)) {
+                        collisionCorrection = temp;
+                        //console.log("Temp CLone: x " + temp.x + " y " + temp.y)
+                    }
+                }
+            }
+            //IF CORRECTION APPLY IT ...
+            if (collisionCorrection.x != 0 || collisionCorrection.y != 0) {
+                //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
+                inmatesA[i].pos.x += collisionCorrection.x;
+                inmatesA[i].pos.y += collisionCorrection.y;
+                //RANDOM NEW DIRECTION TO WALK IN 
+                randIMDir(inmatesA[i]);
+            }
         }
     }
     function draw(step, ctx, xView, yView)
@@ -136,9 +164,22 @@
             ctx.beginPath(); ctx.rect(newX - 16, newY - 6, inmatesA[i].respect, 6);
             ctx.fillStyle = 'blue'; ctx.fill(); ctx.stroke();
 
+            //SHADOW 
+            ctx.beginPath();
+            ctx.rect(newX+6, newY+6, 10, 10);
+            ctx.fillStyle = "red";
+            ctx.shadowColor = 'black';
+            ctx.shadowBlur = 15;
+            ctx.shadowOffsetX = 9;
+            ctx.shadowOffsetY = 1;
+            ctx.fill();
+            ctx.stroke();
+
             //BOXES AROUND HP AND RESP
             ctx.beginPath(); ctx.rect(newX - 16, newY - 14, 70, 6); ctx.stroke();
-            ctx.beginPath(); ctx.rect(newX - 16, newY - 6, 70, 6);  ctx.stroke();
+            ctx.beginPath(); ctx.rect(newX - 16, newY - 6, 70, 6); ctx.stroke();
+
+            
 
             ctx.drawImage(
                 inmatesA[i].sprite,
@@ -155,21 +196,36 @@
 
     }
 
-
-    function seeInmateStats()
+    //HELPER FUNCTIONS
+    function possibleCollisionBlocks(inmate)
     {
-        var num = 0;
-        for (var i = 0 ; i < numInmates; i++)
-        {
-            num++;
-            console.log("Inmate " + num + " Name: " + inmatesA[i].name);
-            console.log("Inmate " + num + " Pos: " + inmatesA[i].onT.x + " " + inmatesA[i].onT.y);
-        }
-    }
+        inmate.cBlocks = []; //Empty Current
 
-    //GETTERS SETTERS
+        //CHECK IF ITS OFF MAP GRID < 0
+        if (inmate.onT.x - 1 <= 0 || inmate.onT.y - 1 <= 0) {
+            inmate.cBlocks[0] = new Victor(inmate.onT.x, inmate.onT.y);         //Topleft
+            inmate.cBlocks[2] = new Victor(inmate.onT.x, inmate.onT.y);         //BotLeft
+            inmate.cBlocks[4] = new Victor(inmate.onT.x, inmate.onT.y);         //Left
+            inmate.cBlocks[6] = new Victor(inmate.onT.x, inmate.onT.y);         //Above
+            inmate.cBlocks[1] = new Victor(inmate.onT.x, inmate.onT.y);         //TopRight
+        }
+        else {
+            inmate.cBlocks[1] = new Victor(inmate.onT.x + 1, inmate.onT.y - 1); //TopRight
+            inmate.cBlocks[0] = new Victor(inmate.onT.x - 1, inmate.onT.y - 1); //Topleft
+            inmate.cBlocks[2] = new Victor(inmate.onT.x - 1, inmate.onT.y + 1); //BotLeft
+            inmate.cBlocks[4] = new Victor(inmate.onT.x - 1, inmate.onT.y);     //Left
+            inmate.cBlocks[6] = new Victor(inmate.onT.x,     inmate.onT.y - 1); //Above
+        }
+        inmate.cBlocks[3] = new Victor(inmate.onT.x + 1, inmate.onT.y + 1);     //BotRight
+        inmate.cBlocks[5] = new Victor(inmate.onT.x + 1, inmate.onT.y);         //Right
+        inmate.cBlocks[7] = new Victor(inmate.onT.x,     inmate.onT.y + 1);     //Below
+        inmate.cBlocks[8] = new Victor(inmate.onT.x, inmate.onT.y);         //Your Current Tile
+
+        //console.log(inmate.cBlocks[3].x +" " +inmate.cBlocks[3].y);
+    }
    
 
+    //GETTERS SETTERS
     function getOnTile() {
         return onTile;
     }
@@ -177,7 +233,6 @@
     {
         return pColBlocks;
     }
-
     function setSpeed(speed)
     {
         for (var i = 0 ; i < numInmates; i++)
@@ -195,14 +250,17 @@
 
     function randDir()
     {
-       
         for (var i = 0 ; i < numInmates; i++)
         {
             var randDir = prison.math.randomRange(0, 8);
             inmatesA[i].dir = randDir;
         }
     }
-
+    function randIMDir(inmate)
+    {
+        var randDir = prison.math.randomRange(0, 7);
+        inmate.dir = randDir;
+    }
     function backToCell()
     {
         for (var i = 0 ; i < numInmates; i++) {
@@ -212,7 +270,14 @@
             inmatesA[i].dir = 8;
         }
     }
-
+    function seeInmateStats() {
+        var num = 0;
+        for (var i = 0 ; i < numInmates; i++) {
+            num++;
+            console.log("Inmate " + num + " Name: " + inmatesA[i].name);
+            console.log("Inmate " + num + " On Tile: " + inmatesA[i].onT.x + " " + inmatesA[i].onT.y);
+        }
+    }
 
     return {
         //EXPOSED FUNCTIONS IN HERE

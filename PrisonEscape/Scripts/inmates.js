@@ -52,14 +52,15 @@
             var newInmate = {   
                 sx: 0,
                 sy: 0,
-                dir: randDir,                                   //Direction
-                pos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Position
-                v: new Victor(0, 0),                            //Velocity
-                c: new Victor(0, 0),                            //Center
-                onT: new Victor(0, 0),                          //On Tile
-                speed: 20,                                     //Speed
-                accel: 20,                                      //Acceleration
-                sdspeed: 40,                                    //SlowDownSpeed
+                dir: randDir,                                       //Direction
+                pos: new Victor(spawnPos[0].x, spawnPos[0].y),      //Position
+                cellPos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Cell Position
+                v: new Victor(0, 0),                                //Velocity
+                c: new Victor(0, 0),                                //Center
+                onT: new Victor(0, 0),                              //On Tile
+                speed: 20,                                          //Speed
+                accel: 20,                                          //Acceleration
+                sdspeed: 40,                                        //SlowDownSpeed
                 name: inmateNames[i],
                 sprite: Sprite,
                 health: 70,
@@ -103,7 +104,8 @@
                         if (inmatesA[i].v.x != -inmatesA[i].speed) { inmatesA[i].v.x -= inmatesA[i].accel; if (inmatesA[i].v.x < -inmatesA[i].speed) { inmatesA[i].v.x = -inmatesA[i].speed } } 
                     break;
                 //STILL 
-                case 8: if (inmatesA[i].v.x != 0 && inmatesA[i].v.y != 0) { inmatesA[i].v.x = 0; inmatesA[i].v.y = 0; }
+                case 8: if(inmatesA[i].v.x != 0) { inmatesA[i].v.x = 0;}
+                        if(inmatesA[i].v.y != 0) {  inmatesA[i].v.y = 0;}
                     break;
             }
 
@@ -166,12 +168,8 @@
     }
 
     //GETTERS SETTERS
-    function getX() {
-        return x;
-    }
-    function getY() {
-        return y;
-    }
+   
+
     function getOnTile() {
         return onTile;
     }
@@ -179,38 +177,47 @@
     {
         return pColBlocks;
     }
-    function setXY(x, y) {
-        x = x;
-        y = y;
+
+    function setSpeed(speed)
+    {
+        for (var i = 0 ; i < numInmates; i++)
+        {
+            inmatesA[i].speed = speed;
+        }
     }
-    function setSpeed(speed) {
-        pSpeed = speed;
+    function setSlowDownSpeed(speed)
+    {
+        for (var i = 0 ; i < numInmates; i++)
+        {
+            inmatesA[i].sdspeed = speed;
+        }
     }
-    function setSlowDownSpeed(speed) {
-        slowDownSpeed = speed;
+
+    function randDir()
+    {
+       
+        for (var i = 0 ; i < numInmates; i++)
+        {
+            var randDir = prison.math.randomRange(0, 8);
+            inmatesA[i].dir = randDir;
+        }
     }
-    function setVX(vx) {
-        vx = vx;
+
+    function backToCell()
+    {
+        for (var i = 0 ; i < numInmates; i++) {
+           
+            inmatesA[i].pos.x = inmatesA[i].cellPos.x;
+            inmatesA[i].pos.y = inmatesA[i].cellPos.y;
+            inmatesA[i].dir = 8;
+        }
     }
-    function setVY(vy) {
-        vy = vy;
-    }
-    function getVX() {
-        return vx;
-    }
-    function getVY() {
-        return vy;
-    }
+
 
     return {
         //EXPOSED FUNCTIONS IN HERE
-        setVX: setVX,
-        setVY: setVY,
-        getVX: getVX,
-        getVY: getVY,
-        getY: getY,
-        getX: getX,
-        setXY: setXY,
+        randDir: randDir,
+        backToCell: backToCell,
         setSpeed: setSpeed,
         setSlowDownSpeed: setSlowDownSpeed,
         seeInmateStats: seeInmateStats,

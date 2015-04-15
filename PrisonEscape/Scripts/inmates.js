@@ -197,6 +197,18 @@
         temp2 = prison.collision.collisionCheck(inmate.c, pTile);
         collisionCorrectionY = temp2;
         inmate.pos.y += collisionCorrectionY.y;
+        if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0 )
+        {
+            if (inmate.respect != 0)
+            {
+                inmate.respect-=2;
+            }else
+            {
+                //INJURE PLAYER
+            }
+            
+        }
+           
     }
 
     function inmateCollisionCorrection(inmate, step)

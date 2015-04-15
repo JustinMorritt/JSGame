@@ -199,11 +199,12 @@
         inmate.pos.y += collisionCorrectionY.y;
         if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0 )
         {
-            if (inmate.respect != 0)
+            if (inmate.respect > 0)
             {
                 inmate.respect-=2;
             }else
             {
+                inmate.respect = 0;
                 //INJURE PLAYER
             }
             

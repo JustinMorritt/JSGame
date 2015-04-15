@@ -209,7 +209,7 @@
 
         //console.log("On tile: " + onTile.x + " " + onTile.y);
 		
-		/*Animation*/
+		/*Animation
 		if(vx === 0)
 		{
 			setRange("");
@@ -229,7 +229,7 @@
 		if(controls.down)
 		{
 			setRange("Player Walk Down");
-		} 
+		} */
 	}
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
@@ -248,7 +248,7 @@
         context.restore();
         //console.log("DREW PLAYER X:" +x+ " Y: " +y );
 		
-		/*Animation */
+		/*Animation 
 		var currentFrame = 0;
 		for(var i = 0; i < _ranges.length; ++i)
 		{
@@ -267,7 +267,7 @@
 					_x, 
 					_y, 
 					_width, 
-					_height);
+					_height);*/
     }
 
     //HELPER FUNCTIONS
@@ -355,7 +355,7 @@
     }
  
 	
- /*Character Animation */
+ /*Character Animation 
 
 function playerFrame(xPos, yPos, w, h)
 {
@@ -410,10 +410,10 @@ function AnimationRange(rangeName, first, end)
 		_end = end;
 	};
 	
-	/*function setRange(rangeID)
-	{
-		setRange(rangeID);
-	};*/
+	//function setRange(rangeID)
+	//{
+	//	setRange(rangeID);
+	//};
 
 	function getEnd()
 	{
@@ -526,7 +526,7 @@ addRange("Player Walk Down", 1, 4);
 addFrame(0, 65, 32, 32);
 addFrame(33, 64, 32, 32);
 addFrame(65, 65, 32, 32);
-
+*/
 
 
     return {

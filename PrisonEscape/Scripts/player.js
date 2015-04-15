@@ -128,13 +128,10 @@
     function update(step, worldWidth, worldHeight)
     {
         // parameter step is the time between frames ( in seconds )
-
+        //Update Center Vector
+        center.x = x + 16; center.y = y + 16;
+        onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
         
-     
-
-        //Update Potential Collision Blocks 
-        possibleCollisionBlocks();
-
         //ACCELERATION
         if (controls.left)  { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
         if (controls.up)    { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
@@ -142,12 +139,10 @@
         if (controls.down)  { if (vy != pSpeed)  { vy += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } }
 
         x += vx * step;
-        y += vy * step;
-
-        //Update Center Vector
         center.x = x + 16; center.y = y + 16;
-        onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
 
+        //Update Potential Collision Blocks 
+        possibleCollisionBlocks();
 
         var collisionCorrection = new Victor(0, 0);
         var temp = new Victor(0, 0);
@@ -159,20 +154,41 @@
                 //console.log("****Possible Collision Block Near!****");
                 temp = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
                 if (Math.abs(temp.x) > Math.abs(collisionCorrection.x) &&
-                    Math.abs(temp.x) > Math.abs(collisionCorrection.y) ||
-                    Math.abs(temp.y) > Math.abs(collisionCorrection.y) &&
-                    Math.abs(temp.y) > Math.abs(collisionCorrection.x)){
+                    Math.abs(temp.x) > Math.abs(collisionCorrection.y))
+                {
                     collisionCorrection = temp;
-                    //console.log("Temp CLone: x " + temp.x + " y " + temp.y)
-                }
+                } 
             }
         }
         //IF CORRECTION APPLY IT ...
-        if (collisionCorrection.x != 0 || collisionCorrection.y != 0)
+        if (collisionCorrection.x != 0 )
         {
-            //console.log("attempting to correct!.." + collisionCorrection.x + " " + collisionCorrection.y)
             x += collisionCorrection.x;
-            y += collisionCorrection.y;
+        }
+
+        y += vy * step;
+        center.x = x + 16;
+        center.y = y + 16;
+
+        var collisionCorrection2 = new Victor(0, 0);
+        var temp2 = new Victor(0, 0);
+
+        for (var i = 0 ; i < 9; i++)
+        {
+            if (collsionBlocks[pColBlocks[i].x-1][pColBlocks[i].y-1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+            {
+                //console.log("****Possible Collision Block Near!****");
+                temp2 = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
+                if ( Math.abs(temp2.y) > Math.abs(collisionCorrection2.y) &&
+                     Math.abs(temp2.y) > Math.abs(collisionCorrection2.x))
+                {
+                    collisionCorrection2 = temp2;
+                } 
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection2.y != 0) {
+            y += collisionCorrection2.y;
         }
 
         //DECELERATION
@@ -329,6 +345,11 @@
     function getVY() {
         return vy;
     }
+    function getPCenter()
+    {
+        return center;
+    }
+ 
 	
  /*Character Animation 
 
@@ -485,7 +506,9 @@ addFrame(65, 65, 32, 32);
     return {
         //EXPOSED FUNCTIONS IN HERE
         setVX           :setVX,
-        setVY           :setVY,
+        setVY           : setVY,
+        getPCenter      : getPCenter,
+        getOnTile       : getOnTile,
         getVX           :getVX,
         getVY           :getVY,
         getY            :getY,

@@ -3,6 +3,8 @@
         y,
         vx,
         vy,
+		sx,
+		sy,
         pSpeed,
         pWidth,
         pHeight,
@@ -44,6 +46,8 @@
         y                   = 1000//spawnPos[0].y; prison.map.shiftSpawn();
         vx                  = 0;
         vy                  = 0;
+		sx					= 32;
+		sy					= 0;
         center              = new Victor(0, 0);
         onTile              = new Victor(0, 0);
         acceleration        = 20;
@@ -205,7 +209,7 @@
 
         //console.log("On tile: " + onTile.x + " " + onTile.y);
 		
-		/*Animation
+		/*Animation*/
 		if(vx === 0)
 		{
 			setRange("");
@@ -225,7 +229,7 @@
 		if(controls.down)
 		{
 			setRange("Player Walk Down");
-		}*/ 
+		} 
 	}
  
     function draw(step, context, xView, yView)// camera.xView, camera.yView
@@ -239,12 +243,12 @@
         var newX = (x-pWidth/2) - xView;
         var newY = (y-pHeight/2) - yView;
 
-        context.drawImage(playerSprite, 32, 0, 32, 32, newX, newY, pWidth, pHeight);
+        context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
         
         context.restore();
         //console.log("DREW PLAYER X:" +x+ " Y: " +y );
 		
-		/*Animation 
+		/*Animation */
 		var currentFrame = 0;
 		for(var i = 0; i < _ranges.length; ++i)
 		{
@@ -263,7 +267,7 @@
 					_x, 
 					_y, 
 					_width, 
-					_height);*/
+					_height);
     }
 
     //HELPER FUNCTIONS
@@ -351,7 +355,7 @@
     }
  
 	
- /*Character Animation 
+ /*Character Animation */
 
 function playerFrame(xPos, yPos, w, h)
 {
@@ -405,6 +409,11 @@ function AnimationRange(rangeName, first, end)
 		_first = first
 		_end = end;
 	};
+	
+	/*function setRange(rangeID)
+	{
+		setRange(rangeID);
+	};*/
 
 	function getEnd()
 	{
@@ -441,7 +450,7 @@ function AnimationRange(rangeName, first, end)
 };
 
 var _frames = new Array();
-_frames.push(new playerFrame(sx, sy, sw, sh));
+_frames.push(new playerFrame(sx, sy, 32, 32));
 
 var _ranges = new Array();
 _ranges.push(new AnimationRange("", 0, 1));
@@ -465,11 +474,11 @@ function setRange(rangeId)
 	}
 };
 
-function setRangeFrames(rangename, start, end)
+function setRangeFrames(rangeName, start, end)
 {
 	for(var i = 0; i < _ranges.length; ++i)
 	{
-		if(rangename == _ranges[i].getName())
+		if(rangeName == _ranges[i].getName())
 		{
 			_ranges[i].setRange(start, end);
 			return;
@@ -496,11 +505,28 @@ function addFrame(xPos, yPos, w, h)
 	_frames.push(new playerFrame(xPos, yPos, w, h));
 };
 
+setRangeFrames("", 0, 1);
+
 addRange("Player Walk Left", 1, 4);
 addFrame(0, 65, 32, 32);
 addFrame(33, 64, 32, 32);
 addFrame(65, 65, 32, 32);
-*/
+
+addRange("Player Walk Right", 1, 4);
+addFrame(0, 65, 32, 32);
+addFrame(33, 64, 32, 32);
+addFrame(65, 65, 32, 32);
+
+addRange("Player Walk Up", 1, 4);
+addFrame(0, 65, 32, 32);
+addFrame(33, 64, 32, 32);
+addFrame(65, 65, 32, 32);
+
+addRange("Player Walk Down", 1, 4);
+addFrame(0, 65, 32, 32);
+addFrame(33, 64, 32, 32);
+addFrame(65, 65, 32, 32);
+
 
 
     return {

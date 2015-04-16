@@ -98,6 +98,10 @@
             overlayI = dom.$("#game-screen .inventory-overlay")[0];
             overlayC.style.display = "none";
             overlayI.style.display = "none";
+            dom.$("#game-screen .health ")[0].style.display = "none";
+            //dom.$("#game-screen .healthbar")[0].style.display = "none";
+            dom.$("#game-screen .game-info .name span")[0].style.display = "none";
+  
 
         overlay = dom.$("#game-screen .pause-overlay")[0];
         overlay.style.display = "block";
@@ -123,6 +127,10 @@
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
 
+            dom.$("#game-screen .health ")[0].style.display = "none";
+            //dom.$("#game-screen .healthbar")[0].style.display = "none";
+            dom.$("#game-screen .game-info .name span")[0].style.display = "none";
+
         overlay = dom.$("#game-screen .inventory-overlay")[0];
         overlay.style.display = "block";
         paused = true;
@@ -143,6 +151,10 @@
                 overlaya.style.display = "block";
             }
 
+            dom.$("#game-screen .health ")[0].style.display = "none";
+            //dom.$("#game-screen .healthbar")[0].style.display = "none";
+            dom.$("#game-screen .game-info .name span")[0].style.display = "none";
+
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
 
@@ -162,6 +174,10 @@
         overlayI.style.display = "none";
         overlayP.style.display = "none";
         backOL.style.display = "none";
+
+        dom.$("#game-screen .health ")[0].style.display = "block";
+       // dom.$("#game-screen .healthbar")[0].style.display = "block";
+        dom.$("#game-screen .game-info .name span")[0].style.display = "block";
 
 
         for (var i = 0; i < invents.length; i++) {

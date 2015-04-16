@@ -144,8 +144,8 @@
         var dom = prison.dom;
         var $ = dom.$;
         p = getPLayerHP();
-        $("#game-screen .game-info .health ")[0].innerHTML = "Health: " + getPLayerHP();
-        $("#game-screen .game-info .healthbar")[0].style.width = p + "%";
+        $("#game-screen .health ")[0].innerHTML = "Health: " + getPLayerHP();
+        //$("#game-screen .healthbar")[0].style.width = p + "%";
         // parameter step is the time between frames ( in seconds )
         //Update Center Vector
         center.x = x + 16; center.y = y + 16;

@@ -175,6 +175,7 @@
 
         //BACKGROUND /MAP
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
+        map.drawItems(ctx, sx, sy);
 
         // INMATES/GUARDS/PLAYER DRAW
         inmates.draw(STEP, ctx, sx, sy);

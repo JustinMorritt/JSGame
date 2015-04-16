@@ -371,6 +371,24 @@
         if (pHP < 0) { pHP = 0; }   //PLAYER DIES TRIGGER DEATH SEQUENCE
         console.log("Ouch you Asshole! .. hp: "  + pHP);
     }
+    function getPlayerOBJ()
+    {
+            var pCenter = getPCenter();
+            var playerTile = getOnTile();
+            var X = pCenter - 16;
+            var Y = pCenter - 16;
+            var Cx = pCenter.x;
+            var Cy = pCenter.y;
+            pTile =
+            {
+                X: X,
+                Y: Y,
+                Cx: Cx,
+                Cy: Cy,
+                Type: "Player"
+            }
+            return pTile;
+    }
 	
  /*Character Animation 
 
@@ -552,6 +570,7 @@ addFrame(65, 65, 32, 32);
         setVY           :setVY,
         pLayerHP        :pLayerHP,
         getPCenter      :getPCenter,
+        getPlayerOBJ    :getPlayerOBJ,
         getOnTile       :getOnTile,
         getVX           :getVX,
         getVY           :getVY,

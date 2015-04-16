@@ -69,10 +69,10 @@
 
     function update(step, worldWidth, worldHeight)
     {
+        //UPDATE PLAYERS BLOCK
+        setPlayerBlock();
         for (var i = 0 ; i < numInmates; i++)
         {
-            //UPDATE PLAYERS BLOCK
-            setPlayerBlock();
             playerCollision(inmatesA[i], step);
 
             //ACCELERATION
@@ -140,20 +140,7 @@
 
     function setPlayerBlock()
     {
-        var pCenter = prison.player.getPCenter();
-        var playerTile = prison.player.getOnTile();
-        var X = pCenter-16;
-        var Y = pCenter-16;
-        var Cx = pCenter.x;
-        var Cy = pCenter.y;
-        pTile =
-        {
-            X: X,
-            Y: Y,
-            Cx: Cx,
-            Cy: Cy,
-            Type: "Player"
-        }
+        pTile = prison.player.getPlayerOBJ();
     }
 
     //HELPER FUNCTIONS

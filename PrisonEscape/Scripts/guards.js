@@ -6,6 +6,7 @@
         guardsA         = [],
         collsionBlocks  = [],
         guardNames      = [],
+        pTile,
 
     slowDown = {
         left: false,
@@ -60,7 +61,11 @@
 
 
     function update(step, worldWidth, worldHeight) {
+        setPlayerBlock();
         for (var i = 0 ; i < 7; i++) {
+
+            playerCollision(guardsA[i], step);
+
             //ACCELERATION
             applyDirection(guardsA[i]);
 
@@ -142,6 +147,10 @@
         guard.cBlocks[8] = new Victor(guard.onT.x, guard.onT.y);             //Your Current Tile
     }
 
+    function setPlayerBlock() {
+        pTile = prison.player.getPlayerOBJ();
+    }
+
     function guardCollisionCorrection(guard, step) {
         //ATTEMPT STEP //*******MAJOR ISSUE HERE  ONLY STEP ON X FIRST RESOLVE IT FIRST
         guard.pos.x += (guard.v.x * step);
@@ -189,6 +198,25 @@
             //RANDOM NEW DIRECTION TO WALK IN 
             randIMDir(guard);
         }
+    }
+    function playerCollision(guard, step) {
+        //COLLISION CHECK /
+        var collisionCorrectionX = new Victor(0, 0);
+        var temp1 = new Victor(0, 0);
+        temp1 = prison.collision.collisionCheck(guard.c, pTile);
+        collisionCorrectionX = temp1;
+        guard.pos.x += collisionCorrectionX.x;
+
+        var collisionCorrectionY = new Victor(0, 0);
+        var temp2 = new Victor(0, 0);
+
+        temp2 = prison.collision.collisionCheck(guard.c, pTile);
+        collisionCorrectionY = temp2;
+        guard.pos.y += collisionCorrectionY.y;
+        if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
+                prison.player.pLayerHP(-30); //DEAL 30 DAMAGE TO PLAYER
+            }
+        
     }
 
     function applyDirection(guard) {

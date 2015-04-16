@@ -20,7 +20,7 @@ body
     margin-left: auto;
     margin-right: auto;
 	margin-top:1em;
-    width: 60%;
+    width: 68%;
 }
 
 #game
@@ -28,8 +28,8 @@ body
 	font-family:bearpawregular;
 	color:#000033;
 	position: absolute;
-	width: 60%;
-	height: 90%;
+	width: 68%;
+	height: 85%;
 	
     background:
     radial-gradient(black 15%, transparent 16%) 0 0,
@@ -201,7 +201,7 @@ ul.menu li button:active
 .screen .game-info .time
 {
     text-align:center;
-    margin-left: 90%;
+    margin-left: 88%;
     display: block;
     position: absolute;
     height: 1.5em;
@@ -226,7 +226,57 @@ ul.menu li button:active
     user-select: none;
     /*====NO SELECT============*/
 }
+.screen .game-info .health
+{
+    text-align:center;
+    margin-left: 0%;
+    margin-top: 4em;
+    display: block;
+    position: absolute;
+    height: 1.5em;
+    width: 20em;
+    z-index: 100;
+	font-family:capture_itregular;
+	font-size:1.5em;
+	color: black;
+	background:red;
+	border: 0.05em solid rgb(255,255,0);
+	border-radius: 0.5em;
+	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
+	-moz-box-shadow:  0.2em 0.2em 0.3em black;
+	box-shadow:  0.2em 0.2em 0.3em black;
 
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
+}
+.screen .game-info .name
+{
+    text-align:left;
+    margin-left: 0%;
+    display: block;
+    position: absolute;
+    height: 1.5em;
+    width:20em;
+    z-index: 100;
+	font-family:bearpawregular;
+	font-size:8em;
+	color: black;
+
+       /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
+}
 
 .screen footer
 {
@@ -468,8 +518,8 @@ ul.menu li button:active
 #game-screen .game-map {
 
     position : absolute;
-    width : 75em; /* 1.5 times the height (20x30 tiles)*/
-    height : 50em;
+    width : 100%; /* 1.5 times the height (20x30 tiles)*/
+    height : 100%;
     
 }
 
@@ -478,8 +528,8 @@ ul.menu li button:active
     position : absolute;
     left: 0;
     top: 0;
-    width :  75em;
-    height : 50em;
+    width :  100%;
+    height : 100%;
 }
 
 
@@ -492,8 +542,8 @@ ul.menu li button:active
 #game-screen .game-map .background
 {
 
-    width : 75em;
-    height : 50em;
+    width  : 100%;
+    height : 100%;
     z-index: 50;
 }
 
@@ -529,6 +579,9 @@ ul.menu li button:active
 /*IPAD SIZES/TABLETS*/
 @media only screen and (min-width: 481px) and (max-width: 979px)
 {
+    .screen .game-info .time {
+        margin-right:70%;
+    }
     #splash-screen .logo
     {
         font-size:5em;

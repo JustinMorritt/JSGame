@@ -131,6 +131,9 @@
 
     function update(step, worldWidth, worldHeight)
     {
+        var dom = prison.dom;
+        var $ = dom.$;
+        $("#game-screen .game-info .health span")[0].innerHTML = getPLayerHP();
         // parameter step is the time between frames ( in seconds )
         //Update Center Vector
         center.x = x + 16; center.y = y + 16;
@@ -371,6 +374,10 @@
         if (pHP < 0) { pHP = 0; }   //PLAYER DIES TRIGGER DEATH SEQUENCE
         console.log("Ouch you Asshole! .. hp: "  + pHP);
     }
+    function getPLayerHP()
+    {
+        return pHP;
+    }
     function getPlayerOBJ()
     {
             var pCenter = getPCenter();
@@ -577,6 +584,7 @@ addFrame(65, 65, 32, 32);
         getY            :getY,
         getX            :getX,
         setXY           :setXY,
+        getPLayerHP     :getPLayerHP,
         setSpeed        :setSpeed,
         setSlowDownSpeed:setSlowDownSpeed,
         run             :run,

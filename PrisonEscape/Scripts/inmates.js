@@ -207,9 +207,7 @@
                 inmate.respect = 0;
                 //INJURE PLAYER
             }
-            
-        }
-           
+        }   
     }
 
     function inmateCollisionCorrection(inmate, step)

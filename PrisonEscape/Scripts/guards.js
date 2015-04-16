@@ -6,7 +6,6 @@
         guardsA         = [],
         collsionBlocks  = [],
         guardNames      = [],
-        DIR             = { UP: 0, UPRIGHT: 1, RIGHT: 2, DOWNRIGHT: 3, DOWN: 4, DOWNLEFT: 5, LEFT: 6, UPLEFT: 7, STILL: 8 },
 
     slowDown = {
         left: false,
@@ -28,15 +27,16 @@
     }
 
     function spawnGuards() {
-        //get spawn positions!!
-        //var spawnPos = prison.map.getSpawns(); GET GUARD SPAWNS
+      
+        var names = prison.game.getGuardNames();
+        spawnPos = prison.map.guardSpawns();
 
         for (var i = 0 ; i < numGuards; i++)
         {
-            //Sprite = new Image();
-            //Sprite.src = "Images/$Guard" + i + ".png";
+            Sprite = new Image();
+            Sprite.src = "Images/$Guard" + i + ".png";
 
-            var newNewGuard = {
+            var NewGuard = {
                 sx: 0,
                 sy: 0,
                 dir: 4,                                             //Direction START WALKING OUT OF CELLS
@@ -45,16 +45,16 @@
                 v: new Victor(0, 0),                                //Velocity
                 c: new Victor(0, 0),                                //Center
                 onT: new Victor(0, 0),                              //On Tile
-                speed: 100,                                          //Speed
+                speed: 100,                                         //Speed
                 accel: 9,                                           //Acceleration
                 sdspeed: 40,                                        //SlowDownSpeed
-                name: guardNames[i],
+                name: names[i],
                 //sprite: Sprite,
-                health: 70,
+                health: 110,
                 cBlocks: []
             }
             //prison.map.shiftGuardSpawn();
-            guardsA.push(newNewGuard);
+            guardsA.push(NewGuard);
         }
     }
 

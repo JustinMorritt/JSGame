@@ -10,6 +10,7 @@
         firstRun = true,
         player,
         inmates,
+        guards,
         runningId = -1,
         camera, xDeadZone, yDeadZone,
         canvasWidth, canvasHeight,
@@ -29,6 +30,7 @@
         mapElement = $("#game-screen .game-map")[0];
         cols = prison.settings.cols;
         rows = prison.settings.rows;
+        guards = prison.guards;
         player = prison.player;
         camera = prison.camera;
         inmates = prison.inmates;
@@ -58,47 +60,28 @@
         mapElement.appendChild(createBackground());
         mapElement.appendChild(canvas);
 
-       
-
-
-        console.log("attempting to run player");
-
         map.run();
         player.run();
         inmates.run();
+        guards.run();
         schedule.run(ctx);
    
         //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);
         camera.initialize(canvas.width, canvas.height, constMapWidth, constMapHeight);
        
-
-
         //previousCycle = Date.now();   //ANIMATION
         //requestAnimationFrame(cycle);
-
-
-        //createBackground();
-
-        
         play();
-
         console.log("Canvas Setup Complete");
     }
 
     function initialize() {
         console.log("====Attempting Canvas setup====");
         if (firstRun) {
-        
-
             prisonSprite = new Image();
-          //  prisonSprite.addEventListener(
-            //    "load", callback, false);
-
             prisonSprite.src =
                 "Images/map.png";
             console.log("Initialized prison Map");
-
-
 
             setup();
   
@@ -184,15 +167,19 @@
         var sx = camera.getXView();
         var sy = camera.getYView();
 
+        //CAMERA CALCULATIONS FOR OFFSET
         if (sx < 0){sx = 0;}
         if (sy < 0){sy = 0;}
         if (3200 - sx < 3200){mapWidth = 3200 - sx;}
         if (3200 - sy < 3200){mapHeight = 3200 - sy;}
 
+        //BACKGROUND /MAP
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
+
+        // INMATES/GUARDS/PLAYER DRAW
+        inmates.draw(STEP, ctx, sx, sy);
         inmates.draw(STEP, ctx, sx, sy);
         player.draw(STEP, ctx, sx, sy);
-        
 
         ctx.restore();
     }
@@ -200,8 +187,8 @@
     function update()
     {
         inmates.update(STEP, 3200, 3200);
+        guards.update(STEP, 3200, 3200);
         player.update(STEP, 3200, 3200);
-        
         camera.update();
     }
 

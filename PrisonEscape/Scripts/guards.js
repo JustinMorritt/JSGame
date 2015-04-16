@@ -88,7 +88,7 @@
             //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
 
             //DRAW NAME
-            ctx.textAlign = 'center'; ctx.font = '10pt Calibri';
+            ctx.textAlign = 'center'; ctx.font = 'bold 14pt Calibri';
             ctx.fillText(guardsA[i].name, newX + 16, newY - 16);
 
             //DRAW HEALTH
@@ -218,7 +218,7 @@
         if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
                 if (!firstRun)
                 {
-                    prison.player.pLayerHP(-20); //DEAL 30 DAMAGE TO PLAYER
+                    prison.player.pLayerHP(-5); //DEAL 30 DAMAGE TO PLAYER
                 }
                 
             }

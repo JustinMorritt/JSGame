@@ -97,7 +97,7 @@
             //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
 
             //DRAW NAME
-            ctx.textAlign = 'center'; ctx.font = '10pt Calibri';
+            ctx.textAlign = 'center'; ctx.font = 'bold 10pt Calibri';
             ctx.fillText(inmatesA[i].name, newX + 16, newY - 16);
 
             //DRAW HEALTH
@@ -192,7 +192,7 @@
             }else
             {
                 inmate.respect = 0;
-                prison.player.pLayerHP(-10);
+                prison.player.pLayerHP(-3);
             }
         }   
     }

@@ -128,12 +128,24 @@
         }, false);
     }
 
+    function calcHealthBar()
+    {
+        var health = pHP / 5;
+        if (health < 0)
+        {
+            health = 0;
+            return health;
+        }
+        return health;
+    }
 
     function update(step, worldWidth, worldHeight)
     {
         var dom = prison.dom;
         var $ = dom.$;
-        $("#game-screen .game-info .health span")[0].innerHTML = getPLayerHP();
+        p = getPLayerHP();
+        $("#game-screen .game-info .health ")[0].innerHTML = "Health: " + getPLayerHP();
+        $("#game-screen .game-info .healthbar")[0].style.width = p + "%";
         // parameter step is the time between frames ( in seconds )
         //Update Center Vector
         center.x = x + 16; center.y = y + 16;

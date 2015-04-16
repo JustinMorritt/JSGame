@@ -229,7 +229,7 @@ ul.menu li button:active
 .screen .game-info .health
 {
     text-align:center;
-    margin-left: 0%;
+    margin-left: 2%;
     margin-top: 4em;
     display: block;
     position: absolute;
@@ -239,7 +239,7 @@ ul.menu li button:active
 	font-family:capture_itregular;
 	font-size:1.5em;
 	color: black;
-	background:red;
+	background:none;
 	border: 0.05em solid rgb(255,255,0);
 	border-radius: 0.5em;
 	-webkit-box-shadow : 0.2em 0.2em 0.3em black;
@@ -255,10 +255,32 @@ ul.menu li button:active
     user-select: none;
     /*====NO SELECT============*/
 }
+
+.screen .game-info .healthbar
+{
+    text-align:center;
+    margin-left: 2%;
+    margin-top: 4em;
+    display: block;
+    position: absolute;
+    height: 1.5em;
+    width: 20em;
+    z-index: 99;
+	font-family:capture_itregular;
+	font-size:1.5em;
+	color: black;
+	background:red;
+	border: 0.05em solid rgba(255,255,0,0);
+	border-radius: 0.5em;
+
+}
+
+
+
 .screen .game-info .name
 {
     text-align:left;
-    margin-left: 0%;
+    margin-left: 1%;
     display: block;
     position: absolute;
     height: 1.5em;

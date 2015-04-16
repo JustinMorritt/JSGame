@@ -7,6 +7,7 @@
         collsionBlocks  = [],
         guardNames      = [],
         pTile,
+        firstRun = true,
 
     slowDown = {
         left: false,
@@ -119,6 +120,7 @@
                 32,
                 32);
             ctx.restore();
+            firstRun = false;
         }
        
     }
@@ -214,7 +216,11 @@
         collisionCorrectionY = temp2;
         guard.pos.y += collisionCorrectionY.y;
         if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
-                prison.player.pLayerHP(-30); //DEAL 30 DAMAGE TO PLAYER
+                if (!firstRun)
+                {
+                    prison.player.pLayerHP(-20); //DEAL 30 DAMAGE TO PLAYER
+                }
+                
             }
         
     }

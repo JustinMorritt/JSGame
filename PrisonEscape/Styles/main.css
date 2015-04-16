@@ -267,6 +267,7 @@ ul.menu li button:active
 	font-family:bearpawregular;
 	font-size:8em;
 	color: black;
+     text-shadow: 3px 3px 3px white;
 
        /*====NO SELECT============*/
     -webkit-touch-callout: none;

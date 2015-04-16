@@ -72,7 +72,7 @@
         }
     }
     function draw(step, ctx, xView, yView) {
-        /*
+        
         for (var i = 0 ; i < 7; i++) {
             //OFFSET CAMERA VIEW
             var newX = (guardsA[i].pos.x) - xView;
@@ -115,7 +115,7 @@
                 32);
             ctx.restore();
         }
-        */
+       
     }
 
 

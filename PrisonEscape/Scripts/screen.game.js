@@ -8,6 +8,7 @@
     function run() {
         if (firstRun) {
             prison.setName();
+            prison.schedule.run();
             prison.game.initialize();
             setup();
             firstRun = false;
@@ -182,9 +183,6 @@
 
         paused = false;
         prison.schedule.setPaused(paused);
-    }
-    function time(){
-        prison.schedule.run();
     }
     return {
         run: run

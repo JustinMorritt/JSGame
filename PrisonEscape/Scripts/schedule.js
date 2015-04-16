@@ -85,6 +85,7 @@ prison.schedule = (function()
 	}
 	return {
 	    //EXPOSED FUNCTIONS IN HERE
+	    init: init,
 	    run: run,
 	    getTime: getTime,
 	    setPaused: setPaused,

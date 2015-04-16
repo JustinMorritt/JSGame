@@ -95,6 +95,7 @@
                         break;
                     case 11: //Prisoners
                         spawns1d.push(new Victor(x * Width, y * Height));
+                        break;
                     case 12: //Guards
                         guards1d.push(new Victor(x * Width, y * Height));
                         break;
@@ -190,6 +191,9 @@
     function updateItems(){
 
     };
+    //Add 
+    //map.drawItems(ctx, sx, sy)
+    //to display.canvas just under the background map drawImage
     function drawItems(ctx, xView, yView) {
         //OFFSET CAMERA VIEW
         var newX = (items[0].posX) - xView;
@@ -218,6 +222,7 @@
         getCollisions: getCollisions,
         getSpawns: getSpawns,
         guardSpawns: guardSpawns,
-        shiftGuards: shiftGuards
+        shiftGuards: shiftGuards,
+        drawItems: drawItems
     };
 })();

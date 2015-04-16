@@ -12,17 +12,17 @@
     var totalTiles = 0;
     var itemSprites;
     var itemsNum = 10;
-        items = [
+    var items = [
             { name: "1", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0,0), grabbed: false, type: "" },
             { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
         ];
 
     //Variables

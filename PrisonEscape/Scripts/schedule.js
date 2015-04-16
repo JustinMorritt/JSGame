@@ -84,6 +84,7 @@ prison.schedule = (function()
 	    //EXPOSED FUNCTIONS IN HERE
 	    run: run,
 	    getTime: getTime,
-        setPaused: setPaused
+	    setPaused: setPaused,
+        TimeLeft: TimeLeft
 	};
 })();

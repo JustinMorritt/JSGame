@@ -17,7 +17,8 @@
         inmateNames,
         offenceTime,
         guardNames,
-        offences
+        offences,
+        crimRecString = ""
        
 
     function initialize(callback)
@@ -39,9 +40,6 @@
         randomSentence();
         randomNameIM();
         randomNameGRD();
-
-		//displayNPCs();
-		displayCriminalRecord();
 
         if (callback)
         {
@@ -117,15 +115,20 @@
             console.log("Guard " +Num2+ " = " + guardNames[i]);
         }
     }
-    function displayCriminalRecord()
+    function getCriminalRecord()
     {
         var num =0;
-        for (var i = 1 ; i < sentence.length ; ++i)
+        for (var i = 0 ; i < sentence.length ; ++i)
         {
             num++;
-            console.log("Offence #" + num + " " + sentence[i].offence + " --> Years: " + sentence[i].time);
+            var offence = "<br>" + "# Offence " + num + "<br>" + sentence[i].offence + "<br> Years: " + sentence[i].time + "<br>"
+            crimRecString += offence;
+           //console.log("Offence #" + num + " " + sentence[i].offence + " --> Years: " + sentence[i].time);
         }
-        console.log("Total Time: " + sentenceTime + " Years");
+        var Total = "<b><br>Total Time: " + sentenceTime + " Years</b>";
+        crimRecString += Total;
+        //console.log("Total Time: " + sentenceTime + " Years");
+        return crimRecString;
     }
 
     function randomSentence()
@@ -137,7 +140,7 @@
 
         function randOffenceCommitNum()
         {
-            return Math.floor(Math.random() * 4) + 1;
+            return Math.floor(Math.random() * 3) + 1;
         }
 
         var offences = [
@@ -146,7 +149,7 @@
             {time: 25,offence:"Soliciting to commit murder"},
             {time: 25,offence:"Destroying, damaging or endangering the safety of an aircraft"},
             {time: 25,offence:"Racially-aggravated arson (endangering life)"},
-            {time: 35,offence:"Kidnapping"},
+            {time: 5,offence:"Kidnapping"},
             {time: 10,offence:"Possession of firearm with intent to cause fear of violence "},
             {time: 10,offence:"Possessing or distributing prohibited weapon or ammunition "},
             {time: 7,offence:"Carrying firearm or imitation firearm in public place"},
@@ -215,6 +218,10 @@
             }
         }
     }
+    function getSentenceTime()
+    {
+        return sentenceTime;
+    }
 
     function getInmateNames()
     {
@@ -225,11 +232,11 @@
         return guardNames;
     }
 
-
-
     return {
         //EXPOSED FUNCTIONS IN HERE
         initialize: initialize,
+        getSentenceTime: getSentenceTime,
+        getCriminalRecord: getCriminalRecord,
         displayNPCs: displayNPCs,
         getInmateNames: getInmateNames,
         getGuardNames: getGuardNames

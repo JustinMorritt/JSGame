@@ -33,6 +33,8 @@
 
         dom.$("#game-screen .game-info .name span")[0].innerHTML =
         prison.getName();
+
+        dom.$("#game-screen .pause-overlay .pause-crime")[0].innerHTML = prison.game.getCriminalRecord();
       
         var input = prison.input;
         input.initialize();
@@ -91,17 +93,16 @@
             resumeGame();
             return;//do nothing if already paused
         }
-        console.log("----entered pause Function!----")
+            console.log("----entered pause Function!----")
         var dom = prison.dom,
+
             //HIDING OTHER OVERLAYS SO NO OVERLAP
             overlayC = dom.$("#game-screen .crafting-overlay")[0];
             overlayI = dom.$("#game-screen .inventory-overlay")[0];
             overlayC.style.display = "none";
             overlayI.style.display = "none";
-            dom.$("#game-screen .health ")[0].style.display = "none";
-            //dom.$("#game-screen .healthbar")[0].style.display = "none";
             dom.$("#game-screen .game-info .name span")[0].style.display = "none";
-  
+
 
         overlay = dom.$("#game-screen .pause-overlay")[0];
         overlay.style.display = "block";
@@ -127,8 +128,6 @@
             backOL = dom.$("#game-screen .back")[0];
             backOL.style.display = "block";
 
-            dom.$("#game-screen .health ")[0].style.display = "none";
-            //dom.$("#game-screen .healthbar")[0].style.display = "none";
             dom.$("#game-screen .game-info .name span")[0].style.display = "none";
 
         overlay = dom.$("#game-screen .inventory-overlay")[0];
@@ -151,8 +150,6 @@
                 overlaya.style.display = "block";
             }
 
-            dom.$("#game-screen .health ")[0].style.display = "none";
-            //dom.$("#game-screen .healthbar")[0].style.display = "none";
             dom.$("#game-screen .game-info .name span")[0].style.display = "none";
 
             backOL = dom.$("#game-screen .back")[0];
@@ -175,8 +172,6 @@
         overlayP.style.display = "none";
         backOL.style.display = "none";
 
-        dom.$("#game-screen .health ")[0].style.display = "block";
-       // dom.$("#game-screen .healthbar")[0].style.display = "block";
         dom.$("#game-screen .game-info .name span")[0].style.display = "block";
 
 
@@ -184,7 +179,6 @@
             overlaya = dom.$(invents[i])[0];
             overlaya.style.display = "none";
         }
-
 
         paused = false;
         prison.schedule.setPaused(paused);

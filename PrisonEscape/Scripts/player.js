@@ -40,10 +40,10 @@
     function initialize(callback)
     {
 
-       // var spawnPos = prison.map.getSpawns();
+        var spawnPos = prison.map.getSpawns();
        // var index = array.indexOf(5);
-        x                   = 1000//spawnPos[0].x; //USE THIS TO GRAB A RANDOM SPAWN POSITION
-        y                   = 1000//spawnPos[0].y; prison.map.shiftSpawn();
+        x                   = spawnPos[0].x+16; //USE THIS TO GRAB A RANDOM SPAWN POSITION
+        y                   = spawnPos[0].y+16;    prison.map.shiftSpawn();
         vx                  = 0;
         vy                  = 0;
 		sx					= 32;

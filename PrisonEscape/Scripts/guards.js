@@ -21,7 +21,7 @@
     function initialize(callback) {
         game = prison.game;
         numGuards = prison.settings.guards;
-        guardNames = game.getGuardNames(); //Array of Random Inmate Names
+        guardNames = game.getGuardNames(); //Array of Random guard Names
         collsionBlocks = prison.map.getCollisions();
         spawnGuards();
     }
@@ -60,7 +60,7 @@
 
 
     function update(step, worldWidth, worldHeight) {
-       /* for (var i = 0 ; i < numGuards; i++) {
+        for (var i = 0 ; i < 7; i++) {
             //ACCELERATION
             applyDirection(guardsA[i]);
 
@@ -68,8 +68,8 @@
             possibleCollisionBlocks(guardsA[i]);
 
             //CORRECT COLLISIONS
-            inmateCollisionCorrection(guardsA[i], step);
-        }*/
+            guardCollisionCorrection(guardsA[i], step);
+        }
     }
     function draw(step, ctx, xView, yView) {
         /*
@@ -121,43 +121,43 @@
 
 
     //HELPER FUNCTIONS
-    function possibleCollisionBlocks(inmate) {
-        inmate.cBlocks = []; //Empty Current
+    function possibleCollisionBlocks(guard) {
+        guard.cBlocks = []; //Empty Current
         //CHECK IF ITS OFF MAP GRID < 0
-        if (inmate.onT.x - 1 <= 0 || inmate.onT.y - 1 <= 0) {
-            inmate.cBlocks[0] = new Victor(inmate.onT.x, inmate.onT.y);         //Topleft
-            inmate.cBlocks[2] = new Victor(inmate.onT.x, inmate.onT.y);         //BotLeft
-            inmate.cBlocks[4] = new Victor(inmate.onT.x, inmate.onT.y);         //Left
-            inmate.cBlocks[6] = new Victor(inmate.onT.x, inmate.onT.y);         //Above
-            inmate.cBlocks[1] = new Victor(inmate.onT.x, inmate.onT.y);         //TopRight
+        if (guard.onT.x - 1 <= 0 || guard.onT.y - 1 <= 0) {
+            guard.cBlocks[0] = new Victor(guard.onT.x, guard.onT.y);         //Topleft
+            guard.cBlocks[2] = new Victor(guard.onT.x, guard.onT.y);         //BotLeft
+            guard.cBlocks[4] = new Victor(guard.onT.x, guard.onT.y);         //Left
+            guard.cBlocks[6] = new Victor(guard.onT.x, guard.onT.y);         //Above
+            guard.cBlocks[1] = new Victor(guard.onT.x, guard.onT.y);         //TopRight
         }
         else {
-            inmate.cBlocks[1] = new Victor(inmate.onT.x + 1, inmate.onT.y - 1); //TopRight
-            inmate.cBlocks[0] = new Victor(inmate.onT.x - 1, inmate.onT.y - 1); //Topleft
-            inmate.cBlocks[2] = new Victor(inmate.onT.x - 1, inmate.onT.y + 1); //BotLeft
-            inmate.cBlocks[4] = new Victor(inmate.onT.x - 1, inmate.onT.y);     //Left
-            inmate.cBlocks[6] = new Victor(inmate.onT.x, inmate.onT.y - 1); //Above
+            guard.cBlocks[1] = new Victor(guard.onT.x + 1, guard.onT.y - 1); //TopRight
+            guard.cBlocks[0] = new Victor(guard.onT.x - 1, guard.onT.y - 1); //Topleft
+            guard.cBlocks[2] = new Victor(guard.onT.x - 1, guard.onT.y + 1); //BotLeft
+            guard.cBlocks[4] = new Victor(guard.onT.x - 1, guard.onT.y);     //Left
+            guard.cBlocks[6] = new Victor(guard.onT.x, guard.onT.y - 1); //Above
         }
-        inmate.cBlocks[3] = new Victor(inmate.onT.x + 1, inmate.onT.y + 1);     //BotRight
-        inmate.cBlocks[5] = new Victor(inmate.onT.x + 1, inmate.onT.y);         //Right
-        inmate.cBlocks[7] = new Victor(inmate.onT.x, inmate.onT.y + 1);     //Below
-        inmate.cBlocks[8] = new Victor(inmate.onT.x, inmate.onT.y);             //Your Current Tile
+        guard.cBlocks[3] = new Victor(guard.onT.x + 1, guard.onT.y + 1);     //BotRight
+        guard.cBlocks[5] = new Victor(guard.onT.x + 1, guard.onT.y);         //Right
+        guard.cBlocks[7] = new Victor(guard.onT.x, guard.onT.y + 1);     //Below
+        guard.cBlocks[8] = new Victor(guard.onT.x, guard.onT.y);             //Your Current Tile
     }
 
-    function inmateCollisionCorrection(inmate, step) {
+    function guardCollisionCorrection(guard, step) {
         //ATTEMPT STEP //*******MAJOR ISSUE HERE  ONLY STEP ON X FIRST RESOLVE IT FIRST
-        inmate.pos.x += (inmate.v.x * step);
-        inmate.c.x = inmate.pos.x + 32;
-        inmate.c.y = inmate.pos.y + 32;
+        guard.pos.x += (guard.v.x * step);
+        guard.c.x = guard.pos.x + 32;
+        guard.c.y = guard.pos.y + 32;
 
 
         //COLLISION CHECK /
         var collisionCorrectionX = new Victor(0, 0);
         var temp1 = new Victor(0, 0);
         for (var j = 0 ; j < 9; j++) {
-            if (collsionBlocks[inmate.cBlocks[j].x - 1][inmate.cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+            if (collsionBlocks[guard.cBlocks[j].x - 1][guard.cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
             {
-                temp1 = prison.collision.collisionCheck(inmate.c, collsionBlocks[inmate.cBlocks[j].x - 1][inmate.cBlocks[j].y - 1]);
+                temp1 = prison.collision.collisionCheck(guard.c, collsionBlocks[guard.cBlocks[j].x - 1][guard.cBlocks[j].y - 1]);
                 if (Math.abs(temp1.x) > Math.abs(collisionCorrectionX.x) &&
                     Math.abs(temp1.x) > Math.abs(collisionCorrectionX.y))
                 { collisionCorrectionX = temp1; }
@@ -165,21 +165,21 @@
         }
         //IF CORRECTION APPLY IT ...
         if (collisionCorrectionX.x != 0) {
-            inmate.pos.x += collisionCorrectionX.x;
+            guard.pos.x += collisionCorrectionX.x;
             //RANDOM NEW DIRECTION TO WALK IN 
-            randIMDir(inmate);
+            randIMDir(guard);
         }
         //NOW STEP ON Y AND CHECK COLLISION AND RESOLVE IT
-        inmate.pos.y += (inmate.v.y * step);
-        inmate.c.x = inmate.pos.x + 32;
-        inmate.c.y = inmate.pos.y + 32;
+        guard.pos.y += (guard.v.y * step);
+        guard.c.x = guard.pos.x + 32;
+        guard.c.y = guard.pos.y + 32;
 
         var collisionCorrectionY = new Victor(0, 0);
         var temp2 = new Victor(0, 0);
         for (var j = 0 ; j < 9; j++) {
-            if (collsionBlocks[inmate.cBlocks[j].x - 1][inmate.cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+            if (collsionBlocks[guard.cBlocks[j].x - 1][guard.cBlocks[j].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
             {
-                temp2 = prison.collision.collisionCheck(inmate.c, collsionBlocks[inmate.cBlocks[j].x - 1][inmate.cBlocks[j].y - 1]);
+                temp2 = prison.collision.collisionCheck(guard.c, collsionBlocks[guard.cBlocks[j].x - 1][guard.cBlocks[j].y - 1]);
                 if (Math.abs(temp2.y) > Math.abs(collisionCorrectionY.y) &&
                     Math.abs(temp2.y) > Math.abs(collisionCorrectionY.x))
                 { collisionCorrectionY = temp2; }
@@ -187,56 +187,56 @@
         }
         //IF CORRECTION APPLY IT ...
         if (collisionCorrectionY.y != 0) {
-            inmate.pos.y += collisionCorrectionY.y;
+            guard.pos.y += collisionCorrectionY.y;
             //RANDOM NEW DIRECTION TO WALK IN 
-            randIMDir(inmate);
+            randIMDir(guard);
         }
     }
 
-    function applyDirection(inmate) {
+    function applyDirection(guard) {
         //UPDATE ONTILE
-        inmate.c.x = inmate.pos.x + 32;
-        inmate.c.y = inmate.pos.y + 32;
-        inmate.onT.x = Math.round(inmate.c.x / 32); inmate.onT.y = Math.round(inmate.c.y / 32);
+        guard.c.x = guard.pos.x + 32;
+        guard.c.y = guard.pos.y + 32;
+        guard.onT.x = Math.round(guard.c.x / 32); guard.onT.y = Math.round(guard.c.y / 32);
 
-        switch (inmate.dir) {
+        switch (guard.dir) {
             //UP
-            case 0: if (inmate.v.y != inmate.speed * -1) { inmate.v.y -= inmate.accel; } if (inmate.v.y < inmate.speed * -1) { inmate.v.y = inmate.speed * -1; }
+            case 0: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
                 break;
                 //UPRIGHT
-            case 1: if (inmate.v.y != inmate.speed * -1) { inmate.v.y -= inmate.accel; } if (inmate.v.y < inmate.speed * -1) { inmate.v.y = inmate.speed * -1; }
-                if (inmate.v.x != inmate.speed) { inmate.v.x += inmate.accel; } if (inmate.v.x > inmate.speed) { inmate.v.x = inmate.speed; }
+            case 1: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
+                if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
                 break;
                 //RIGHT
-            case 2: if (inmate.v.x != inmate.speed) { inmate.v.x += inmate.accel; } if (inmate.v.x > inmate.speed) { inmate.v.x = inmate.speed; }
+            case 2: if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
                 break;
                 //DOWN RIGHT
-            case 3: if (inmate.v.y != inmate.speed) { inmate.v.y += inmate.accel; } if (inmate.v.y > inmate.speed) { inmate.v.y = inmate.speed; }
-                if (inmate.v.x != inmate.speed) { inmate.v.x += inmate.accel; } if (inmate.v.x > inmate.speed) { inmate.v.x = inmate.speed; }
+            case 3: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
+                if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
                 break;
                 //DOWN
-            case 4: if (inmate.v.y != inmate.speed) { inmate.v.y += inmate.accel; } if (inmate.v.y > inmate.speed) { inmate.v.y = inmate.speed; }
+            case 4: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
                 break;
                 //DOWNLEFT
-            case 5: if (inmate.v.y != inmate.speed) { inmate.v.y += inmate.accel; } if (inmate.v.y > inmate.speed) { inmate.v.y = inmate.speed; }
-                if (inmate.v.x != inmate.speed * -1) { inmate.v.x -= inmate.accel; } if (inmate.v.x < inmate.speed * -1) { inmate.v.x = inmate.speed * -1; }
+            case 5: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
+                if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
                 break;
                 //LEFT
-            case 6: if (inmate.v.x != inmate.speed * -1) { inmate.v.x -= inmate.accel; } if (inmate.v.x < inmate.speed * -1) { inmate.v.x = inmate.speed * -1; }
+            case 6: if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
                 break;
                 //UPLEFT
-            case 7: if (inmate.v.y != inmate.speed * -1) { inmate.v.y -= inmate.accel; } if (inmate.v.y < inmate.speed * -1) { inmate.v.y = inmate.speed * -1; }
-                if (inmate.v.x != inmate.speed * -1) { inmate.v.x -= inmate.accel; } if (inmate.v.x < inmate.speed * -1) { inmate.v.x = inmate.speed * -1; }
+            case 7: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
+                if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
                 break;
                 //STILL 
-            case 8: if (inmate.v.x != 0) { inmate.v.x = 0; }
-                if (inmate.v.y != 0) { inmate.v.y = 0; }
+            case 8: if (guard.v.x != 0) { guard.v.x = 0; }
+                if (guard.v.y != 0) { guard.v.y = 0; }
                 break;
         }
-        if (inmate.pos.x - 16 < 0) { inmate.pos.x = 16; }
-        if (inmate.pos.y - 16 < 0) { inmate.pos.y = 16; }
-        if (inmate.pos.x + (32 * 1.5) > 3200) { inmate.pos.x = 3200 - (32 * 1.5); }
-        if (inmate.pos.y + (32 * 1.5) > 3200) { inmate.pos.y = 3200 - (32 * 1.5); }
+        if (guard.pos.x - 16 < 0) { guard.pos.x = 16; }
+        if (guard.pos.y - 16 < 0) { guard.pos.y = 16; }
+        if (guard.pos.x + (32 * 1.5) > 3200) { guard.pos.x = 3200 - (32 * 1.5); }
+        if (guard.pos.y + (32 * 1.5) > 3200) { guard.pos.y = 3200 - (32 * 1.5); }
     }
 
 
@@ -249,41 +249,41 @@
         return pColBlocks;
     }
     function setSpeed(speed) {
-        for (var i = 0 ; i < numInmates; i++) {
+        for (var i = 0 ; i < numguards; i++) {
             guardsA[i].speed = speed;
         }
     }
     function setSlowDownSpeed(speed) {
-        for (var i = 0 ; i < numInmates; i++) {
+        for (var i = 0 ; i < numguards; i++) {
             guardsA[i].sdspeed = speed;
         }
     }
 
     function randDir() {
-        for (var i = 0 ; i < numInmates; i++) {
+        for (var i = 0 ; i < numguards; i++) {
             var randDir = prison.math.randomRange(0, 8);
             guardsA[i].dir = randDir;
         }
     }
-    function randIMDir(inmate) {
+    function randIMDir(guard) {
         var randDir = Math.floor(Math.random() * 8);
-        inmate.dir = randDir;
+        guard.dir = randDir;
         //console.log(randDir);
     }
     function backToCell() {
-        for (var i = 0 ; i < numInmates; i++) {
+        for (var i = 0 ; i < numguards; i++) {
 
             guardsA[i].pos.x = guardsA[i].cellPos.x;
             guardsA[i].pos.y = guardsA[i].cellPos.y;
             guardsA[i].dir = 8;
         }
     }
-    function seeInmateStats() {
+    function seeguardStats() {
         var num = 0;
-        for (var i = 0 ; i < numInmates; i++) {
+        for (var i = 0 ; i < numguards; i++) {
             num++;
-            console.log("Inmate " + num + " Name: " + guardsA[i].name);
-            console.log("Inmate " + num + " On Tile: " + guardsA[i].onT.x + " " + guardsA[i].onT.y);
+            console.log("guard " + num + " Name: " + guardsA[i].name);
+            console.log("guard " + num + " On Tile: " + guardsA[i].onT.x + " " + guardsA[i].onT.y);
         }
     }
 
@@ -293,7 +293,7 @@
         backToCell: backToCell,
         setSpeed: setSpeed,
         setSlowDownSpeed: setSlowDownSpeed,
-        seeInmateStats: seeInmateStats,
+        seeguardStats: seeguardStats,
         run: run,
         update: update,
         draw: draw,

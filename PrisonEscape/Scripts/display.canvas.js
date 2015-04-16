@@ -178,7 +178,7 @@
 
         // INMATES/GUARDS/PLAYER DRAW
         inmates.draw(STEP, ctx, sx, sy);
-        inmates.draw(STEP, ctx, sx, sy);
+        guards.draw(STEP, ctx, sx, sy);
         player.draw(STEP, ctx, sx, sy);
 
         ctx.restore();

@@ -15,7 +15,7 @@
     }
 
     function run() {
-        initialize(console.log("initialized inmates"));
+        initialize(console.log("initialized guards"));
     }
 
     function initialize(callback) {
@@ -31,7 +31,7 @@
         var names = prison.game.getGuardNames();
         spawnPos = prison.map.guardSpawns();
 
-        for (var i = 0 ; i < numGuards; i++)
+        for (var i = 0 ; i < 7; i++)
         {
             Sprite = new Image();
             Sprite.src = "Images/$Guard" + i + ".png";
@@ -49,18 +49,18 @@
                 accel: 9,                                           //Acceleration
                 sdspeed: 40,                                        //SlowDownSpeed
                 name: names[i],
-                //sprite: Sprite,
-                health: 110,
+                sprite: Sprite,
+                health: 100,
                 cBlocks: []
             }
-            //prison.map.shiftGuardSpawn();
+            prison.map.shiftGuards();
             guardsA.push(NewGuard);
         }
     }
 
 
     function update(step, worldWidth, worldHeight) {
-        for (var i = 0 ; i < numGuards; i++) {
+       /* for (var i = 0 ; i < numGuards; i++) {
             //ACCELERATION
             applyDirection(guardsA[i]);
 
@@ -69,10 +69,11 @@
 
             //CORRECT COLLISIONS
             inmateCollisionCorrection(guardsA[i], step);
-        }
+        }*/
     }
     function draw(step, ctx, xView, yView) {
-        for (var i = 0 ; i < numInmates; i++) {
+        /*
+        for (var i = 0 ; i < 7; i++) {
             //OFFSET CAMERA VIEW
             var newX = (guardsA[i].pos.x) - xView;
             var newY = (guardsA[i].pos.y) - yView;
@@ -88,10 +89,6 @@
             ctx.beginPath(); ctx.rect(newX - 16, newY - 14, guardsA[i].health, 6);
             ctx.fillStyle = 'red'; ctx.fill(); ctx.stroke();
 
-            //DRAW RESPECT
-            ctx.beginPath(); ctx.rect(newX - 16, newY - 6, guardsA[i].respect, 6);
-            ctx.fillStyle = 'blue'; ctx.fill(); ctx.stroke();
-
             //SHADOW 
             ctx.beginPath();
             ctx.rect(newX + 6, newY + 6, 10, 10);
@@ -104,11 +101,8 @@
             ctx.stroke();
 
             //BOXES AROUND HP AND RESP
-            ctx.beginPath(); ctx.rect(newX - 16, newY - 14, 70, 6); ctx.stroke();
-            ctx.beginPath(); ctx.rect(newX - 16, newY - 6, 70, 6); ctx.stroke();
-
-
-
+            ctx.beginPath(); ctx.rect(newX - 16, newY - 14, guardsA[i].health, 6); ctx.stroke();
+            
             ctx.drawImage(
                 guardsA[i].sprite,
                 guardsA[i].sx,
@@ -121,7 +115,7 @@
                 32);
             ctx.restore();
         }
-
+        */
     }
 
 

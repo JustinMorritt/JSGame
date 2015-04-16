@@ -243,6 +243,17 @@
         var newX = (x-pWidth/2) - xView;
         var newY = (y-pHeight/2) - yView;
 
+        //SHADOW 
+        context.beginPath();
+        context.rect(newX + 6, newY + 6, 10, 10);
+        context.fillStyle = "red";
+        context.shadowColor = 'black';
+        context.shadowBlur = 15;
+        context.shadowOffsetX = 9;
+        context.shadowOffsetY = 1;
+        context.fill();
+        context.stroke();
+
         context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
         
         context.restore();

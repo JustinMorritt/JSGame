@@ -86,7 +86,7 @@ var prison = (function ()
 		image.onload = image.onerror = function()
 		{
 		    numResourcesLoaded++;
-		    console.log("Number Of Resources Loaded: " + numResourcesLoaded);
+		    //console.log("Number Of Resources Loaded: " + numResourcesLoaded);
 			queueEntry.loaded = true;
 			if(!executeRunning)
 			{

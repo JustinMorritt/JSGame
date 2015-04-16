@@ -8,7 +8,7 @@
     function run() {
         if (firstRun) {
             prison.setName();
-            prison.schedule.run();
+            prison.schedule.init();
             prison.game.initialize();
             setup();
             firstRun = false;

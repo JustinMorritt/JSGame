@@ -13,6 +13,9 @@ prison.schedule = (function()
 	{
 	    CTX = ctx;
 	    CTX.font = "30px Verdana";
+	}
+	function init()
+	{
 	    gameDay = prison.game.getSentenceTime();
 	    setInterval(UpdateTime, gameHour);
 	}

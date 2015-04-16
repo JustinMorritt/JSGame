@@ -227,23 +227,23 @@
 		/*Animation
 		if(vx === 0)
 		{
-			setRange("");
+			range("");
 		}
 		if(controls.left)
 		{
-			setRange("Player Walk Left");
+			range("Player Walk Left");
 		}
 		if(controls.right)
 		{
-			setRange("Player Walk Right");
+			range("Player Walk Right");
 		}
 		if(controls.up)
 		{
-			setRange("Player Walk Up");
+			range("Player Walk Up");
 		}
 		if(controls.down)
 		{
-			setRange("Player Walk Down");
+			range("Player Walk Down");
 		} */
 	}
  
@@ -270,9 +270,19 @@
         context.stroke();
 
         context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
+		
+		/*context.drawImage(playerSprite, 
+					_frames[currentFrame]._getx(), 
+					_frames[currentFrame]._gety(),
+					_frames[currentFrame]._getWidth(), 
+					_frames[currentFrame]._getHeight(),
+					newX, 
+					newY, 
+					pWidth, 
+					pHeight);*/
         
         context.restore();
-        //console.log("DREW PLAYER X:" +x+ " Y: " +y );
+        console.log("DREW PLAYER X:" +x+ " Y: " +y );
 		
 		/*Animation 
 		var currentFrame = 0;
@@ -283,17 +293,17 @@
 				currentFrame = _ranges[i].currentFrame();
 				//console.log(currentFrame);
 			}
-		}
-
-		c.drawImage(_img, 
-					_frames[currentFrame].getx(), 
-					_frames[currentFrame].gety(),
-					_frames[currentFrame].getWidth(), 
-					_frames[currentFrame].getHeight(),
-					_x, 
-					_y, 
-					_width, 
-					_height);*/
+		}*/
+/*
+		context.drawImage(playerSprite, 
+					_frames[currentFrame]._getx(), 
+					_frames[currentFrame]._gety(),
+					_frames[currentFrame]._getWidth(), 
+					_frames[currentFrame]._getHeight(),
+					newX, 
+					newY, 
+					pWidth, 
+					pHeight);*/
     }
 
     //HELPER FUNCTIONS
@@ -409,7 +419,7 @@
             return pTile;
     }
 	
- /*Character Animation 
+ /*Character Animation
 
 function playerFrame(xPos, yPos, w, h)
 {
@@ -418,22 +428,22 @@ function playerFrame(xPos, yPos, w, h)
 	var _width = w;
 	var _height = h;
 
-	function getX()
+	function _getX()
 	{
 		return _x;
 	};
 
-	function getY()
+	function _getY()
 	{
 		return _y;
 	};
 
-	function getWidth()
+	function _getWidth()
 	{
 		return _width;  
 	};
 
-	function getHeight()
+	function _getHeight()
 	{
 		return _height;
 	};
@@ -516,7 +526,7 @@ function addRange(rangeName, start, end)
 	_ranges.push(new AnimationRange(rangeName, start, end));
 };  
 
-function setRange(rangeId)
+function range(rangeId)
 {
 	for(var i = 0; i < _ranges.length; ++i)
 	{
@@ -540,7 +550,7 @@ function setRangeFrames(rangeName, start, end)
 	}    
 }
 
-function nextFrame()
+function Frame()
 {
 	for(var i = 0; i < _ranges.length; ++i)
 	{
@@ -559,24 +569,24 @@ function addFrame(xPos, yPos, w, h)
 	_frames.push(new playerFrame(xPos, yPos, w, h));
 };
 
-setRangeFrames("", 0, 1);
+//setRangeFrames("", 0, 1);
 
 addRange("Player Walk Left", 1, 4);
 addFrame(0, 65, 32, 32);
 addFrame(33, 64, 32, 32);
 addFrame(65, 65, 32, 32);
 
-addRange("Player Walk Right", 1, 4);
+addRange("Player Walk Right", 4, 7);
 addFrame(0, 65, 32, 32);
 addFrame(33, 64, 32, 32);
 addFrame(65, 65, 32, 32);
 
-addRange("Player Walk Up", 1, 4);
+addRange("Player Walk Up", 7, 10);
 addFrame(0, 65, 32, 32);
 addFrame(33, 64, 32, 32);
 addFrame(65, 65, 32, 32);
 
-addRange("Player Walk Down", 1, 4);
+addRange("Player Walk Down", 10, 13);
 addFrame(0, 65, 32, 32);
 addFrame(33, 64, 32, 32);
 addFrame(65, 65, 32, 32);

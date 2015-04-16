@@ -10,16 +10,16 @@
     var Height = 32;
     var colBlockNum = 0;
     var totalTiles = 0;
-    var itemSprites,
+    var itemSprites;
+    var itemsNum = 2;
         items = [
-            { name: "Test1", sx: 928, sy: 1088, posX: 0, posY: 0, grabbed: false },
-            { name: "Test2", sx: 896, sy: 1088, posX: 0, posY: 0, grabbed: false }
+            { name: "1", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0,0), grabbed: false, type: "" },
+            { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0,0), grabbed: false,  type: "" }
         ];
 
     //Variables
     var objects, walls = [], spawns2d = [], items2d = [], spawns1d = [], guards1d = [], items1d = [];
     var collision;
-    var rnd;
 
     function run() {
         initialize(console.log("init map"));
@@ -157,6 +157,7 @@
         //console.log("Total Blocks: " + totalTiles);
         //console.log("1st element" + collision[0].X + "x" + collision[0].Y);
         shuffleSpawns(spawns1d);
+        updateItems();
     }
 
     function getColBlockNum()
@@ -185,11 +186,14 @@
         guards1d.shift();
     }
 
-    function shuffleSpawns(array)
+    function shuffleSpawns(array , arrayLength)
     {
       
         var currentIndex = 20, temporaryValue, randomIndex;
-
+        if (arrayLength)
+        {
+            currentIndex = arrayLength;
+        }
         // While there remain elements to shuffle...
         while (0 !== currentIndex)
         {
@@ -208,36 +212,47 @@
        
     }
 
-    function updateItems() {
-        rnd = Math.floor(Math.random() * items1d.length);
-        for(var i = 0; i < items.length; i++)
+    function updateItems()
+    {
+       var ShufArray = shuffleSpawns(items1d, 8);
+        for(var i = 0; i < 2; i++)
         {
+            items[i].posX = ShufArray[0].x;
+            items[i].posY = ShufArray[0].y;
+            items[i].c = new Victor(items[i].posX + 16, items[i].posY + 16);
             items[i].grabbed = false;
         }
 
     };
+    function getItems()
+    {
+        return items1d;
+    }
 
     function drawItems(ctx, xView, yView) {
         //OFFSET CAMERA VIEW
-        if (items[0].grabbed == false) {
-            items[0].posX = items1d[1].x;
-            items[0].posY = items1d[1].y;
+     
+        //LOOP THROUGH ITEMS 
+        for (var i = 0; i < 2; i++)
+        {
+            if (items[i].grabbed == false) {
+                var newX = (items[i].posX) - xView;
+                var newY = (items[i].posY) - yView;
 
-            var newX = (items[0].posX) - xView;
-            var newY = (items[0].posY) - yView;
-
-            ctx.drawImage(
-                itemSprites,
-                items[0].sx,
-                items[0].sy,
-                32,
-                32,
-                newX,
-                newY,
-                32,
-                32
-                );
+                ctx.drawImage(
+                    itemSprites,
+                    items[i].sx,
+                    items[i].sy,
+                    32,
+                    32,
+                    newX,
+                    newY,
+                    32,
+                    32
+                    );
+            }
         }
+
     };
 
     return {
@@ -246,6 +261,7 @@
         initialize: initialize,
         shiftSpawn : shiftSpawn,
         print: print,
+        getItems: getItems,
         getColBlockNum: getColBlockNum,
         getCollisions: getCollisions,
         getSpawns: getSpawns,

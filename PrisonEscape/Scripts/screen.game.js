@@ -35,7 +35,7 @@
         dom.$("#game-screen .game-info .name span")[0].innerHTML =
         prison.getName();
 
-        dom.$("#game-screen .pause-overlay .pause-crime")[0].innerHTML = prison.game.getCriminalRecord();
+        
       
         var input = prison.input;
         input.initialize();

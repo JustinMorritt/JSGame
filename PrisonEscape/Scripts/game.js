@@ -117,6 +117,7 @@
     }
     function getCriminalRecord()
     {
+        crimRecString = null;
         var num =0;
         for (var i = 0 ; i < sentence.length ; ++i)
         {
@@ -126,7 +127,9 @@
            //console.log("Offence #" + num + " " + sentence[i].offence + " --> Years: " + sentence[i].time);
         }
         var Total = "<b><br>Total Time: " + sentenceTime + " Years</b>";
+        var TotalTimeLeft = "<b><br>Time Left: " + prison.schedule.TimeLeft() + " Years</b>";
         crimRecString += Total;
+        crimRecString += TotalTimeLeft;
         //console.log("Total Time: " + sentenceTime + " Years");
         return crimRecString;
     }

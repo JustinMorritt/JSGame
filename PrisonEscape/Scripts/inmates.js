@@ -205,7 +205,7 @@
             }else
             {
                 inmate.respect = 0;
-                //INJURE PLAYER
+                prison.player.pLayerHP(-10);
             }
         }   
     }
@@ -301,10 +301,10 @@
                 if (inmate.v.y != 0) { inmate.v.y = 0; }
                 break;
         }
-        if (inmate.pos.x - 16 < 0) { inmate.pos.x = 16; }
-        if (inmate.pos.y - 16 < 0) { inmate.pos.y = 16; }
-        if (inmate.pos.x + (32 * 1.5) > 3200) { inmate.pos.x = 3200 - (32 * 1.5); }
-        if (inmate.pos.y + (32 * 1.5) > 3200) { inmate.pos.y = 3200 - (32 * 1.5); }
+        if (inmate.pos.x - 64 < 0) { inmate.pos.x = 64; }
+        if (inmate.pos.y - 64 < 0) { inmate.pos.y = 64; }
+        if (inmate.pos.x + (64) > 3200) { inmate.pos.x = 3200 - (64); }
+        if (inmate.pos.y + (64) > 3200) { inmate.pos.y = 3200 - (64); }
     }
    
 

@@ -39,7 +39,7 @@
             var NewGuard = {
                 sx: 0,
                 sy: 0,
-                dir: 4,                                             //Direction START WALKING OUT OF CELLS
+                dir: 1,                                             //Direction START WALKING OUT OF CELLS
                 pos: new Victor(spawnPos[0].x, spawnPos[0].y),      //Position
                 cellPos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Cell Position
                 v: new Victor(0, 0),                                //Velocity
@@ -86,7 +86,7 @@
             ctx.fillText(guardsA[i].name, newX + 16, newY - 16);
 
             //DRAW HEALTH
-            ctx.beginPath(); ctx.rect(newX - 16, newY - 14, guardsA[i].health, 6);
+            ctx.beginPath(); ctx.rect(newX - 30, newY - 14, guardsA[i].health, 6);
             ctx.fillStyle = 'red'; ctx.fill(); ctx.stroke();
 
             //SHADOW 
@@ -101,7 +101,7 @@
             ctx.stroke();
 
             //BOXES AROUND HP AND RESP
-            ctx.beginPath(); ctx.rect(newX - 16, newY - 14, guardsA[i].health, 6); ctx.stroke();
+            ctx.beginPath(); ctx.rect(newX - 30, newY - 14, guardsA[i].health, 6); ctx.stroke();
             
             ctx.drawImage(
                 guardsA[i].sprite,
@@ -117,8 +117,6 @@
         }
        
     }
-
-
 
     //HELPER FUNCTIONS
     function possibleCollisionBlocks(guard) {
@@ -200,45 +198,24 @@
         guard.onT.x = Math.round(guard.c.x / 32); guard.onT.y = Math.round(guard.c.y / 32);
 
         switch (guard.dir) {
-            //UP
+                //UP
             case 0: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
                 break;
-                //UPRIGHT
-            case 1: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
-                if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
+                //DOWN
+            case 1: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
                 break;
                 //RIGHT
             case 2: if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
                 break;
-                //DOWN RIGHT
-            case 3: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
-                if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
-                break;
-                //DOWN
-            case 4: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
-                break;
-                //DOWNLEFT
-            case 5: if (guard.v.y != guard.speed) { guard.v.y += guard.accel; } if (guard.v.y > guard.speed) { guard.v.y = guard.speed; }
-                if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
-                break;
                 //LEFT
-            case 6: if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
-                break;
-                //UPLEFT
-            case 7: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
-                if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
-                break;
-                //STILL 
-            case 8: if (guard.v.x != 0) { guard.v.x = 0; }
-                if (guard.v.y != 0) { guard.v.y = 0; }
+            case 3: if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
                 break;
         }
-        if (guard.pos.x - 16 < 0) { guard.pos.x = 16; }
-        if (guard.pos.y - 16 < 0) { guard.pos.y = 16; }
-        if (guard.pos.x + (32 * 1.5) > 3200) { guard.pos.x = 3200 - (32 * 1.5); }
-        if (guard.pos.y + (32 * 1.5) > 3200) { guard.pos.y = 3200 - (32 * 1.5); }
+        if (guard.pos.x - 64 < 0) { guard.pos.x = 64; }
+        if (guard.pos.y - 64 < 0) { guard.pos.y = 64; }
+        if (guard.pos.x + (32 * 3) > 3200) { guard.pos.x = 3200 - (32 * 3); }
+        if (guard.pos.y + (32 * 3) > 3200) { guard.pos.y = 3200 - (32 * 3); }
     }
-
 
     //GETTERS SETTERS
     function getOnTile() {
@@ -261,7 +238,7 @@
 
     function randDir() {
         for (var i = 0 ; i < numguards; i++) {
-            var randDir = prison.math.randomRange(0, 8);
+            var randDir = prison.math.randomRange(0, 3);
             guardsA[i].dir = randDir;
         }
     }

@@ -364,7 +364,13 @@
     {
         return center;
     }
- 
+    function pLayerHP(health)
+    {
+        pHP += health;
+        if (pHP > 100) {pHP = 100;}
+        if (pHP < 0) { pHP = 0; }   //PLAYER DIES TRIGGER DEATH SEQUENCE
+        console.log("Ouch you Asshole! .. hp: "  + pHP);
+    }
 	
  /*Character Animation 
 
@@ -543,9 +549,10 @@ addFrame(65, 65, 32, 32);
     return {
         //EXPOSED FUNCTIONS IN HERE
         setVX           :setVX,
-        setVY           : setVY,
-        getPCenter      : getPCenter,
-        getOnTile       : getOnTile,
+        setVY           :setVY,
+        pLayerHP        :pLayerHP,
+        getPCenter      :getPCenter,
+        getOnTile       :getOnTile,
         getVX           :getVX,
         getVY           :getVY,
         getY            :getY,

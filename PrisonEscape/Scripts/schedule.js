@@ -1,7 +1,7 @@
 prison.schedule = (function()
 {
 	var gameHour = 5000, 
-		gameDay = 100;
+		gameDay;
 		
 		var currentTime = 6;
 		var PM = false;

@@ -1,7 +1,7 @@
 prison.schedule = (function()
 {
-	var gameHour = 20000, 
-		gameDay = 100;
+	var gameHour = 5000, 
+		gameDay;
 		
 		var currentTime = 6;
 		var PM = false;
@@ -13,6 +13,10 @@ prison.schedule = (function()
 	{
 	    CTX = ctx;
 	    CTX.font = "30px Verdana";
+	}
+	function init()
+	{
+	    gameDay = prison.game.getSentenceTime();
 	    setInterval(UpdateTime, gameHour);
 	}
 	function getTime()
@@ -35,6 +39,10 @@ prison.schedule = (function()
 	        if (currentTime == 12 && PM == false) {
 	            //console.log("Days left:" + " " + gameDay);
 	            gameDay--;
+	            prison.map.updateItems();
+	            prison.inmates.backToCell();
+	            prison.inmates.randDir();
+	            currentTime = 6;
 	        }
 
 	        if (PM == false) {
@@ -71,10 +79,16 @@ prison.schedule = (function()
 	{
 	    return paused;
 	}
+	function TimeLeft()
+	{
+	    return gameDay;
+	}
 	return {
 	    //EXPOSED FUNCTIONS IN HERE
+	    init: init,
 	    run: run,
 	    getTime: getTime,
-        setPaused: setPaused
+	    setPaused: setPaused,
+        TimeLeft: TimeLeft
 	};
 })();

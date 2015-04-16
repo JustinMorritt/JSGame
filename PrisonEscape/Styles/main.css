@@ -226,7 +226,7 @@ ul.menu li button:active
     user-select: none;
     /*====NO SELECT============*/
 }
-.screen .health
+.health
 {
     text-align:center;
     margin-left: 1%;
@@ -261,6 +261,7 @@ ul.menu li button:active
     display: block;
     height: 100%;
     width: 0%;
+    z-index: 100;
 	background:red;
 	border-radius: 0.5em;
 }
@@ -363,7 +364,28 @@ ul.menu li button:active
 				-1px -1px 2px rgb(255,255,0),
 				0px 0px 0px black;
     color:red;
-       /*====NO SELECT============*/
+
+    /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
+}
+
+#game-screen .pause-overlay .pause-crime
+{
+        width:100%;
+    text-align:center;
+    font-size:1.8em;
+    text-shadow:1px 1px 2px rgb(255,255,0),
+				-1px -1px 2px rgb(255,255,0),
+				0px 0px 0px black;
+    color:red;
+
+    /*====NO SELECT============*/
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;

@@ -65,6 +65,7 @@
         inmates.run();
         guards.run();
         schedule.run(ctx);
+        
    
         //console.log("DEADZONES FOR CAMERA: x:" + xDeadZone + " y:" + yDeadZone);
         camera.initialize(canvas.width, canvas.height, constMapWidth, constMapHeight);
@@ -159,6 +160,10 @@
     }
 
     function draw() {
+        //UPDATE TIME LEFT 
+        prison.dom.$("#game-screen .pause-overlay .pause-crime")[0].innerHTML = prison.game.getCriminalRecord();
+
+
         ctx.save();
         //ctx.clearRect(0, 0, canvas.width, canvas.height);
         //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);

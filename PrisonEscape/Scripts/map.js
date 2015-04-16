@@ -220,8 +220,8 @@
     function drawItems(ctx, xView, yView) {
         //OFFSET CAMERA VIEW
         if (items[0].grabbed == false) {
-            items[0].posX = items1d[rnd].x;
-            items[0].posY = items1d[rnd].y;
+            items[0].posX = items1d[1].x;
+            items[0].posY = items1d[1].y;
 
             var newX = (items[0].posX) - xView;
             var newY = (items[0].posY) - yView;

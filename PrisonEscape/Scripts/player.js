@@ -231,7 +231,9 @@
         var collisionCorrection = new Victor(0, 0);
         for (var i = 0 ; i < 9; i++) {
             for(var j = 0 ; j < numDoors; j++) {
-                if (pColBlocks[i].x == doors[j].x && pColBlocks[i].y == doors[j].y) {
+                if (pColBlocks[i].x == doors[j].onT.x && pColBlocks[i].y == doors[j].onT.y)
+                {
+                    console.log("COlliding with Door!");
                     collisionCorrection = prison.collision.collisionCheck(center, doors[j]);
                 }
             }
@@ -248,7 +250,7 @@
         var collisionCorrection2 = new Victor(0, 0);
         for (var i = 0 ; i < 9; i++) {
             for (var j = 0 ; j < numDoors; j++) {
-                if (pColBlocks[i].x == doors[j].x && pColBlocks[i].y == doors[j].y) {
+                if (pColBlocks[i].x == doors[j].onT.x && pColBlocks[i].y == doors[j].onT.y) {
                     collisionCorrection2 = prison.collision.collisionCheck(center, doors[j]);
                 }
             }

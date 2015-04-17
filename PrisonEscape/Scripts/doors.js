@@ -33,7 +33,7 @@
         for (var i = 0 ; i < prison.map.getNumDoors(); i++) {
 
             var P = new Victor(spawnPos[0].x, spawnPos[0].y)
-            var C = new Victor(P.x + 16, P.y + 16)
+            var C = new Victor(P.x + 32, P.y + 32)
             var onT = new Victor(Math.round(C.x / 32), Math.round(C.y / 32));
 
             var Newdoor = {

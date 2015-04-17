@@ -545,12 +545,19 @@
     {
         return center;
     }
-    function pLayerHP(health)
+    function pLayerHP(health , name, type)
     {
         pHP += health;
+        console.log("Ouch " + name + " The " + type + " you Asshole! .. hp: " + pHP);
         if (pHP > 100) {pHP = 100;}
-        if (pHP < 0) { pHP = 0; }   //PLAYER DIES TRIGGER DEATH SEQUENCE
-        //console.log("Ouch you Asshole! .. hp: "  + pHP);
+        if (pHP < 0)
+        {
+            pHP = 0;
+
+
+        }   //PLAYER DIES TRIGGER DEATH SEQUENCE
+
+       
     }
     function getPLayerHP()
     {

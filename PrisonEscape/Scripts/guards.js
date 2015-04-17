@@ -259,7 +259,7 @@
         if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
                 if (!firstRun)
                 {
-                    prison.player.pLayerHP(-5); //DEAL 30 DAMAGE TO PLAYER
+                    prison.player.pLayerHP(-5 , guard.name, "guard"); //DEAL 30 DAMAGE TO PLAYER
                 }
                 
             }

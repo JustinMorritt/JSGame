@@ -196,7 +196,7 @@
             }else
             {
                 inmate.respect = 0;
-                prison.player.pLayerHP(-3);
+                prison.player.pLayerHP(-3, inmate.name, "inmate");
             }
         }   
     }

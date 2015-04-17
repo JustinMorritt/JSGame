@@ -7,7 +7,7 @@
         doorNames = [],
         pTile,
         firstRun = true,
-        doorOpenTime = 300,
+        doorOpenTime = 100,
 
     slowDown = {
         left: false,
@@ -45,7 +45,7 @@
                 sy: 1088,
                 dir: 0,                                             //Direction START WALKING OUT OF CELLS
                 pos: P,                                             //Position
-                origPos: P,                                         //Original Position
+                origPos: new Victor(P.x,P.y),                                         //Original Position
                 openPos: new Victor(P.x-35,P.y),
                 v: new Victor(0, 0),                                //Velocity
                 c: C,                                               //Center
@@ -54,6 +54,7 @@
                 accel: 9,                                           //Acceleration
                 sprite: Sprite,
                 open: false,
+                closing: false,
                 openTime: doorOpenTime,                             //DoorStays Open For ...
             }
             prison.map.shiftdoors();
@@ -104,26 +105,33 @@
         if (door.open)
         {
             door.dir = 1;
-            door.openTime--;
+            door.openTime -= 1;
+            //check if fully open
+            if (door.pos.x <= door.openPos.x) {
+                door.pos.x = door.openPos.x;
+                door.dir = 0;
+            }
             if (door.openTime <= 0)
             {
                 door.dir = 2;
                 door.open = false;
+                door.closing = true;
                 door.openTime = doorOpenTime;
             }
+      
         }
+       
         //check if fully closed
-        if (!door.open && door.pos.x >= door.origPos.x)
+        if (door.closing)
         {
-            door.pos.x = door.origPos.x;
-            door.dir = 0;
+            if (door.pos.x > door.origPos.x)
+            {
+                door.pos.x = door.origPos.x;
+                door.dir = 0;
+                door.closing = false;
+            }
         }
-        //check if fully open
-        if (door.open && door.pos.x <= door.openPos.x)
-        {
-            door.pos.x = door.openPos.x;
-            door.dir = 0;
-        }
+
 
         switch (door.dir) {
                 //LEFT

@@ -4,10 +4,10 @@
         game,
         sPositions = [], //Spawns
         doorsA = [],
-        collsionBlocks = [],
         doorNames = [],
         pTile,
         firstRun = true,
+        doorOpenTime = 300,
 
     slowDown = {
         left: false,
@@ -43,18 +43,18 @@
                 Cy: C.y,
                 sx: 0,
                 sy: 1088,
-                dir: 1,                                             //Direction START WALKING OUT OF CELLS
+                dir: 0,                                             //Direction START WALKING OUT OF CELLS
                 pos: P,                                             //Position
                 origPos: P,                                         //Original Position
+                openPos: new Victor(P.x-35,P.y),
                 v: new Victor(0, 0),                                //Velocity
                 c: C,                                               //Center
                 onT: onT,                                           //On Tile
                 speed: 200,                                         //Speed
                 accel: 9,                                           //Acceleration
                 sprite: Sprite,
-                cBlocks: [],
                 open: false,
-                openTime: 1000,                                     //DoorStays Open For ...
+                openTime: doorOpenTime,                             //DoorStays Open For ...
             }
             prison.map.shiftdoors();
             doorsA.push(Newdoor);
@@ -63,12 +63,10 @@
 
 
     function update(step, worldWidth, worldHeight) {
-        setPlayerBlock();
-        for (var i = 0 ; i < prison.map.getNumDoors() ; i++) {
-            playerCollision(doorsA[i], step);
-
+        for (var i = 0 ; i < prison.map.getNumDoors() ; i++)
+        {
             //ACCELERATION
-            applyDirection(doorsA[i]);
+            applyDirection(doorsA[i], step);
         }
         
     }
@@ -96,63 +94,51 @@
 
     }
 
-    //HELPER FUNCTIONS
-    function possibleCollisionBlocks(door) {
-        door.cBlocks = []; //Empty Current
-            door.cBlocks[0] = new Victor(door.onT.x, door.onT.y - 1); //Above
-            door.cBlocks[1] = new Victor(door.onT.x, door.onT.y + 1);     //Below
-    }
 
-    function setPlayerBlock() {
-        pTile = prison.player.getPlayerOBJ();
-    }
-
-    function playerCollision(door, step) {
-        //COLLISION CHECK /
-        if (firstRun)
-        {
-           //OPEN ALL DOORS RIGHT AWAY
-        }
-        var collisionCorrectionX = new Victor(0, 0);
-        var temp1 = new Victor(0, 0);
-        temp1 = prison.collision.collisionCheck(door.c, pTile);
-        collisionCorrectionX = temp1;
-
-        //door.pos.x += collisionCorrectionX.x;
-
-        var collisionCorrectionY = new Victor(0, 0);
-        var temp2 = new Victor(0, 0);
-
-        temp2 = prison.collision.collisionCheck(door.c, pTile);
-        collisionCorrectionY = temp2;
-        //door.pos.y += collisionCorrectionY.y;
-
-        if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
-            if (!firstRun) {
-                //OPEN DOOR
-                //console.log("PLAYER HIT DOOR");
-            }
-        }
-
-    }
-
-    function applyDirection(door) {
+    function applyDirection(door, step) {
         //UPDATE ONTILE
-        door.c.x = door.pos.x + 32;
+        door.c.x = door.pos.x + 16;
         door.c.y = door.pos.y + 32;
         door.onT.x = Math.round(door.c.x / 32); door.onT.y = Math.round(door.c.y / 32);
 
+        if (door.open)
+        {
+            door.dir = 1;
+            door.openTime--;
+            if (door.openTime <= 0)
+            {
+                door.dir = 2;
+                door.open = false;
+                door.openTime = doorOpenTime;
+            }
+        }
+        //check if fully closed
+        if (!door.open && door.pos.x >= door.origPos.x)
+        {
+            door.pos.x = door.origPos.x;
+            door.dir = 0;
+        }
+        //check if fully open
+        if (door.open && door.pos.x <= door.openPos.x)
+        {
+            door.pos.x = door.openPos.x;
+            door.dir = 0;
+        }
+
         switch (door.dir) {
-                //RIGHT
-            case 0: if (door.v.x != door.speed) { door.v.x += door.accel; } if (door.v.x > door.speed) { door.v.x = door.speed; }
-                break;
                 //LEFT
             case 1: if (door.v.x != door.speed * -1) { door.v.x -= door.accel; } if (door.v.x < door.speed * -1) { door.v.x = door.speed * -1; }
                 break;
-            case 3: door.v.x = 0;
-                door.v.y = 0;
+            //RIGHT
+            case 2: if (door.v.x != door.speed) { door.v.x += door.accel; } if (door.v.x > door.speed) { door.v.x = door.speed; }
+                break;
+            case 0: door.v.x = 0;
+                    door.v.y = 0;
                 break;
         }
+
+        //STEP BRO
+        door.pos.x += door.v.x * step;
 
     }
 

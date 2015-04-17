@@ -221,8 +221,7 @@
     {
         //UPDATE DOOR ARRAY TO COLLIDE WITH
         doors = prison.doors.getDoors();
-        x += vx * step;
-        center.x = x + 16; center.y = y + 16;
+
 
         //Update Potential Collision Blocks 
         possibleCollisionBlocks();
@@ -231,9 +230,8 @@
         var collisionCorrection = new Victor(0, 0);
         for (var i = 0 ; i < 9; i++) {
             for(var j = 0 ; j < numDoors; j++) {
-                if (pColBlocks[i].x == doors[j].onT.x && pColBlocks[i].y == doors[j].onT.y)
-                {
-                    console.log("COlliding with Door!");
+                if (pColBlocks[i].x == doors[j].onT.x && pColBlocks[i].y == doors[j].onT.y){
+                    doors[j].open = true;//OPEN DOOR
                     collisionCorrection = prison.collision.collisionCheck(center, doors[j]);
                 }
             }
@@ -243,20 +241,19 @@
             x += collisionCorrection.x;
         }
 
-        y += vy * step;
-        center.x = x + 16;
-        center.y = y + 16;
 
         var collisionCorrection2 = new Victor(0, 0);
         for (var i = 0 ; i < 9; i++) {
             for (var j = 0 ; j < numDoors; j++) {
                 if (pColBlocks[i].x == doors[j].onT.x && pColBlocks[i].y == doors[j].onT.y) {
+                    doors[j].open = true;//OPEN DOOR
                     collisionCorrection2 = prison.collision.collisionCheck(center, doors[j]);
                 }
             }
         }
         //IF CORRECTION APPLY IT ...
         if (collisionCorrection2.y != 0) {
+           
             y += collisionCorrection2.y;
         }
     }

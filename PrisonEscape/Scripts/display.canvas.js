@@ -32,6 +32,7 @@
         rows = prison.settings.rows;
         guards = prison.guards;
         player = prison.player;
+        doors = prison.doors;
         camera = prison.camera;
         inmates = prison.inmates;
         map = prison.map;
@@ -62,6 +63,7 @@
 
         map.run();
         player.run();
+        doors.run();
         inmates.run();
         guards.run();
         schedule.run(ctx);
@@ -185,6 +187,7 @@
         // INMATES/GUARDS/PLAYER DRAW
         inmates.draw(STEP, ctx, sx, sy);
         guards.draw(STEP, ctx, sx, sy);
+        doors.draw(STEP, ctx, sx, sy);
         player.draw(STEP, ctx, sx, sy);
 
         ctx.restore();
@@ -194,6 +197,7 @@
     {
         inmates.update(STEP, 3200, 3200);
         guards.update(STEP, 3200, 3200);
+        doors.update(STEP, 3200, 3200);
         player.update(STEP, 3200, 3200);
         camera.update();
     }

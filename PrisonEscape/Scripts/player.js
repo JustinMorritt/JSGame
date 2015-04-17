@@ -256,7 +256,11 @@
         context.save();
         //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
         var newX = (x-pWidth/2) - xView;
-        var newY = (y-pHeight/2) - yView;
+        var newY = (y - pHeight / 2) - yView;
+
+        //DRAW HEALTH
+        context.beginPath(); context.rect(newX - 35, newY - 14, getPLayerHP(), 8);
+        context.fillStyle = 'red'; context.fill(); context.stroke();
 
         //SHADOW 
         context.beginPath();
@@ -268,6 +272,9 @@
         context.shadowOffsetY = 1;
         context.fill();
         context.stroke();
+
+        //BOXES AROUND HP AND RESP
+        context.beginPath(); context.rect(newX - 35, newY - 14, 100, 8); context.stroke();
 
         context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
 		
@@ -282,7 +289,7 @@
 					pHeight);*/
         
         context.restore();
-        console.log("DREW PLAYER X:" +x+ " Y: " +y );
+        //console.log("DREW PLAYER X:" +x+ " Y: " +y );
 		
 		/*Animation 
 		var currentFrame = 0;

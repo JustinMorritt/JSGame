@@ -184,7 +184,12 @@
         paused = false;
         prison.schedule.setPaused(paused);
     }
+    function getPaused()
+    {
+        return paused;
+    }
     return {
+        getPaused: getPaused,
         run: run
     };
 

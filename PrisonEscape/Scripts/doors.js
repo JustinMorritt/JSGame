@@ -1,11 +1,11 @@
-﻿prison.guards = (function () {
+﻿prison.doors = (function () {
 
-    var numGuards,
+    var numdoors,
         game,
         sPositions = [], //Spawns
-        guardsA = [],
+        doorsA = [],
         collsionBlocks = [],
-        guardNames = [],
+        doorNames = [],
         pTile,
         firstRun = true,
 
@@ -17,88 +17,67 @@
     }
 
     function run() {
-        initialize(console.log("initialized guards"));
+        initialize(console.log("initialized doors"));
     }
 
     function initialize(callback) {
-        game = prison.game;
-        numGuards = prison.settings.guards;
-        guardNames = game.getGuardNames(); //Array of Random guard Names
-        collsionBlocks = prison.map.getCollisions();
-        spawnGuards();
+        spawndoors();
     }
 
-    function spawnGuards() {
+    function spawndoors() {
+        spawnPos = prison.map.getDoors();
 
-        var names = prison.game.getGuardNames();
-        spawnPos = prison.map.guardSpawns();
+        console.log(prison.map.getNumDoors());
 
-        for (var i = 0 ; i < 7; i++) {
+        for (var i = 0 ; i < prison.map.getNumDoors(); i++) {
             Sprite = new Image();
-            Sprite.src = "Images/$Guard" + i + ".png";
+            Sprite.src = "Images/prisons.png";
 
-            var NewGuard = {
+            var P = new Victor(spawnPos[0].x, spawnPos[0].y)
+            var C = new Victor(P.x + 16, P.y + 16)
+            var onT = new Victor(Math.round(C.x / 32), Math.round(C.y / 32));
+
+            var Newdoor = {
                 sx: 0,
-                sy: 0,
+                sy: 1088,
                 dir: 1,                                             //Direction START WALKING OUT OF CELLS
-                pos: new Victor(spawnPos[0].x, spawnPos[0].y),      //Position
-                cellPos: new Victor(spawnPos[0].x, spawnPos[0].y),  //Cell Position
+                pos: P,      //Position
                 v: new Victor(0, 0),                                //Velocity
-                c: new Victor(0, 0),                                //Center
-                onT: new Victor(0, 0),                              //On Tile
+                c: C,                                               //Center
+                onT: onT,                                           //On Tile
                 speed: 100,                                         //Speed
                 accel: 9,                                           //Acceleration
-                sdspeed: 40,                                        //SlowDownSpeed
-                name: names[i],
                 sprite: Sprite,
-                health: 100,
                 cBlocks: []
             }
-            prison.map.shiftGuards();
-            guardsA.push(NewGuard);
+            prison.map.shiftdoors();
+            doorsA.push(Newdoor);
         }
     }
 
 
     function update(step, worldWidth, worldHeight) {
         setPlayerBlock();
-        for (var i = 0 ; i < 7; i++) {
-            playerCollision(guardsA[i], step);
+        for (var i = 0 ; i < prison.map.getNumDoors() ; i++) {
+            playerCollision(doorsA[i], step);
 
             //ACCELERATION
-            applyDirection(guardsA[i]);
-
-            //UPDATE POSSIBLE COLLISION BLOCKS
-            possibleCollisionBlocks(guardsA[i]);
+            applyDirection(doorsA[i]);
         }
+        
     }
     function draw(step, ctx, xView, yView) {
 
-        for (var i = 0 ; i < 7; i++) {
+        for (var i = 0 ; i < prison.map.getNumDoors() ; i++) {
             //OFFSET CAMERA VIEW
-            var newX = (guardsA[i].pos.x) - xView;
-            var newY = (guardsA[i].pos.y) - yView;
-
+            var newX = (doorsA[i].pos.x) - xView;
+            var newY = (doorsA[i].pos.y) - yView;
             ctx.save();
 
-            //SHADOW 
-            ctx.beginPath();
-            ctx.rect(newX + 6, newY + 6, 10, 10);
-            ctx.fillStyle = "red";
-            ctx.shadowColor = 'black';
-            ctx.shadowBlur = 15;
-            ctx.shadowOffsetX = 9;
-            ctx.shadowOffsetY = 1;
-            ctx.fill();
-            ctx.stroke();
-
-            //BOXES AROUND HP AND RESP
-            ctx.beginPath(); ctx.rect(newX - 30, newY - 14, guardsA[i].health, 6); ctx.stroke();
-
             ctx.drawImage(
-                guardsA[i].sprite,
-                guardsA[i].sx,
-                guardsA[i].sy,
+                doorsA[i].sprite,
+                doorsA[i].sx,
+                doorsA[i].sy,
                 32,
                 32,
                 newX,
@@ -112,57 +91,62 @@
     }
 
     //HELPER FUNCTIONS
-    function possibleCollisionBlocks(guard) {
-        guard.cBlocks = []; //Empty Current
-            guard.cBlocks[0] = new Victor(guard.onT.x, guard.onT.y - 1); //Above
-            guard.cBlocks[1] = new Victor(guard.onT.x, guard.onT.y + 1);     //Below
+    function possibleCollisionBlocks(door) {
+        door.cBlocks = []; //Empty Current
+            door.cBlocks[0] = new Victor(door.onT.x, door.onT.y - 1); //Above
+            door.cBlocks[1] = new Victor(door.onT.x, door.onT.y + 1);     //Below
     }
 
     function setPlayerBlock() {
         pTile = prison.player.getPlayerOBJ();
     }
 
-    function playerCollision(guard, step) {
+    function playerCollision(door, step) {
         //COLLISION CHECK /
+        if (firstRun)
+        {
+           //OPEN ALL DOORS RIGHT AWAY
+        }
+
+
         var collisionCorrectionX = new Victor(0, 0);
         var temp1 = new Victor(0, 0);
-        temp1 = prison.collision.collisionCheck(guard.c, pTile);
+        temp1 = prison.collision.collisionCheck(door.c, pTile);
         collisionCorrectionX = temp1;
-        guard.pos.x += collisionCorrectionX.x;
+
+        //door.pos.x += collisionCorrectionX.x;
 
         var collisionCorrectionY = new Victor(0, 0);
         var temp2 = new Victor(0, 0);
 
-        temp2 = prison.collision.collisionCheck(guard.c, pTile);
+        temp2 = prison.collision.collisionCheck(door.c, pTile);
         collisionCorrectionY = temp2;
-        guard.pos.y += collisionCorrectionY.y;
+        //door.pos.y += collisionCorrectionY.y;
+
         if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
             if (!firstRun) {
-                prison.player.pLayerHP(-5); //DEAL 30 DAMAGE TO PLAYER
+               //OPEN DOOR
             }
 
         }
 
     }
 
-    function applyDirection(guard) {
+    function applyDirection(door) {
         //UPDATE ONTILE
-        guard.c.x = guard.pos.x + 32;
-        guard.c.y = guard.pos.y + 32;
-        guard.onT.x = Math.round(guard.c.x / 32); guard.onT.y = Math.round(guard.c.y / 32);
+        door.c.x = door.pos.x + 32;
+        door.c.y = door.pos.y + 32;
+        door.onT.x = Math.round(door.c.x / 32); door.onT.y = Math.round(door.c.y / 32);
 
-        switch (guard.dir) {
+        switch (door.dir) {
                 //RIGHT
-            case 2: if (guard.v.x != guard.speed) { guard.v.x += guard.accel; } if (guard.v.x > guard.speed) { guard.v.x = guard.speed; }
+            case 2: if (door.v.x != door.speed) { door.v.x += door.accel; } if (door.v.x > door.speed) { door.v.x = door.speed; }
                 break;
                 //LEFT
-            case 3: if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
+            case 3: if (door.v.x != door.speed * -1) { door.v.x -= door.accel; } if (door.v.x < door.speed * -1) { door.v.x = door.speed * -1; }
                 break;
         }
-        if (guard.pos.x - 64 < 0) { guard.pos.x = 64; }
-        if (guard.pos.y - 64 < 0) { guard.pos.y = 64; }
-        if (guard.pos.x + (32 * 3) > 3200) { guard.pos.x = 3200 - (32 * 3); }
-        if (guard.pos.y + (32 * 3) > 3200) { guard.pos.y = 3200 - (32 * 3); }
+
     }
 
     //GETTERS SETTERS

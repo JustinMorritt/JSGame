@@ -113,7 +113,7 @@
         pName               = prison.settings.name;
         pColBlocks          = [];
         ranges.push(new AnimationRange("", 0, 1));
-        //frames.push(new Frame(sx, sy, pWidth, pHeight));
+        frames.push(new Frame(sx, sy, pWidth, pHeight));
 
 
         playerSprite = new Image();
@@ -130,6 +130,7 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = true;
+                    setRange("WALKLEFT");
                     slowDown.left = false;
                     break;
                 case 38: // up arrow
@@ -141,11 +142,13 @@
                 case 39:
                 case 68: // right arrow
                     controls.right = true;
+                    setRange("WALKRIGHT");
                     slowDown.right = false;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = true;
+                    setRange("WALKDOWN");
                     slowDown.down = false;
                     break;
             }
@@ -156,24 +159,28 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = false;
+                    setRange("STANDLEFT");
                     slowDown.left = true;
                     //vx = 0;
                     break;
                 case 38:
                 case 87: // up arrow
                     controls.up = false;
+                    setRange("STANDUP");
                     slowDown.up = true;
                     //vy = 0;
                     break;
                 case 39:
                 case 68: // right arrow
                     controls.right = false;
+                    setRange("STANDRIGHT");
                     slowDown.right = true;
                     //vx = 0;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = false;
+                    setRange("STANDDOWN");
                     slowDown.down = true;
                     //vy = 0;
                     break;
@@ -209,9 +216,14 @@
         context.beginPath(); context.rect(newX - 35, newY - 14, getPLayerHP(), 8);
         context.fillStyle = 'red'; context.fill(); context.stroke();
 
+        //BOXES AROUND HP AND RESP
+        context.beginPath(); context.rect(newX - 35, newY - 14, 100, 8); context.stroke();
+
+        //context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
+
         //SHADOW 
         context.beginPath();
-        context.rect(newX + 6, newY + 6, 10, 10);
+        context.rect(newX + 8, newY + 6, 10, 10);
         context.fillStyle = "red";
         context.shadowColor = 'black';
         context.shadowBlur = 15;
@@ -219,13 +231,7 @@
         context.shadowOffsetY = 1;
         context.fill();
         context.stroke();
-
-        //BOXES AROUND HP AND RESP
-        context.beginPath(); context.rect(newX - 35, newY - 14, 100, 8); context.stroke();
-
-        //context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
         
-        context.restore();
 		
 		var _currentFrame = 0;
 		for(var i = 0; i < ranges.length; ++i)
@@ -233,12 +239,12 @@
 			if(_currentRange === ranges[i].getName())
 			{
 				_currentFrame = ranges[i].currentFrame();
-				console.log(_currentFrame);
+				console.log(_currentRange);
 			}
 		}
 
 		context.drawImage(playerSprite, 
-					frames[_currentFrame]._getx(),  //-50 while testing
+					frames[_currentFrame]._getx(),  
 					frames[_currentFrame]._gety(),
 					frames[_currentFrame]._getWidth(), 
 					frames[_currentFrame]._getHeight(),
@@ -246,8 +252,10 @@
 					newY, 
 					pWidth, 
 					pHeight);
-    }
 
+		context.restore();
+    }
+    
 
 
 
@@ -412,20 +420,33 @@
         var h = 32;
         setRangeFrames("", 0, 1);
 
-        addRange("WALKUP", 1, 5)
-        addFrame(0, 64, w, h);
+        addRange("WALKRIGHT", 1, 5)
+        addFrame(0,  64, w, h);
         addFrame(32, 64, w, h);
         addFrame(64, 64, w, h);
         addFrame(32, 64, w, h);
-        addRange("STANDUP", 4, 5)
+        addRange("STANDRIGHT", 4, 5)
 
         addRange("WALKDOWN", 5, 9)
-        addFrame(0, 0, w, h);
-        addFrame(0, 32, w, h);
-        addFrame(0, 64, w, h);
-        addFrame(0, 32, w, h);
+        addFrame(0,  0, w, h);
+        addFrame(32, 0, w, h);
+        addFrame(64, 0, w, h);
+        addFrame(32, 0, w, h);
         addRange("STANDDOWN", 8, 9)
 
+        addRange("WALKUP", 9, 13)
+        addFrame(0,  96, w, h);
+        addFrame(32, 96, w, h);
+        addFrame(64, 96, w, h);
+        addFrame(32, 96, w, h);
+        addRange("STANDUP", 12, 13)
+
+        addRange("WALKLEFT", 13, 17)
+        addFrame(0,  32, w, h);
+        addFrame(32, 32, w, h);
+        addFrame(64, 32, w, h);
+        addFrame(32, 32, w, h);
+        addRange("STANDLEFT", 16, 17)
 
         setInterval(nextFrame, ANIMATION_RATE);
         console.log("Done Setting Up animation...");

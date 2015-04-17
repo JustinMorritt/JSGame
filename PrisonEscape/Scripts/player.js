@@ -83,7 +83,6 @@
     }
 
 
-
     //RUN INIT UPDATE DRAW
     function run() {
         initialize(console.log("initialized player"));
@@ -190,7 +189,6 @@
             }
         }, false);
     }
-
     function update(step)
     {
         //APPLY DIRECTION
@@ -239,7 +237,7 @@
 			if(_currentRange === ranges[i].getName())
 			{
 				_currentFrame = ranges[i].currentFrame();
-				console.log(_currentRange);
+				//console.log(_currentRange);
 			}
 		}
 
@@ -255,9 +253,6 @@
 
 		context.restore();
     }
-    
-
-
 
     //HELPER FUNCTIONS
     function possibleCollisionBlocks()
@@ -454,9 +449,8 @@
     function addRange(rangeName, start, end)
     {
         ranges.push(new AnimationRange(rangeName, start, end));
-        console.log("added RANGE   " + rangeName);
+        //console.log("added RANGE   " + rangeName);
     }
-    //first set your range ID , then set your 
     function setRange(rangeID)
     {
         for(var i = 0; i < ranges.length; i++)
@@ -464,10 +458,11 @@
             if(rangeID === ranges[i].getName())
             {
                 _currentRange = ranges[i].getName();
+                return;
             }
             
         }
-        console.log("No range of that name..");
+        //console.log("No range of that name..");
     }
     function setRangeFrames(rangeName, start, end)
     {
@@ -496,9 +491,8 @@
     function addFrame(xPos, yPos, w, h)
     {
         frames.push(new Frame(xPos, yPos, w, h));
-        console.log("Added Frame!");
+        //console.log("Added Frame!");
     }
-
 
     //GETTERS SETTERS
     function getX()
@@ -576,180 +570,6 @@
             return pTile;
     }
 	
- /*Character Animation
-
-function playerFrame(xPos, yPos, w, h)
-{
-	var _x = xPos;
-	var _y = yPos;
-	var _width = w;
-	var _height = h;
-
-	function _getX()
-	{
-		return _x;
-	};
-
-	function _getY()
-	{
-		return _y;
-	};
-
-	function _getWidth()
-	{
-		return _width;  
-	};
-
-	function _getHeight()
-	{
-		return _height;
-	};
-};
-
-function AnimationRange(rangeName, first, end)
-{
-	if(end <= first)
-	{
-		console.log("End less than first: Range not changed.");
-		return;
-	}
-	
-	var _name = rangeName;
-	var _first = first;
-	var _end = end;
-
-	var _currentFrame = _first;
-
-	function setRange(first, end)
-	{
-		if(end <= first)
-		{
-			console.log("End less than first: Range not changed.");
-			return;
-		}
-		_first = first
-		_end = end;
-	};
-	
-	//function setRange(rangeID)
-	//{
-	//	setRange(rangeID);
-	//};
-
-	function getEnd()
-	{
-		return _end;
-	};
-
-	function getFirst()
-	{
-		return _first;
-	};
-
-	function getName()
-	{
-		return _name;
-	};
-
-	function currentFrame()
-	{
-		return _currentFrame;
-	};
-
-	function nextFrame()
-	{
-		//console.log("Before: " + _currentFrame);    
-		++_currentFrame;
-		
-		if(_currentFrame == _end)
-		{
-			_currentFrame = _first;
-		}
-		//console.log("After: " + _currentFrame);    
-		return _currentFrame;
-	};
-};
-
-var _frames = new Array();
-_frames.push(new playerFrame(sx, sy, 32, 32));
-
-var _ranges = new Array();
-_ranges.push(new AnimationRange("", 0, 1));
-
-var _currentRange = "";
-
-function addRange(rangeName, start, end)
-{
-	_ranges.push(new AnimationRange(rangeName, start, end));
-};  
-
-function range(rangeId)
-{
-	for(var i = 0; i < _ranges.length; ++i)
-	{
-		if(rangeId === _ranges[i].getName())
-		{
-			_currentRange = _ranges[i].getName();
-			//_ranges[i].resetCurrentFrame();
-		}
-	}
-};
-
-function setRangeFrames(rangeName, start, end)
-{
-	for(var i = 0; i < _ranges.length; ++i)
-	{
-		if(rangeName == _ranges[i].getName())
-		{
-			_ranges[i].setRange(start, end);
-			return;
-		}
-	}    
-}
-
-function Frame()
-{
-	for(var i = 0; i < _ranges.length; ++i)
-	{
-		if(_currentRange == _ranges[i].getName())
-		{
-			var ret = _ranges[i].nextFrame()
-			return ret;
-		}
-	}
-	console.log("Something broken in the frames mechanism");
-	return 0;
-};
-
-function addFrame(xPos, yPos, w, h)
-{
-	_frames.push(new playerFrame(xPos, yPos, w, h));
-};
-
-//setRangeFrames("", 0, 1);
-
-addRange("Player Walk Left", 1, 4);
-addFrame(0, 65, 32, 32);
-addFrame(33, 64, 32, 32);
-addFrame(65, 65, 32, 32);
-
-addRange("Player Walk Right", 4, 7);
-addFrame(0, 65, 32, 32);
-addFrame(33, 64, 32, 32);
-addFrame(65, 65, 32, 32);
-
-addRange("Player Walk Up", 7, 10);
-addFrame(0, 65, 32, 32);
-addFrame(33, 64, 32, 32);
-addFrame(65, 65, 32, 32);
-
-addRange("Player Walk Down", 10, 13);
-addFrame(0, 65, 32, 32);
-addFrame(33, 64, 32, 32);
-addFrame(65, 65, 32, 32);
-*/
-
-
     return {
         //EXPOSED FUNCTIONS IN HERE
         setVX           :setVX,

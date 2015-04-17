@@ -22,6 +22,10 @@
         center,
         onTile,
         pColBlocks, //Possible Collision Blocks Array.
+        frames = [],
+        ranges = [],
+        _currentRange = "",
+        ANIMATION_RATE = 150;
 
     controls = {
         left    : false,
@@ -34,10 +38,56 @@
         right   : false,
         down    : false,}
 
+    //ANIMATION OBJECTS
+    var Frame = function (xPos, yPos, w, h) {
+        var _x = xPos, _y = yPos, _width = w, _height = h;
+        this._getx = function () {
+            return _x;
+        };
+        this._gety = function () {
+            return _y;
+        };
+        this._getWidth = function () {
+            return _width;
+        };
+        this._getHeight = function () {
+            return _height;
+        };
+    };
+    var AnimationRange = function(rangeName, first, end)
+    {
+        if(end <= first)
+        {
+            console.log("end less then First frame: Range Not Changed..");
+            return;
+        }
+        var _name = rangeName;
+        var _first = first;
+        var _end = end;
+
+        var _currentFrame = _first;
+
+        this.setRange = function (first, end) {
+            if (end <= first) {
+                console.log("end less then First frame: Range Not Changed..");
+                return;
+            }
+            _first = first;
+            _end = end;
+        };
+        this.getEnd = function ()       { return _end; };
+        this.getFirst = function ()     { return _first; };
+        this.getName = function ()      { return _name; };
+        this.currentFrame = function () { return _currentFrame; };
+        this.nextFrame = function ()    { ++_currentFrame;  if (_currentFrame == _end) { _currentFrame = _first;  } return _currentFrame; };
+    }
+
+
+
+    //RUN INIT UPDATE DRAW
     function run() {
         initialize(console.log("initialized player"));
     }
-
     function initialize(callback)
     {
 
@@ -62,6 +112,9 @@
         getColBlockNum      = prison.map.getColBlockNum();
         pName               = prison.settings.name;
         pColBlocks          = [];
+        ranges.push(new AnimationRange("", 0, 1));
+        //frames.push(new Frame(sx, sy, pWidth, pHeight));
+
 
         playerSprite = new Image();
         playerSprite.addEventListener("load", callback, false);
@@ -70,6 +123,7 @@
         //GET ARRAY OF COLLISION BLOCKS 
         collsionBlocks = prison.map.getCollisions();
 
+        setupAnimation();
 
         window.addEventListener("keydown", function (e) {
             switch (e.keyCode) {
@@ -81,6 +135,7 @@
                 case 38: // up arrow
                 case 87:
                     controls.up = true;
+                    setRange("WALKUP");
                     slowDown.up = false;
                     break;
                 case 39:
@@ -139,33 +194,89 @@
 
         //BLOCK CORRECTION
         blockCorrection(step);
+    }
+    function draw(step, context, xView, yView)// camera.xView, camera.yView
+    {
+        xView = xView; //these will eventually be camera positions
+        yView = yView;
 
+        context.save();
+        //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
+        var newX = (x-pWidth/2) - xView;
+        var newY = (y - pHeight / 2) - yView;
 
+        //DRAW HEALTH
+        context.beginPath(); context.rect(newX - 35, newY - 14, getPLayerHP(), 8);
+        context.fillStyle = 'red'; context.fill(); context.stroke();
 
-        //console.log("On tile: " + onTile.x + " " + onTile.y);
+        //SHADOW 
+        context.beginPath();
+        context.rect(newX + 6, newY + 6, 10, 10);
+        context.fillStyle = "red";
+        context.shadowColor = 'black';
+        context.shadowBlur = 15;
+        context.shadowOffsetX = 9;
+        context.shadowOffsetY = 1;
+        context.fill();
+        context.stroke();
+
+        //BOXES AROUND HP AND RESP
+        context.beginPath(); context.rect(newX - 35, newY - 14, 100, 8); context.stroke();
+
+        //context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
+        
+        context.restore();
 		
-		/*Animation
-		if(vx === 0)
+		var _currentFrame = 0;
+		for(var i = 0; i < ranges.length; ++i)
 		{
-			range("");
+			if(_currentRange === ranges[i].getName())
+			{
+				_currentFrame = ranges[i].currentFrame();
+				console.log(_currentFrame);
+			}
 		}
-		if(controls.left)
-		{
-			range("Player Walk Left");
-		}
-		if(controls.right)
-		{
-			range("Player Walk Right");
-		}
-		if(controls.up)
-		{
-			range("Player Walk Up");
-		}
-		if(controls.down)
-		{
-			range("Player Walk Down");
-		} */
-	}
+
+		context.drawImage(playerSprite, 
+					frames[_currentFrame]._getx(),  //-50 while testing
+					frames[_currentFrame]._gety(),
+					frames[_currentFrame]._getWidth(), 
+					frames[_currentFrame]._getHeight(),
+					newX, 
+					newY, 
+					pWidth, 
+					pHeight);
+    }
+
+
+
+
+    //HELPER FUNCTIONS
+    function possibleCollisionBlocks()
+    {
+        pColBlocks = []; //Empty Current
+        //CHECK IF ITS OFF MAP GRID < 0
+        if (onTile.x - 1 <= 0 || onTile.y - 1 <= 0)
+        {
+            pColBlocks[0] = new Victor(onTile.x, onTile.y);         //Topleft
+            pColBlocks[2] = new Victor(onTile.x, onTile.y);         //BotLeft
+            pColBlocks[4] = new Victor(onTile.x, onTile.y);         //Left
+            pColBlocks[6] = new Victor(onTile.x, onTile.y);         //Above
+            pColBlocks[1] = new Victor(onTile.x, onTile.y);         //TopRight
+        }
+        else
+        {
+            pColBlocks[1] = new Victor(onTile.x + 1, onTile.y - 1); //TopRight
+            pColBlocks[0] = new Victor(onTile.x - 1, onTile.y - 1); //Topleft
+            pColBlocks[2] = new Victor(onTile.x - 1, onTile.y + 1); //BotLeft
+            pColBlocks[4] = new Victor(onTile.x - 1, onTile.y    ); //Left
+            pColBlocks[6] = new Victor(onTile.x,     onTile.y - 1); //Above
+        }
+        pColBlocks[3] = new Victor(onTile.x + 1, onTile.y + 1);     //BotRight
+        pColBlocks[5] = new Victor(onTile.x + 1, onTile.y    );     //Right
+        pColBlocks[7] = new Victor(onTile.x,     onTile.y + 1);     //Below
+        pColBlocks[8] = new Victor(onTile.x,     onTile.y    );     //Your Current Tile
+    }
     function blockCorrection(step)
     {
         x += vx * step;
@@ -216,7 +327,6 @@
             y += collisionCorrection2.y;
         }
     }
-
     function doorCorrection(step)
     {
         //UPDATE DOOR ARRAY TO COLLIDE WITH
@@ -257,7 +367,6 @@
             y += collisionCorrection2.y;
         }
     }
-
     function applyDirection()
     {
         if (prison.screens["game-screen"].getPaused()) {
@@ -286,100 +395,6 @@
         if (x + (pWidth * 1.5) > 3200) { x = 3200 - (pWidth * 1.5); }
         if (y + (pHeight * 1.5) > 3200) { y = 3200 - (pHeight * 1.5); }
     }
-
-    function draw(step, context, xView, yView)// camera.xView, camera.yView
-    {
-
-        xView = xView; //these will eventually be camera positions
-        yView = yView;
-
-        context.save();
-        //context.drawImage(img,    sx, sy, swidth,     sheight,    dx, dy, dwidth,     dheight);
-        var newX = (x-pWidth/2) - xView;
-        var newY = (y - pHeight / 2) - yView;
-
-        //DRAW HEALTH
-        context.beginPath(); context.rect(newX - 35, newY - 14, getPLayerHP(), 8);
-        context.fillStyle = 'red'; context.fill(); context.stroke();
-
-        //SHADOW 
-        context.beginPath();
-        context.rect(newX + 6, newY + 6, 10, 10);
-        context.fillStyle = "red";
-        context.shadowColor = 'black';
-        context.shadowBlur = 15;
-        context.shadowOffsetX = 9;
-        context.shadowOffsetY = 1;
-        context.fill();
-        context.stroke();
-
-        //BOXES AROUND HP AND RESP
-        context.beginPath(); context.rect(newX - 35, newY - 14, 100, 8); context.stroke();
-
-        context.drawImage(playerSprite, sx, sy, 32, 32, newX, newY, pWidth, pHeight);
-		
-		/*context.drawImage(playerSprite, 
-					_frames[currentFrame]._getx(), 
-					_frames[currentFrame]._gety(),
-					_frames[currentFrame]._getWidth(), 
-					_frames[currentFrame]._getHeight(),
-					newX, 
-					newY, 
-					pWidth, 
-					pHeight);*/
-        
-        context.restore();
-        //console.log("DREW PLAYER X:" +x+ " Y: " +y );
-		
-		/*Animation 
-		var currentFrame = 0;
-		for(var i = 0; i < _ranges.length; ++i)
-		{
-			if(_currentRange === _ranges[i].getName())
-			{
-				currentFrame = _ranges[i].currentFrame();
-				//console.log(currentFrame);
-			}
-		}*/
-/*
-		context.drawImage(playerSprite, 
-					_frames[currentFrame]._getx(), 
-					_frames[currentFrame]._gety(),
-					_frames[currentFrame]._getWidth(), 
-					_frames[currentFrame]._getHeight(),
-					newX, 
-					newY, 
-					pWidth, 
-					pHeight);*/
-    }
-
-    //HELPER FUNCTIONS
-    function possibleCollisionBlocks()
-    {
-        pColBlocks = []; //Empty Current
-        //CHECK IF ITS OFF MAP GRID < 0
-        if (onTile.x - 1 <= 0 || onTile.y - 1 <= 0)
-        {
-            pColBlocks[0] = new Victor(onTile.x, onTile.y);         //Topleft
-            pColBlocks[2] = new Victor(onTile.x, onTile.y);         //BotLeft
-            pColBlocks[4] = new Victor(onTile.x, onTile.y);         //Left
-            pColBlocks[6] = new Victor(onTile.x, onTile.y);         //Above
-            pColBlocks[1] = new Victor(onTile.x, onTile.y);         //TopRight
-        }
-        else
-        {
-            pColBlocks[1] = new Victor(onTile.x + 1, onTile.y - 1); //TopRight
-            pColBlocks[0] = new Victor(onTile.x - 1, onTile.y - 1); //Topleft
-            pColBlocks[2] = new Victor(onTile.x - 1, onTile.y + 1); //BotLeft
-            pColBlocks[4] = new Victor(onTile.x - 1, onTile.y    ); //Left
-            pColBlocks[6] = new Victor(onTile.x,     onTile.y - 1); //Above
-        }
-        pColBlocks[3] = new Victor(onTile.x + 1, onTile.y + 1);     //BotRight
-        pColBlocks[5] = new Victor(onTile.x + 1, onTile.y    );     //Right
-        pColBlocks[7] = new Victor(onTile.x,     onTile.y + 1);     //Below
-        pColBlocks[8] = new Victor(onTile.x,     onTile.y    );     //Your Current Tile
-    }
-    
     function dPosCB()  //DISPLAY POSSIBLE COLLISION BLOCKS
     {
         var block = 0;
@@ -389,6 +404,80 @@
             console.log("BLock " +block +" X:" +pColBlocks[i].x + " Y:" + pColBlocks[i].y)
         }
     }
+
+    //ANIMATION
+    function setupAnimation()
+    {
+        var w = 32;
+        var h = 32;
+        setRangeFrames("", 0, 1);
+
+        addRange("WALKUP", 1, 5)
+        addFrame(0, 64, w, h);
+        addFrame(32, 64, w, h);
+        addFrame(64, 64, w, h);
+        addFrame(32, 64, w, h);
+        addRange("STANDUP", 4, 5)
+
+        addRange("WALKDOWN", 5, 9)
+        addFrame(0, 0, w, h);
+        addFrame(0, 32, w, h);
+        addFrame(0, 64, w, h);
+        addFrame(0, 32, w, h);
+        addRange("STANDDOWN", 8, 9)
+
+
+        setInterval(nextFrame, ANIMATION_RATE);
+        console.log("Done Setting Up animation...");
+    }
+    function addRange(rangeName, start, end)
+    {
+        ranges.push(new AnimationRange(rangeName, start, end));
+        console.log("added RANGE   " + rangeName);
+    }
+    //first set your range ID , then set your 
+    function setRange(rangeID)
+    {
+        for(var i = 0; i < ranges.length; i++)
+        {
+            if(rangeID === ranges[i].getName())
+            {
+                _currentRange = ranges[i].getName();
+            }
+            
+        }
+        console.log("No range of that name..");
+    }
+    function setRangeFrames(rangeName, start, end)
+    {
+        for(var i = 0; i < ranges.length; i++)
+        {
+            if(rangeName == ranges[i].getName())
+            {
+                ranges[i].setRange(start, end);
+                return;
+            }
+        }
+    }
+    function nextFrame()
+    {
+        for(var i = 0; i < ranges.length; i++)
+        {
+            if(_currentRange == ranges[i].getName())
+            {
+                var ret = ranges[i].nextFrame();
+                return ret;
+            }
+        }
+        console.log("Something broke in the frames mechanism...");
+        return 0;
+    }
+    function addFrame(xPos, yPos, w, h)
+    {
+        frames.push(new Frame(xPos, yPos, w, h));
+        console.log("Added Frame!");
+    }
+
 
     //GETTERS SETTERS
     function getX()

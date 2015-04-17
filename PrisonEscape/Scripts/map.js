@@ -257,20 +257,20 @@
 
     return {
 //EXPOSED FUNCTIONS IN HERE
-        run: run,
-        initialize: initialize,
-        shiftSpawn: shiftSpawn,
-        getDoors: getDoors,
-        print: print,
-        shiftdoors: shiftdoors,
-        getItems: getItems,
-        getNumDoors: getNumDoors,
-        getColBlockNum: getColBlockNum,
-        getCollisions: getCollisions,
-        getSpawns: getSpawns,
-        guardSpawns: guardSpawns,
-        shiftGuards: shiftGuards,
-        drawItems: drawItems,
-        updateItems: updateItems
+        run             : run,
+        initialize      : initialize,
+        shiftSpawn      : shiftSpawn,
+        getDoors        : getDoors,
+        print           : print,
+        shiftdoors      : shiftdoors,
+        getItems        : getItems,
+        getNumDoors     : getNumDoors,
+        getColBlockNum  : getColBlockNum,
+        getCollisions   : getCollisions,
+        getSpawns       : getSpawns,
+        guardSpawns     : guardSpawns,
+        shiftGuards     : shiftGuards,
+        drawItems       : drawItems,
+        updateItems     : updateItems
     };
 })();

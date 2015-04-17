@@ -334,7 +334,7 @@ ul.menu li button:active
 }
 
 /*============================GAME OVERLAYS============================*/
-#game-screen .pause-overlay,.inventory-overlay,.crafting-overlay,.lose-overlay
+#game-screen .pause-overlay,.inventory-overlay,.crafting-overlay,.lose-overlay,.win-overlay
 {
     font-size:2em;
     display:none;
@@ -395,7 +395,7 @@ ul.menu li button:active
     /*====NO SELECT============*/
 }
 
-#game-screen .lose-overlay .losecondition
+#game-screen .lose-overlay .losecondition, .win-text
 {
     width:100%;
     text-align:center;

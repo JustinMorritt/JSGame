@@ -27,7 +27,8 @@
 
         dom.bind("footer button.craft", "click", showCraftingOL);
 
-        dom.bind(".lose-overlay", "click",    loseGame);
+        dom.bind(".lose-overlay", "click", loseGame);
+        dom.bind(".win-overlay", "click", loseGame);
 
         dom.bind("#game-screen .back", "click", resumeGame);
 

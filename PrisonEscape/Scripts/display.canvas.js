@@ -167,7 +167,7 @@
         //UPDATE TIME LEFT 
         prison.dom.$("#game-screen .pause-overlay .pause-crime")[0].innerHTML = prison.game.getCriminalRecord();
         prison.dom.$("#game-screen .lose-overlay .losecondition")[0].innerHTML = prison.player.getLoseCondition();
-
+        prison.dom.$("#game-screen .win-overlay .win-text")[0].innerHTML = prison.player.getWin();
 
         ctx.save();
         //ctx.clearRect(0, 0, canvas.width, canvas.height);

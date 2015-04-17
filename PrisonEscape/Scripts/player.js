@@ -22,6 +22,7 @@
         center,
         onTile,
         losecondition,
+        wincondition,
         pColBlocks, //Possible Collision Blocks Array.
         frames = [],
         ranges = [],
@@ -399,10 +400,18 @@
         if (slowDown.down) { vy -= slowDownSpeed; if (vy < 0) { slowDown.down = false; vy = 0;      setRange("STANDDOWN"); } }
 
         //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
-        if (x - pWidth / 2 < 0) { x = pWidth / 2; }
-        if (y - pHeight / 2 < 0) { y = pHeight / 2; }
-        if (x + (pWidth * 1.5) > 3200) { x = 3200 - (pWidth * 1.5); }
-        if (y + (pHeight * 1.5) > 3200) { y = 3200 - (pHeight * 1.5); }
+        if (x - pWidth / 2 < 0) { x = pWidth / 2; won(); }
+        if (y - pHeight / 2 < 0) { y = pHeight / 2; won(); }
+        if (x + (pWidth * 1.5) > 3200) { x = 3200 - (pWidth * 1.5); won(); }
+        if (y + (pHeight * 1.5) > 3200) { y = 3200 - (pHeight * 1.5); won(); }
+
+        function won()
+        {
+            console.log("WIN");
+            prison.schedule.setPaused(true);
+            wincondition = "<br><br><b> YOU ESCAPED, CONGRATULATIONS!</b> <br><br> Good luck in society.. :P";
+            prison.dom.$("#game-screen .win-overlay")[0].style.display = "block";
+        }
     }
     function dPosCB()  //DISPLAY POSSIBLE COLLISION BLOCKS
     {
@@ -549,17 +558,16 @@
     function pLayerHP(health , name, type)
     {
         pHP += health;
-        console.log("Ouch " + name + " The " + type + " you Asshole! .. hp: " + pHP);
+        //console.log("Ouch " + name + " The " + type + " you Asshole! .. hp: " + pHP);
         if (pHP > 100) {pHP = 100;}
         if (pHP < 0)
         {
             pHP = 0;
             prison.schedule.setPaused(true);
             var timeSurvived = (prison.game.getSentenceTime() - prison.schedule.TimeLeft());
-            losecondition = "<br><br><b><br>The pesky " + type + " " + name + " killed you..<br><br>" + " You Survived " + timeSurvived + " years..</b>";
+            losecondition = "<br><br><b>YOU LOSE</b><br><br>The pesky " + type + " " + name + " killed you..<br><br>" + " You Survived " + timeSurvived + " years..";
             prison.dom.$("#game-screen .lose-overlay")[0].style.display = "block";
             //PLAYER DIES TRIGGER DEATH SEQUENCE
-
         }   
 
        
@@ -590,6 +598,10 @@
     {
         return losecondition;
     }
+    function getWin()
+    {
+        return wincondition;
+    }
 	
     return {
         //EXPOSED FUNCTIONS IN HERE
@@ -603,7 +615,8 @@
         getVY           :getVY,
         getY            :getY,
         getX            :getX,
-        setXY           : setXY,
+        setXY           :setXY,
+        getWin          :getWin,
         getLoseCondition:getLoseCondition,
         getPLayerHP     :getPLayerHP,
         setSpeed        :setSpeed,

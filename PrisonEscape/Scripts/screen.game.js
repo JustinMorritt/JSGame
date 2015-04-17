@@ -27,7 +27,7 @@
 
         dom.bind("footer button.craft", "click", showCraftingOL);
 
-        dom.bind(".lose-overlay", "click", exitGame);
+        dom.bind(".lose-overlay", "click",    loseGame);
 
         dom.bind("#game-screen .back", "click", resumeGame);
 
@@ -79,6 +79,12 @@
 
         console.log("------------Engines Roar-------------");
     }
+
+    function loseGame()
+    {
+        prison.showScreen("main-menu");
+    }
+
 
     function exitGame() {
         //console.log("----entered pause Function!----")

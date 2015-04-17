@@ -554,6 +554,7 @@
         if (pHP < 0)
         {
             pHP = 0;
+            prison.schedule.setPaused(true);
             var timeSurvived = (prison.game.getSentenceTime() - prison.schedule.TimeLeft());
             losecondition = "<br><br><b><br>The pesky " + type + " " + name + " killed you..<br><br>" + " You Survived " + timeSurvived + " years..</b>";
             prison.dom.$("#game-screen .lose-overlay")[0].style.display = "block";

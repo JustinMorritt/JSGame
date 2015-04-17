@@ -221,7 +221,6 @@
             inmate.pos.x += collisionCorrection.x;
         }
 
-
         var collisionCorrection2 = new Victor(0, 0);
         for (var i = 0 ; i < 9; i++) {
             for (var j = 0 ; j < numDoors; j++) {
@@ -233,7 +232,6 @@
         }
         //IF CORRECTION APPLY IT ...
         if (collisionCorrection2.y != 0) {
-
             inmate.pos.y += collisionCorrection2.y;
         }
     }

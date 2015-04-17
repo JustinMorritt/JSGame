@@ -12,19 +12,15 @@
     var colBlockNum = 0;
     var totalTiles = 0;
     var itemSprites;
-    var itemsNum = 10;
+    var itemsNum = 5;
+    var itemSpawns = 0;
     var numDoors = 0;
     var items = [
             { name: "1", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0,0), grabbed: false, type: "" },
             { name: "2", sx: 896, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
             { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
             { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
-            { name: "2", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" },
+            { name: "1", sx: 928, sy: 1088, posX: 0, posY: 0, c: new Victor(0, 0), grabbed: false, type: "" }
         ];
 
     //Variables
@@ -120,6 +116,7 @@
                         break;
                     case 45:
                         items1d.push(new Victor(x * Width, y * Height));
+                        itemSpawns++;
                         break;
                 }
                 switch (spawns2d[y][x])
@@ -236,7 +233,7 @@
 
     function updateItems()
     {
-        var ShufArray = shuffleSpawns(items1d, itemsNum);
+        var ShufArray = shuffleSpawns(items1d, itemSpawns);
        for (var i = 0; i < itemsNum; i++)
         {
             items[i].posX = ShufArray[i].x;

@@ -11,6 +11,7 @@
         player,
         inmates,
         guards,
+        doors,
         runningId = -1,
         camera, xDeadZone, yDeadZone,
         canvasWidth, canvasHeight,
@@ -30,9 +31,10 @@
         mapElement = $("#game-screen .game-map")[0];
         cols = prison.settings.cols;
         rows = prison.settings.rows;
+        doors = prison.doors;
         guards = prison.guards;
         player = prison.player;
-        doors = prison.doors;
+        
         camera = prison.camera;
         inmates = prison.inmates;
         map = prison.map;
@@ -62,8 +64,8 @@
         mapElement.appendChild(canvas);
 
         map.run();
-        player.run();
         doors.run();
+        player.run();
         inmates.run();
         guards.run();
         schedule.run(ctx);
@@ -195,9 +197,9 @@
 
     function update()
     {
+        doors.update(STEP, 3200, 3200);
         inmates.update(STEP, 3200, 3200);
         guards.update(STEP, 3200, 3200);
-        doors.update(STEP, 3200, 3200);
         player.update(STEP, 3200, 3200);
         camera.update();
     }

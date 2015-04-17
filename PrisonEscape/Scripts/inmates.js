@@ -73,6 +73,7 @@
         setPlayerBlock();
         for (var i = 0 ; i < numInmates; i++)
         {
+            //PLAYER
             playerCollision(inmatesA[i], step);
 
             //ACCELERATION
@@ -80,6 +81,9 @@
 
             //UPDATE POSSIBLE COLLISION BLOCKS
             possibleCollisionBlocks(inmatesA[i]);
+
+            //CORRECT COLLISIONS DOOR 
+            doorCorrection(inmatesA[i], step);
 
             //CORRECT COLLISIONS
             inmateCollisionCorrection(inmatesA[i], step);
@@ -195,6 +199,43 @@
                 prison.player.pLayerHP(-3);
             }
         }   
+    }
+
+    function doorCorrection(inmate, step) {
+        //UPDATE DOOR ARRAY TO COLLIDE WITH
+        doors = prison.doors.getDoors();
+
+        var numDoors = prison.map.getNumDoors()
+
+        var collisionCorrection = new Victor(0, 0);
+        for (var i = 0 ; i < 9; i++) {
+            for (var j = 0 ; j < numDoors; j++) {
+                if (inmate.cBlocks[i].x == doors[j].onT.x && inmate.cBlocks[i].y == doors[j].onT.y) {
+                    doors[j].open = true;//OPEN DOOR
+                    collisionCorrection = prison.collision.collisionCheck(inmate.c, doors[j]);
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection.x != 0) {
+            inmate.pos.x += collisionCorrection.x;
+        }
+
+
+        var collisionCorrection2 = new Victor(0, 0);
+        for (var i = 0 ; i < 9; i++) {
+            for (var j = 0 ; j < numDoors; j++) {
+                if (inmate.cBlocks[i].x == doors[j].onT.x && inmate.cBlocks[i].y == doors[j].onT.y) {
+                    doors[j].open = true;//OPEN DOOR
+                    collisionCorrection2 = prison.collision.collisionCheck(inmate.c, doors[j]);
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection2.y != 0) {
+
+            inmate.pos.y += collisionCorrection2.y;
+        }
     }
 
     function inmateCollisionCorrection(inmate, step)

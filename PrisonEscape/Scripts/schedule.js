@@ -41,6 +41,7 @@ prison.schedule = (function()
 	            gameDay--;
 	            prison.map.updateItems();
 	            prison.inmates.backToCell();
+	            prison.doors.openAllDoors();
 	            prison.inmates.randDir();
 	            currentTime = 6;
 	        }

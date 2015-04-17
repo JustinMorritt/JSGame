@@ -7,6 +7,7 @@
         collsionBlocks  = [],
         guardNames      = [],
         pTile,
+        doors = [],
         firstRun = true,
 
     slowDown = {
@@ -63,19 +64,21 @@
 
     function update(step, worldWidth, worldHeight) {
         setPlayerBlock();
-    
-
+ 
         for (var i = 0 ; i < 7; i++) {
-
+            //PLAYER
             playerCollision(guardsA[i], step);
 
             //ACCELERATION
-            applyDirection(guardsA[i]);
+            applyDirection(guardsA[i], guardsA[i]);
 
             //UPDATE POSSIBLE COLLISION BLOCKS
             possibleCollisionBlocks(guardsA[i]);
 
-            //CORRECT COLLISIONS
+            //CORRECT COLLISIONS DOOR 
+            doorCorrection(guardsA[i], step);
+
+            //CORRECT COLLISIONS WALL
             guardCollisionCorrection(guardsA[i], step);
         }
     }
@@ -155,6 +158,42 @@
         pTile = prison.player.getPlayerOBJ();
     }
 
+    function doorCorrection(guard,step) {
+        //UPDATE DOOR ARRAY TO COLLIDE WITH
+        doors = prison.doors.getDoors();
+
+        var numDoors = prison.map.getNumDoors()
+
+        var collisionCorrection = new Victor(0, 0);
+        for (var i = 0 ; i < 9; i++) {
+            for (var j = 0 ; j < numDoors; j++) {
+                if (guard.cBlocks[i].x == doors[j].onT.x && guard.cBlocks[i].y == doors[j].onT.y) {
+                    doors[j].open = true;//OPEN DOOR
+                    collisionCorrection = prison.collision.collisionCheck(guard.c, doors[j]);
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection.x != 0) {
+            guard.pos.x += collisionCorrection.x;
+        }
+
+
+        var collisionCorrection2 = new Victor(0, 0);
+        for (var i = 0 ; i < 9; i++) {
+            for (var j = 0 ; j < numDoors; j++) {
+                if (guard.cBlocks[i].x == doors[j].onT.x && guard.cBlocks[i].y == doors[j].onT.y) {
+                    doors[j].open = true;//OPEN DOOR
+                    collisionCorrection2 = prison.collision.collisionCheck(guard.c, doors[j]);
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection2.y != 0) {
+
+            guard.pos.y += collisionCorrection2.y;
+        }
+    }
     function guardCollisionCorrection(guard, step) {
         //ATTEMPT STEP //*******MAJOR ISSUE HERE  ONLY STEP ON X FIRST RESOLVE IT FIRST
         guard.pos.x += (guard.v.x * step);

@@ -160,8 +160,16 @@
         return doorsA;
     }
 
+    function openAllDoors()
+    {
+        for (var i = 0 ; i < prison.map.getNumDoors() ; i++) {
+            doorsA[i].open = true;
+        }
+    }
+
 
     return {
+        openAllDoors: openAllDoors,
         getDoors: getDoors,
         run: run,
         update: update,

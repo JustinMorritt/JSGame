@@ -14,6 +14,7 @@
         pTime,
         playerSprite,
         collsionBlocks,
+        doors,
         blockWidth,
         getColBlockNum,
         slowDownSpeed,
@@ -128,99 +129,18 @@
         }, false);
     }
 
-    function calcHealthBar()
+    function update(step)
     {
-        var health = pHP / 5;
-        if (health < 0)
-        {
-            health = 0;
-            return health;
-        }
-        return health;
-    }
+        //APPLY DIRECTION
+        applyDirection();
 
-    function update(step, worldWidth, worldHeight)
-    {
-        var dom = prison.dom;
-        var $ = dom.$;
-        p = getPLayerHP();
-        //$("#game-screen .health ")[0].innerHTML = "Health: " + getPLayerHP();
-        //$("#game-screen .healthbar")[0].style.width = p + "%";
-        // parameter step is the time between frames ( in seconds )
-        //Update Center Vector
-        center.x = x + 16; center.y = y + 16;
-        onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
-        
-        //ACCELERATION
-        if (controls.left)  { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
-        if (controls.up)    { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
-        if (controls.right) { if (vx != pSpeed)  { vx += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } }
-        if (controls.down)  { if (vy != pSpeed)  { vy += acceleration; if (vx > pSpeed)  { vx = pSpeed  } } }
+        //DOOR CORRECTION
+        doorCorrection(step);
 
-        x += vx * step;
-        center.x = x + 16; center.y = y + 16;
+        //BLOCK CORRECTION
+        blockCorrection(step);
 
-        //Update Potential Collision Blocks 
-        possibleCollisionBlocks();
 
-        var collisionCorrection = new Victor(0, 0);
-        var temp = new Victor(0, 0);
-
-        for (var i = 0 ; i < 9; i++)
-        {
-            if (collsionBlocks[pColBlocks[i].x-1][pColBlocks[i].y-1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
-            {
-                //console.log("****Possible Collision Block Near!****");
-                temp = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
-                if (Math.abs(temp.x) > Math.abs(collisionCorrection.x) &&
-                    Math.abs(temp.x) > Math.abs(collisionCorrection.y))
-                {
-                    collisionCorrection = temp;
-                } 
-            }
-        }
-        //IF CORRECTION APPLY IT ...
-        if (collisionCorrection.x != 0 )
-        {
-            x += collisionCorrection.x;
-        }
-
-        y += vy * step;
-        center.x = x + 16;
-        center.y = y + 16;
-
-        var collisionCorrection2 = new Victor(0, 0);
-        var temp2 = new Victor(0, 0);
-
-        for (var i = 0 ; i < 9; i++)
-        {
-            if (collsionBlocks[pColBlocks[i].x-1][pColBlocks[i].y-1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
-            {
-                //console.log("****Possible Collision Block Near!****");
-                temp2 = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
-                if ( Math.abs(temp2.y) > Math.abs(collisionCorrection2.y) &&
-                     Math.abs(temp2.y) > Math.abs(collisionCorrection2.x))
-                {
-                    collisionCorrection2 = temp2;
-                } 
-            }
-        }
-        //IF CORRECTION APPLY IT ...
-        if (collisionCorrection2.y != 0) {
-            y += collisionCorrection2.y;
-        }
-
-        //DECELERATION
-        if (slowDown.left)  { vx += slowDownSpeed; if (vx > 0) { slowDown.left  = false; vx = 0 } }
-        if (slowDown.up)    { vy += slowDownSpeed; if (vy > 0) { slowDown.up    = false; vy = 0 } }
-        if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
-        if (slowDown.down)  { vy -= slowDownSpeed; if (vy < 0) { slowDown.down  = false; vy = 0 } }
-
-        //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
-        if (x - pWidth / 2 < 0)                 {x = pWidth / 2;}
-        if (y - pHeight / 2 < 0)                {y = pHeight / 2;}
-        if (x + (pWidth * 1.5) > worldWidth)    {x = worldWidth - (pWidth * 1.5);}
-        if (y + (pHeight * 1.5) > worldHeight)  {y = worldHeight - (pHeight * 1.5);}
 
         //console.log("On tile: " + onTile.x + " " + onTile.y);
 		
@@ -246,7 +166,128 @@
 			range("Player Walk Down");
 		} */
 	}
- 
+    function blockCorrection(step)
+    {
+        x += vx * step;
+        center.x = x + 16; center.y = y + 16;
+
+        //Update Potential Collision Blocks 
+        possibleCollisionBlocks();
+
+        var collisionCorrection = new Victor(0, 0);
+        var temp = new Victor(0, 0);
+
+        for (var i = 0 ; i < 9; i++) {
+            if (collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+            {
+                //console.log("****Possible Collision Block Near!****");
+                temp = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
+                if (Math.abs(temp.x) > Math.abs(collisionCorrection.x) &&
+                    Math.abs(temp.x) > Math.abs(collisionCorrection.y)) {
+                    collisionCorrection = temp;
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection.x != 0) {
+            x += collisionCorrection.x;
+        }
+
+        y += vy * step;
+        center.x = x + 16;
+        center.y = y + 16;
+
+        var collisionCorrection2 = new Victor(0, 0);
+        var temp2 = new Victor(0, 0);
+
+        for (var i = 0 ; i < 9; i++) {
+            if (collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1].Type != "0") //RIDICULOUS REFERENCE BUT WORKS GREAT HAHA
+            {
+                //console.log("****Possible Collision Block Near!****");
+                temp2 = prison.collision.collisionCheck(center, collsionBlocks[pColBlocks[i].x - 1][pColBlocks[i].y - 1]);
+                if (Math.abs(temp2.y) > Math.abs(collisionCorrection2.y) &&
+                     Math.abs(temp2.y) > Math.abs(collisionCorrection2.x)) {
+                    collisionCorrection2 = temp2;
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection2.y != 0) {
+            y += collisionCorrection2.y;
+        }
+    }
+
+    function doorCorrection(step)
+    {
+        //UPDATE DOOR ARRAY TO COLLIDE WITH
+        doors = prison.doors.getDoors();
+        x += vx * step;
+        center.x = x + 16; center.y = y + 16;
+
+        //Update Potential Collision Blocks 
+        possibleCollisionBlocks();
+        var numDoors = prison.map.getNumDoors()
+
+        var collisionCorrection = new Victor(0, 0);
+        for (var i = 0 ; i < 9; i++) {
+            for(var j = 0 ; j < numDoors; j++) {
+                if (pColBlocks[i].x == doors[j].x && pColBlocks[i].y == doors[j].y) {
+                    collisionCorrection = prison.collision.collisionCheck(center, doors[j]);
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection.x != 0) {
+            x += collisionCorrection.x;
+        }
+
+        y += vy * step;
+        center.x = x + 16;
+        center.y = y + 16;
+
+        var collisionCorrection2 = new Victor(0, 0);
+        for (var i = 0 ; i < 9; i++) {
+            for (var j = 0 ; j < numDoors; j++) {
+                if (pColBlocks[i].x == doors[j].x && pColBlocks[i].y == doors[j].y) {
+                    collisionCorrection2 = prison.collision.collisionCheck(center, doors[j]);
+                }
+            }
+        }
+        //IF CORRECTION APPLY IT ...
+        if (collisionCorrection2.y != 0) {
+            y += collisionCorrection2.y;
+        }
+    }
+
+    function applyDirection()
+    {
+        if (prison.screens["game-screen"].getPaused()) {
+            vx = 0; vy = 0;
+        }
+
+        //Update Center Vector
+        center.x = x + 16; center.y = y + 16;
+        onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
+
+        //ACCELERATION
+        if (controls.left) { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
+        if (controls.up) { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
+        if (controls.right) { if (vx != pSpeed) { vx += acceleration; if (vx > pSpeed) { vx = pSpeed } } }
+        if (controls.down) { if (vy != pSpeed) { vy += acceleration; if (vx > pSpeed) { vx = pSpeed } } }
+
+        //DECELERATION
+        if (slowDown.left) { vx += slowDownSpeed; if (vx > 0) { slowDown.left = false; vx = 0 } }
+        if (slowDown.up) { vy += slowDownSpeed; if (vy > 0) { slowDown.up = false; vy = 0 } }
+        if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
+        if (slowDown.down) { vy -= slowDownSpeed; if (vy < 0) { slowDown.down = false; vy = 0 } }
+
+        //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
+        if (x - pWidth / 2 < 0) { x = pWidth / 2; }
+        if (y - pHeight / 2 < 0) { y = pHeight / 2; }
+        if (x + (pWidth * 1.5) > 3200) { x = 3200 - (pWidth * 1.5); }
+        if (y + (pHeight * 1.5) > 3200) { y = 3200 - (pHeight * 1.5); }
+    }
+
     function draw(step, context, xView, yView)// camera.xView, camera.yView
     {
 
@@ -401,7 +442,7 @@
         pHP += health;
         if (pHP > 100) {pHP = 100;}
         if (pHP < 0) { pHP = 0; }   //PLAYER DIES TRIGGER DEATH SEQUENCE
-        console.log("Ouch you Asshole! .. hp: "  + pHP);
+        //console.log("Ouch you Asshole! .. hp: "  + pHP);
     }
     function getPLayerHP()
     {

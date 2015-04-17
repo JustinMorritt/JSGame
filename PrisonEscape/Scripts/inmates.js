@@ -254,6 +254,10 @@
         inmate.c.y = inmate.pos.y + 32;
         inmate.onT.x = Math.round(inmate.c.x / 32); inmate.onT.y = Math.round(inmate.c.y / 32);
 
+        if (prison.screens["game-screen"].getPaused()) {
+            inmate.dir = 8;
+        }
+
         switch (inmate.dir) {
             //UP
             case 0: if (inmate.v.y != inmate.speed * -1) { inmate.v.y -= inmate.accel; } if (inmate.v.y < inmate.speed * -1) { inmate.v.y = inmate.speed * -1; }

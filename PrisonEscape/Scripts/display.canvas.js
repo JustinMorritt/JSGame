@@ -183,11 +183,11 @@
         //BACKGROUND /MAP
         ctx.drawImage(prisonSprite, sx, sy, mapWidth, mapHeight, 0, 0, mapWidth, mapHeight);
         map.drawItems(ctx, sx, sy);
-
+        doors.draw(STEP, ctx, sx, sy);
         // INMATES/GUARDS/PLAYER DRAW
         inmates.draw(STEP, ctx, sx, sy);
         guards.draw(STEP, ctx, sx, sy);
-        doors.draw(STEP, ctx, sx, sy);
+
         player.draw(STEP, ctx, sx, sy);
 
         ctx.restore();

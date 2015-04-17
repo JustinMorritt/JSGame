@@ -63,6 +63,8 @@
 
     function update(step, worldWidth, worldHeight) {
         setPlayerBlock();
+    
+
         for (var i = 0 ; i < 7; i++) {
 
             playerCollision(guardsA[i], step);
@@ -231,6 +233,10 @@
         guard.c.y = guard.pos.y + 32;
         guard.onT.x = Math.round(guard.c.x / 32); guard.onT.y = Math.round(guard.c.y / 32);
 
+        if (prison.screens["game-screen"].getPaused()) {
+            guard.dir = 4;
+        }
+
         switch (guard.dir) {
                 //UP
             case 0: if (guard.v.y != guard.speed * -1) { guard.v.y -= guard.accel; } if (guard.v.y < guard.speed * -1) { guard.v.y = guard.speed * -1; }
@@ -244,6 +250,10 @@
                 //LEFT
             case 3: if (guard.v.x != guard.speed * -1) { guard.v.x -= guard.accel; } if (guard.v.x < guard.speed * -1) { guard.v.x = guard.speed * -1; }
                 break;
+                //STILL / Paused
+            case 4: guard.v.x = 0; guard.v.y = 0;
+                break;
+
         }
         if (guard.pos.x - 64 < 0) { guard.pos.x = 64; }
         if (guard.pos.y - 64 < 0) { guard.pos.y = 64; }
@@ -271,13 +281,13 @@
     }
 
     function randDir() {
-        for (var i = 0 ; i < numguards; i++) {
+        for (var i = 0 ; i < 10; i++) {
             var randDir = prison.math.randomRange(0, 3);
             guardsA[i].dir = randDir;
         }
     }
     function randIMDir(guard) {
-        var randDir = Math.floor(Math.random() * 8);
+        var randDir = Math.floor(Math.random() * 3);
         guard.dir = randDir;
         //console.log(randDir);
     }

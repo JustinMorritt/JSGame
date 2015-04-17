@@ -183,6 +183,8 @@
 
         paused = false;
         prison.schedule.setPaused(paused);
+        prison.inmates.randDir();
+        prison.guards.randDir();
     }
     function getPaused()
     {

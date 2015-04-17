@@ -26,29 +26,35 @@
 
     function spawndoors() {
         spawnPos = prison.map.getDoors();
-
-        console.log(prison.map.getNumDoors());
+        //console.log(prison.map.getNumDoors());
+        Sprite = new Image();
+        Sprite.src = "Images/prisons.png";
 
         for (var i = 0 ; i < prison.map.getNumDoors(); i++) {
-            Sprite = new Image();
-            Sprite.src = "Images/prisons.png";
 
             var P = new Victor(spawnPos[0].x, spawnPos[0].y)
             var C = new Victor(P.x + 16, P.y + 16)
             var onT = new Victor(Math.round(C.x / 32), Math.round(C.y / 32));
 
             var Newdoor = {
+                X: P.x,             //DUPLICATES FOR COMPATIBILITY ISSUES .. too far to go back and remake objects...
+                Y: P.y,
+                Cx: C.x,
+                Cy: C.y,
                 sx: 0,
                 sy: 1088,
                 dir: 1,                                             //Direction START WALKING OUT OF CELLS
-                pos: P,      //Position
+                pos: P,                                             //Position
+                origPos: P,                                         //Original Position
                 v: new Victor(0, 0),                                //Velocity
                 c: C,                                               //Center
                 onT: onT,                                           //On Tile
-                speed: 100,                                         //Speed
+                speed: 200,                                         //Speed
                 accel: 9,                                           //Acceleration
                 sprite: Sprite,
-                cBlocks: []
+                cBlocks: [],
+                open: false,
+                openTime: 1000,                                     //DoorStays Open For ...
             }
             prison.map.shiftdoors();
             doorsA.push(Newdoor);
@@ -107,8 +113,6 @@
         {
            //OPEN ALL DOORS RIGHT AWAY
         }
-
-
         var collisionCorrectionX = new Victor(0, 0);
         var temp1 = new Victor(0, 0);
         temp1 = prison.collision.collisionCheck(door.c, pTile);
@@ -125,9 +129,9 @@
 
         if (collisionCorrectionY.y != 0 || collisionCorrectionX.x != 0) {
             if (!firstRun) {
-               //OPEN DOOR
+                //OPEN DOOR
+                //console.log("PLAYER HIT DOOR");
             }
-
         }
 
     }
@@ -140,10 +144,13 @@
 
         switch (door.dir) {
                 //RIGHT
-            case 2: if (door.v.x != door.speed) { door.v.x += door.accel; } if (door.v.x > door.speed) { door.v.x = door.speed; }
+            case 0: if (door.v.x != door.speed) { door.v.x += door.accel; } if (door.v.x > door.speed) { door.v.x = door.speed; }
                 break;
                 //LEFT
-            case 3: if (door.v.x != door.speed * -1) { door.v.x -= door.accel; } if (door.v.x < door.speed * -1) { door.v.x = door.speed * -1; }
+            case 1: if (door.v.x != door.speed * -1) { door.v.x -= door.accel; } if (door.v.x < door.speed * -1) { door.v.x = door.speed * -1; }
+                break;
+            case 3: door.v.x = 0;
+                door.v.y = 0;
                 break;
         }
 
@@ -154,9 +161,14 @@
         return onTile;
     }
 
+    function getDoors()
+    {
+        return doorsA;
+    }
 
 
     return {
+        getDoors: getDoors,
         run: run,
         update: update,
         draw: draw,

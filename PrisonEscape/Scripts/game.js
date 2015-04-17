@@ -117,7 +117,7 @@
     }
     function getCriminalRecord()
     {
-        crimRecString = null;
+        crimRecString = "";
         var num =0;
         for (var i = 0 ; i < sentence.length ; ++i)
         {

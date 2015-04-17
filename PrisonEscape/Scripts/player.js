@@ -21,6 +21,7 @@
         acceleration,
         center,
         onTile,
+        losecondition,
         pColBlocks, //Possible Collision Blocks Array.
         frames = [],
         ranges = [],
@@ -553,9 +554,12 @@
         if (pHP < 0)
         {
             pHP = 0;
+            var timeSurvived = (prison.game.getSentenceTime() - prison.schedule.TimeLeft());
+            losecondition = "<br><br><b><br>The pesky " + type + " " + name + " killed you..<br><br>" + " You Survived " + timeSurvived + " years..</b>";
+            prison.dom.$("#game-screen .lose-overlay")[0].style.display = "block";
+            //PLAYER DIES TRIGGER DEATH SEQUENCE
 
-
-        }   //PLAYER DIES TRIGGER DEATH SEQUENCE
+        }   
 
        
     }
@@ -581,6 +585,10 @@
             }
             return pTile;
     }
+    function getLoseCondition()
+    {
+        return losecondition;
+    }
 	
     return {
         //EXPOSED FUNCTIONS IN HERE
@@ -594,7 +602,8 @@
         getVY           :getVY,
         getY            :getY,
         getX            :getX,
-        setXY           :setXY,
+        setXY           : setXY,
+        getLoseCondition:getLoseCondition,
         getPLayerHP     :getPLayerHP,
         setSpeed        :setSpeed,
         setSlowDownSpeed:setSlowDownSpeed,

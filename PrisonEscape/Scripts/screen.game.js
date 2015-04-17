@@ -25,7 +25,9 @@
         dom.bind("footer button.inventory", "click", showInventoryOL);
         dom.bind("footer button.craft", "click", showCraftingOL);
 
-        dom.bind(".pause-overlay", "click", resumeGame);
+        dom.bind("footer button.craft", "click", showCraftingOL);
+
+        dom.bind(".lose-overlay", "click", exitGame);
 
         dom.bind("#game-screen .back", "click", resumeGame);
 
@@ -80,6 +82,7 @@
 
     function exitGame() {
         //console.log("----entered pause Function!----")
+
         pauseGame();
         var confirmed = window.confirm("Do you want to return to the main menu?");
         if (confirmed) {
@@ -95,7 +98,7 @@
             return;//do nothing if already paused
         }
             console.log("----entered pause Function!----")
-        var dom = prison.dom,
+            var dom = prison.dom,
 
             //HIDING OTHER OVERLAYS SO NO OVERLAP
             overlayC = dom.$("#game-screen .crafting-overlay")[0];

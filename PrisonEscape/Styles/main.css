@@ -334,7 +334,7 @@ ul.menu li button:active
 }
 
 /*============================GAME OVERLAYS============================*/
-#game-screen .pause-overlay,.inventory-overlay,.crafting-overlay
+#game-screen .pause-overlay,.inventory-overlay,.crafting-overlay,.lose-overlay
 {
     font-size:2em;
     display:none;
@@ -355,7 +355,7 @@ ul.menu li button:active
     /*====NO SELECT============*/
 }
 
-#game-screen .pause-overlay .pause-text,.inventory-text,.crafting-text
+#game-screen .pause-overlay .pause-text,.inventory-text,.crafting-text,lose-text
 {
     width:100%;
     text-align:center;
@@ -380,6 +380,26 @@ ul.menu li button:active
         width:100%;
     text-align:center;
     font-size:1.8em;
+    text-shadow:1px 1px 2px rgb(255,255,0),
+				-1px -1px 2px rgb(255,255,0),
+				0px 0px 0px black;
+    color:red;
+
+    /*====NO SELECT============*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*====NO SELECT============*/
+}
+
+#game-screen .lose-overlay .losecondition
+{
+    width:100%;
+    text-align:center;
+    font-size:2.8em;
     text-shadow:1px 1px 2px rgb(255,255,0),
 				-1px -1px 2px rgb(255,255,0),
 				0px 0px 0px black;

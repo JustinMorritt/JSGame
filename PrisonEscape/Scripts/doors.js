@@ -19,50 +19,9 @@
     function run() {
         initialize(console.log("initialized doors"));
     }
-
     function initialize(callback) {
         spawndoors();
     }
-
-    function spawndoors() {
-        spawnPos = prison.map.getDoors();
-        //console.log(prison.map.getNumDoors());
-        Sprite = new Image();
-        Sprite.src = "Images/prisons.png";
-
-        for (var i = 0 ; i < prison.map.getNumDoors(); i++) {
-
-            var P = new Victor(spawnPos[0].x, spawnPos[0].y)
-            var C = new Victor(P.x + 32, P.y + 32)
-            var onT = new Victor(Math.round(C.x / 32), Math.round(C.y / 32));
-
-            var Newdoor = {
-                X: P.x,             //DUPLICATES FOR COMPATIBILITY ISSUES .. too far to go back and remake objects...
-                Y: P.y,
-                Cx: C.x,
-                Cy: C.y,
-                sx: 0,
-                sy: 1088,
-                dir: 0,                                             //Direction START WALKING OUT OF CELLS
-                pos: P,                                             //Position
-                origPos: new Victor(P.x,P.y),                                         //Original Position
-                openPos: new Victor(P.x-35,P.y),
-                v: new Victor(0, 0),                                //Velocity
-                c: C,                                               //Center
-                onT: onT,                                           //On Tile
-                speed: 200,                                         //Speed
-                accel: 9,                                           //Acceleration
-                sprite: Sprite,
-                open: false,
-                closing: false,
-                openTime: doorOpenTime,                             //DoorStays Open For ...
-            }
-            prison.map.shiftdoors();
-            doorsA.push(Newdoor);
-        }
-    }
-
-
     function update(step, worldWidth, worldHeight) {
         for (var i = 0 ; i < prison.map.getNumDoors() ; i++)
         {
@@ -96,6 +55,43 @@
     }
 
 
+    function spawndoors() {
+        spawnPos = prison.map.getDoors();
+        //console.log(prison.map.getNumDoors());
+        Sprite = new Image();
+        Sprite.src = "Images/prisons.png";
+
+        for (var i = 0 ; i < prison.map.getNumDoors() ; i++) {
+
+            var P = new Victor(spawnPos[0].x, spawnPos[0].y)
+            var C = new Victor(P.x + 32, P.y + 32)
+            var onT = new Victor(Math.round(C.x / 32), Math.round(C.y / 32));
+
+            var Newdoor = {
+                X: P.x,             //DUPLICATES FOR COMPATIBILITY ISSUES .. too far to go back and remake objects...
+                Y: P.y,
+                Cx: C.x,
+                Cy: C.y,
+                sx: 0,
+                sy: 1088,
+                dir: 0,                                             //Direction START WALKING OUT OF CELLS
+                pos: P,                                             //Position
+                origPos: new Victor(P.x, P.y),                                         //Original Position
+                openPos: new Victor(P.x - 35, P.y),
+                v: new Victor(0, 0),                                //Velocity
+                c: C,                                               //Center
+                onT: onT,                                           //On Tile
+                speed: 200,                                         //Speed
+                accel: 9,                                           //Acceleration
+                sprite: Sprite,
+                open: false,
+                closing: false,
+                openTime: doorOpenTime,                             //DoorStays Open For ...
+            }
+            prison.map.shiftdoors();
+            doorsA.push(Newdoor);
+        }
+    }
     function applyDirection(door, step) {
         //UPDATE ONTILE
         door.c.x = door.pos.x + 16;
@@ -154,12 +150,10 @@
     function getOnTile() {
         return onTile;
     }
-
     function getDoors()
     {
         return doorsA;
     }
-
     function openAllDoors()
     {
         for (var i = 0 ; i < prison.map.getNumDoors() ; i++) {

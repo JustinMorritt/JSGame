@@ -129,25 +129,25 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = true;
-                    setRange("WALKLEFT");
+                    
                     slowDown.left = false;
                     break;
                 case 38: // up arrow
                 case 87:
                     controls.up = true;
-                    setRange("WALKUP");
+                   
                     slowDown.up = false;
                     break;
                 case 39:
                 case 68: // right arrow
                     controls.right = true;
-                    setRange("WALKRIGHT");
+                    
                     slowDown.right = false;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = true;
-                    setRange("WALKDOWN");
+                   
                     slowDown.down = false;
                     break;
             }
@@ -158,28 +158,28 @@
                 case 37:
                 case 65: // left arrow
                     controls.left = false;
-                    setRange("STANDLEFT");
+                    
                     slowDown.left = true;
                     //vx = 0;
                     break;
                 case 38:
                 case 87: // up arrow
                     controls.up = false;
-                    setRange("STANDUP");
+                   
                     slowDown.up = true;
                     //vy = 0;
                     break;
                 case 39:
                 case 68: // right arrow
                     controls.right = false;
-                    setRange("STANDRIGHT");
+                    
                     slowDown.right = true;
                     //vx = 0;
                     break;
                 case 40:
                 case 83: // down arrow
                     controls.down = false;
-                    setRange("STANDDOWN");
+                    
                     slowDown.down = true;
                     //vy = 0;
                     break;
@@ -381,16 +381,21 @@
         onTile.x = Math.round(center.x / 32); onTile.y = Math.round(center.y / 32);
 
         //ACCELERATION
-        if (controls.left) { if (vx != -pSpeed) { vx -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
-        if (controls.up) { if (vy != -pSpeed) { vy -= acceleration; if (vx < -pSpeed) { vx = -pSpeed } } }
-        if (controls.right) { if (vx != pSpeed) { vx += acceleration; if (vx > pSpeed) { vx = pSpeed } } }
+        if (controls.left) { if (vx != -pSpeed) { vx -= acceleration;     if (vx < -pSpeed) { vx = -pSpeed } } }
+        if (controls.up) { if (vy != -pSpeed) { vy -= acceleration;       if (vx < -pSpeed) { vx = -pSpeed } } }
+        if (controls.right) { if (vx != pSpeed) { vx += acceleration;     if (vx > pSpeed) { vx = pSpeed } } }
         if (controls.down) { if (vy != pSpeed) { vy += acceleration; if (vx > pSpeed) { vx = pSpeed } } }
 
+        if (vx < 0) { setRange("WALKLEFT"); }
+        if (vy < 0) { setRange("WALKUP"); }
+        if (vx > 0) { setRange("WALKRIGHT");}
+        if (vy > 0) { setRange("WALKDOWN"); }
+
         //DECELERATION
-        if (slowDown.left) { vx += slowDownSpeed; if (vx > 0) { slowDown.left = false; vx = 0 } }
-        if (slowDown.up) { vy += slowDownSpeed; if (vy > 0) { slowDown.up = false; vy = 0 } }
-        if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0 } }
-        if (slowDown.down) { vy -= slowDownSpeed; if (vy < 0) { slowDown.down = false; vy = 0 } }
+        if (slowDown.left) { vx += slowDownSpeed; if (vx > 0) { slowDown.left = false; vx = 0;      setRange("STANDLEFT"); } }
+        if (slowDown.up) { vy += slowDownSpeed; if (vy > 0) { slowDown.up = false; vy = 0;          setRange("STANDUP");  } }
+        if (slowDown.right) { vx -= slowDownSpeed; if (vx < 0) { slowDown.right = false; vx = 0;    setRange("STANDRIGHT"); } }
+        if (slowDown.down) { vy -= slowDownSpeed; if (vy < 0) { slowDown.down = false; vy = 0;      setRange("STANDDOWN"); } }
 
         //Dont Leave world  or ***WIN GAME IF HITS THE OUTTER SIDES**
         if (x - pWidth / 2 < 0) { x = pWidth / 2; }

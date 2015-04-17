@@ -198,11 +198,14 @@
 
     function update()
     {
-        doors.update(STEP, 3200, 3200);
-        inmates.update(STEP, 3200, 3200);
-        guards.update(STEP, 3200, 3200);
-        player.update(STEP, 3200, 3200);
-        camera.update();
+        if (prison.schedule.getPaused() == false)
+        {
+            doors.update(STEP, 3200, 3200);
+            inmates.update(STEP, 3200, 3200);
+            guards.update(STEP, 3200, 3200);
+            player.update(STEP, 3200, 3200);
+            camera.update();
+        };
     }
 
     //====================================================

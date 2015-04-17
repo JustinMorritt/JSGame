@@ -90,6 +90,7 @@ prison.schedule = (function()
 	    run: run,
 	    getTime: getTime,
 	    setPaused: setPaused,
+        getPaused: getPaused,
         TimeLeft: TimeLeft
 	};
 })();
